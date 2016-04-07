@@ -1,0 +1,72 @@
+Changelog for NEW-NUSGrabberGUI
+
+0.84 beta
+- Added more exitcode interpretation to detect more errors when running NUSGrabber.
+- Added more comments for others to understand the code better once it's open source.
+
+0.83 beta
+- Hopefully fixed a bug reported by hama - NUSGrabber was not being detected properly on some systems on download start. It now waits 2 seconds before processing.
+- Added exitcode interpretation to hopefully detect when C++ is not installed.
+
+0.82 beta
+- Fixed a bug reported by supermalloch when multi-tasking - Separated (internally) NUSGrabber and CDecrypt.
+
+0.81 beta
+- Removed the annoying "&amp;" in the description from parsed HTML.
+- Re-re-fixed (hopefully) yet another part of the bug "Title not found." If it doesn't work past this, then use the archived version in the settings.
+- Added a new feature that allows the program to cleanup resources after it exits. You can choose to disable this in the settings.
+- Program now safely removes files, as well as forcing others (like read-only ones) to be normal before deletion.
+
+0.8 beta
+- Re-fixed another part of the bug with the assumed file path.
+- Fixed another popular bug "Unable to set directory"; the file path was being amended, not set.
+
+0.79 beta
+- Fixed the popular bug "Title not found." with every download; the assumed file path was wrong.
+- Fixed a bug reported by markehmus - Versions weren't being cleared out when searching for a title that doesn't exist.
+- Fixed a bug where if there was no internet, the reload button would NOT be displayed.
+- Provided more documentation in the code in prep for making the code public.
+
+0.78 beta
+- Made the folder selection dialog auto-set it's starting path based on the current working directory.
+- Fixed a bug with decryption not setting the current working path back to normal.
+- Fixed a bug with auto-decryption not setting the correct working path.
+- Fixed a minor bug with the update text.
+- Added a progress bar for the embedded NUSGrabber, which still isn't useful to the public yet.
+
+0.77 beta
+- Added an option to use an archived version of the title database instead of the latest.
+- Fixed some minor bugs.
+- Limited the view down to your specific region.
+
+0.76 beta
+- Added a new method of connecting to Nintendo's NUS, by use of a modified libWiiSharp.
+- Added an option to use the new method or stick with the original (NUSGrabber commandline)
+- Fixed an unhandled exception with having no internet when loading titles.
+
+0.75 beta
+- Added MSVCP140.dll, which is needed by NUSGrabber.
+
+0.74 beta
+- Fixed a bug reported by Nym5 - CDecrypt needed MSVCR120.dll, which is not pre-installed on some systems.
+- Added ability to watch for file changes while downloading and report what file is downloading in the GUI.
+
+0.73 beta (private)
+- Removed locale requirement. Now checks for specific files created by NUSGrabber to determine status.
+- Added option to load titles on start.
+- Errors while downloading are now more descriptive about the problem.
+- Cleaned up decryption code to start decryption faster.
+
+0.72 beta
+- Using LINQ to iterate through locale now, making it easier to add new locales.
+- Added more locale updates.
+- Added regions to help pick through code.
+- Added a cleanup script to get rid of files that are unused at end of program. (WARNING: This will delete the log file if you switch back to standard mode, so rename your log file if you want to keep it!)
+
+0.71 beta
+- Tweaked code to be more fluid and meaningful.
+- Fixed debug log overwriting itself every time it writes.
+
+0.7 beta
+- Added debug logs.
+- Created a changelog, now that the program is mostly stable.
