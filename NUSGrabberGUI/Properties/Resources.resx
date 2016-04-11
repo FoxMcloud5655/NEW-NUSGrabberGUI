@@ -127,9 +127,6 @@
   <data name="libeay32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\libeay32.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="NUSgrabber" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NUSgrabber.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="vcruntime140" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vcruntime140.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -144,5 +141,8 @@
   </data>
   <data name="msvcr120" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\msvcr120.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="NUSgrabber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NUSgrabber.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

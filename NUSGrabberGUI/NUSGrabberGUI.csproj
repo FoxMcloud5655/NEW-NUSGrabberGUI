@@ -169,13 +169,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NUSGrabberGUI.ico" />
+    <None Include="Resources\NUSgrabber.exe" />
     <None Include="Resources\msvcp140.dll" />
     <None Include="Resources\msvcr120.dll" />
     <None Include="Resources\wiiu_versionlist.txt" />
     <None Include="Resources\HtmlAgilityPack.dll" />
     <None Include="Resources\wget.exe" />
     <None Include="Resources\vcruntime140.dll" />
-    <None Include="Resources\NUSgrabber.exe" />
     <None Include="Resources\libeay32.dll" />
     <None Include="Resources\CDecrypt.exe" />
   </ItemGroup>

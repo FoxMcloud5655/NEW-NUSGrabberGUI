@@ -1,12 +1,16 @@
 Changelog for NEW-NUSGrabberGUI
 
+0.85 beta
+- Added project to GitHub!
+- Updated NUSGrabber to a hacked version designed to support the new protocol Nintendo has implemented.
+
 0.84 beta
-- Added more exitcode interpretation to detect more errors when running NUSGrabber.
+- Added more exit code interpretation to detect more errors when running NUSGrabber.
 - Added more comments for others to understand the code better once it's open source.
 
 0.83 beta
 - Hopefully fixed a bug reported by hama - NUSGrabber was not being detected properly on some systems on download start. It now waits 2 seconds before processing.
-- Added exitcode interpretation to hopefully detect when C++ is not installed.
+- Added exit code interpretation to hopefully detect when C++ is not installed.
 
 0.82 beta
 - Fixed a bug reported by supermalloch when multi-tasking - Separated (internally) NUSGrabber and CDecrypt.
@@ -28,7 +32,7 @@ Changelog for NEW-NUSGrabberGUI
 - Provided more documentation in the code in prep for making the code public.
 
 0.78 beta
-- Made the folder selection dialog auto-set it's starting path based on the current working directory.
+- Made the folder selection dialog auto-set its starting path based on the current working directory.
 - Fixed a bug with decryption not setting the current working path back to normal.
 - Fixed a bug with auto-decryption not setting the correct working path.
 - Fixed a minor bug with the update text.
