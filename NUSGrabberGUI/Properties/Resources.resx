@@ -145,4 +145,7 @@
   <data name="NUSgrabber" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NUSgrabber.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="NUSgrabberORIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NUSgrabberORIG.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

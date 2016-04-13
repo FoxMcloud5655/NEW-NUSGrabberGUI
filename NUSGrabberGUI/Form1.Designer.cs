@@ -35,6 +35,7 @@ namespace NUSGrabberGUI
         {
             NUSTabs = new TabControl();
             GameUpdateTab = new TabPage();
+            NUSGrabberProgress = new ProgressBar();
             GUVersionList = new ListBox();
             GUVersionLabel = new Label();
             GUTitleLabel = new Label();
@@ -49,8 +50,6 @@ namespace NUSGrabberGUI
             STSearchBox = new TextBox();
             STTitleList = new ListBox();
             FullListTab = new TabPage();
-            FTVersionList = new ListBox();
-            FTVersionLabel = new Label();
             FTTitleLabel = new Label();
             FTSearchLabel = new Label();
             FTSearchBox = new TextBox();
@@ -62,7 +61,6 @@ namespace NUSGrabberGUI
             DecryptButton = new Button();
             OpenFileDialog = new OpenFileDialog();
             EmbedNUSGrabber = new BackgroundWorker();
-            NUSGrabberProgress = new ProgressBar();
             NUSTabs.SuspendLayout();
             GameUpdateTab.SuspendLayout();
             SystemTab.SuspendLayout();
@@ -98,6 +96,14 @@ namespace NUSGrabberGUI
             GameUpdateTab.Size = new Size(352, 236);
             GameUpdateTab.TabIndex = 0;
             GameUpdateTab.Text = "Game Updates";
+            // 
+            // NUSGrabberProgress
+            // 
+            NUSGrabberProgress.Location = new Point(56, 6);
+            NUSGrabberProgress.Name = "NUSGrabberProgress";
+            NUSGrabberProgress.Size = new Size(290, 20);
+            NUSGrabberProgress.TabIndex = 6;
+            NUSGrabberProgress.Visible = false;
             // 
             // GUVersionList
             // 
@@ -222,8 +228,6 @@ namespace NUSGrabberGUI
             // FullListTab
             // 
             FullListTab.BackColor = Color.Turquoise;
-            FullListTab.Controls.Add(FTVersionList);
-            FullListTab.Controls.Add(FTVersionLabel);
             FullListTab.Controls.Add(FTTitleLabel);
             FullListTab.Controls.Add(FTSearchLabel);
             FullListTab.Controls.Add(FTSearchBox);
@@ -235,27 +239,10 @@ namespace NUSGrabberGUI
             FullListTab.TabIndex = 2;
             FullListTab.Text = "Full Titles";
             // 
-            // FTVersionList
-            // 
-            FTVersionList.FormattingEnabled = true;
-            FTVersionList.Location = new Point(289, 53);
-            FTVersionList.Name = "FTVersionList";
-            FTVersionList.Size = new Size(57, 173);
-            FTVersionList.TabIndex = 11;
-            // 
-            // FTVersionLabel
-            // 
-            FTVersionLabel.AutoSize = true;
-            FTVersionLabel.Location = new Point(292, 37);
-            FTVersionLabel.Name = "FTVersionLabel";
-            FTVersionLabel.Size = new Size(45, 13);
-            FTVersionLabel.TabIndex = 10;
-            FTVersionLabel.Text = "Version:";
-            // 
             // FTTitleLabel
             // 
             FTTitleLabel.AutoSize = true;
-            FTTitleLabel.Location = new Point(120, 37);
+            FTTitleLabel.Location = new Point(152, 37);
             FTTitleLabel.Name = "FTTitleLabel";
             FTTitleLabel.Size = new Size(35, 13);
             FTTitleLabel.TabIndex = 9;
@@ -283,9 +270,8 @@ namespace NUSGrabberGUI
             FTTitleList.FormattingEnabled = true;
             FTTitleList.Location = new Point(6, 53);
             FTTitleList.Name = "FTTitleList";
-            FTTitleList.Size = new Size(277, 173);
+            FTTitleList.Size = new Size(340, 173);
             FTTitleList.TabIndex = 6;
-            FTTitleList.SelectedIndexChanged += new EventHandler(FTTitleList_SelectedIndexChanged);
             // 
             // DownloadButton
             // 
@@ -353,14 +339,6 @@ namespace NUSGrabberGUI
             EmbedNUSGrabber.DoWork += new DoWorkEventHandler(EmbedNUSGrabber_Work);
             EmbedNUSGrabber.RunWorkerCompleted += new RunWorkerCompletedEventHandler(EmbedNUSGrabber_Done);
             // 
-            // NUSGrabberProgress
-            // 
-            NUSGrabberProgress.Location = new Point(56, 6);
-            NUSGrabberProgress.Name = "NUSGrabberProgress";
-            NUSGrabberProgress.Size = new Size(290, 20);
-            NUSGrabberProgress.TabIndex = 6;
-            NUSGrabberProgress.Visible = false;
-            // 
             // NUSGrabberForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
@@ -406,8 +384,6 @@ namespace NUSGrabberGUI
         private Label STSearchLabel;
         private TextBox STSearchBox;
         private ListBox STTitleList;
-        private ListBox FTVersionList;
-        private Label FTVersionLabel;
         private Label FTTitleLabel;
         private Label FTSearchLabel;
         private TextBox FTSearchBox;

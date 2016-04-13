@@ -115,13 +115,13 @@ namespace NUSGrabberGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool UseOrigNUS {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseEmbedNUS {
             get {
-                return ((bool)(this["UseOrigNUS"]));
+                return ((bool)(this["UseEmbedNUS"]));
             }
             set {
-                this["UseOrigNUS"] = value;
+                this["UseEmbedNUS"] = value;
             }
         }
         
@@ -146,6 +146,18 @@ namespace NUSGrabberGUI.Properties {
             }
             set {
                 this["Cleanup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseOrigNUS {
+            get {
+                return ((bool)(this["UseOrigNUS"]));
+            }
+            set {
+                this["UseOrigNUS"] = value;
             }
         }
     }

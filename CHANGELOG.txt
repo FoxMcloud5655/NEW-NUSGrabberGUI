@@ -2,7 +2,14 @@ Changelog for NEW-NUSGrabberGUI
 
 0.85 beta
 - Added project to GitHub!
-- Updated NUSGrabber to a hacked version designed to support the new protocol Nintendo has implemented.
+- Updated NUSGrabber to a hacked version (by DaBlackDeath) designed to support the new protocol Nintendo has implemented.
+- Added option to switch between hacked version and normal version of NUSGrabber.
+- Fixed a bug with switching pages not disabling UI when performing tasks.
+- Fixed a bug with incomplete downloads not being detected.
+- Fixed a bug with already downloaded titles and overwriting them properly (without destroying user data).
+- Changed some wording to better fit what's actually going on.
+- LibWiiSharp is now debug protected and automatically turns off when you exit the program.
+- Fixed a bug with multiple calls to the main fourm writing usless data in the debug log.
 
 0.84 beta
 - Added more exit code interpretation to detect more errors when running NUSGrabber.

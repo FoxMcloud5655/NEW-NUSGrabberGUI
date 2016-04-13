@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NUSGrabberGUI.ico" />
+    <None Include="Resources\NUSgrabberORIG.exe" />
     <None Include="Resources\NUSgrabber.exe" />
     <None Include="Resources\msvcp140.dll" />
     <None Include="Resources\msvcr120.dll" />

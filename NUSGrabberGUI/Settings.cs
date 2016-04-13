@@ -13,12 +13,14 @@ namespace NUSGrabberGUI
             HideCheckBox.Checked = Properties.Settings.Default.HideNUS;
             LoadCheckBox.Checked = Properties.Settings.Default.LoadTitles;
             DecryptCheckBox.Checked = Properties.Settings.Default.AutoDecrypt;
-            EmbedCheckBox.Checked = Properties.Settings.Default.UseOrigNUS;
+            EmbedCheckBox.Checked = Properties.Settings.Default.UseEmbedNUS;
             ArchivedCheckBox.Checked = Properties.Settings.Default.ArchivedDatabase;
+            if (Properties.Settings.Default.Debug) Properties.Settings.Default.Cleanup = false;
             CleanupCheckBox.Checked = Properties.Settings.Default.Cleanup;
-
+            OrigCheckBox.Checked = Properties.Settings.Default.UseOrigNUS;
             CleanupCheckBox.Enabled = !debug;
-            HideCheckBox.Enabled = EmbedCheckBox.Checked;
+            EmbedCheckBox.Visible = Properties.Settings.Default.Debug;
+            HideCheckBox.Enabled = !EmbedCheckBox.Checked;
         }
 
         private void SaveCloseButton_Click(object sender, EventArgs e)
@@ -31,40 +33,40 @@ namespace NUSGrabberGUI
             Properties.Settings.Default.HideNUS = HideCheckBox.Checked;
             Properties.Settings.Default.AutoDecrypt = DecryptCheckBox.Checked;
             Properties.Settings.Default.LoadTitles = LoadCheckBox.Checked;
-            Properties.Settings.Default.UseOrigNUS = EmbedCheckBox.Checked;
+            Properties.Settings.Default.UseEmbedNUS = EmbedCheckBox.Checked;
             Properties.Settings.Default.ArchivedDatabase = ArchivedCheckBox.Checked;
             Properties.Settings.Default.Cleanup = CleanupCheckBox.Checked;
+            Properties.Settings.Default.UseOrigNUS = OrigCheckBox.Checked;
             Properties.Settings.Default.Save();
             Close();
         }
 
         private void AboutButton_Click(object sender, EventArgs e)
         {
-            string debugversion = "";
-            if (Properties.Settings.Default.Debug) debugversion = " DEBUG";
             float version_float = (float)Properties.Settings.Default.Version / 100;
             MessageBox.Show("Created by: FoxMcloud5655\nNUSgrabber/CDecrypt by: crediar\nOriginal GUI by: Adr990\n\nVersion " +
-                version_float + ' ' + Properties.Settings.Default.VersionType + debugversion);
+                version_float + ' ' + Properties.Settings.Default.VersionType + (Properties.Settings.Default.Debug ? " DEBUG" : ""));
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            NUSGrabberForm update = new NUSGrabberForm();
+            NUSGrabberForm update = new NUSGrabberForm(true);
             update.CheckForUpdates(false);
+            update.Close();
         }
 
         private void EmbedCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (!EmbedCheckBox.Checked)
+            if (EmbedCheckBox.Checked)
             {
                 if (MessageBox.Show("This is an experimental feature which is not useful to the general public right now, as it " + 
-                    "uses the old method of downloading.  Are you sure you want to disable using NUSGrabber.exe?",
-                    "Confirm BETA Test", MessageBoxButtons.YesNo) == DialogResult.No)
+                    "is configured to use the old method of file storage.  Are you sure you want to disable using NUSGrabber.exe?",
+                    "Confirm Experimental Testing", MessageBoxButtons.YesNo) == DialogResult.No)
                 {
-                    EmbedCheckBox.Checked = true;
+                    EmbedCheckBox.Checked = false;
                 }
             }
-            HideCheckBox.Enabled = EmbedCheckBox.Checked;
+            HideCheckBox.Enabled = !EmbedCheckBox.Checked;
         }
     }
 }

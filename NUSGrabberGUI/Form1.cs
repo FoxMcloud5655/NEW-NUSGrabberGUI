@@ -85,6 +85,8 @@ namespace NUSGrabberGUI
                 Process.GetCurrentProcess().Kill();
             }
         }
+        
+        public NUSGrabberForm(bool temp) { }
 
         private void LoadTitleInfo(object sender, EventArgs e)
         {
@@ -205,25 +207,6 @@ namespace NUSGrabberGUI
             }
         }
 
-        private void FTTitleList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FTVersionList.Items.Clear();
-            string versions = (FTTitleList.SelectedItem as ListItem).Versions.ToString();
-            FTVersionList.Items.Add("Latest");
-            if (versions != "-")
-            {
-                string[] versions_split = versions.Split(',');
-                foreach (string v in versions_split)
-                {
-                    if (v != null && v != "" && v != " ")
-                    {
-                        FTVersionList.Items.Add(v.TrimStart(' '));
-                    }
-                }
-            }
-            FTVersionList.SelectedIndex = 0;
-        }
-
         private void FTSearchBox_TextChanged(object sender, EventArgs e)
         {
             FTTitleList.Items.Clear();
@@ -320,11 +303,6 @@ namespace NUSGrabberGUI
                 {
                     args[0] = "00050000";
                     args[0] += (FTTitleList.SelectedItem as ListItem).Title_ID.ToString();
-                    string selectversion = FTVersionList.SelectedItem.ToString();
-                    if (selectversion != "Latest")
-                    {
-                        args[1] = ' ' + selectversion.TrimStart('v');
-                    }
                 }
                 catch { args = null; }
             }
@@ -332,103 +310,111 @@ namespace NUSGrabberGUI
             {
                 
                 filepath = Environment.CurrentDirectory + '\\' + args[0] + '\\' + (!args[1].Equals("") ? args[1] + '\\' : "");
-                if (!File.Exists(filepath + "title.tmd"))
+                if (!Directory.Exists(filepath))
                 {
-                    EnableUI(false);
-                    NUSTabs.SelectedIndex = 0;
-                    ForceRefresh(GUSearchBox, "Downloading...  Please wait.");
-                    if (!Properties.Settings.Default.UseOrigNUS)
+                    if (!File.Exists(filepath + "title.tmd"))
                     {
-                        EmbedNUSGrabber.RunWorkerAsync(args);
-                    }
-                    else
-                    {
-                        Process nusgrabber = new Process();
-                        nusgrabber.StartInfo.FileName = "NUSGrabber.exe";
-                        nusgrabber.StartInfo.Arguments = args[0] + (args[1] != "" ?  ' ' + args[1] : "");
-                        nusgrabber.StartInfo.RedirectStandardOutput = true;
-                        nusgrabber.StartInfo.UseShellExecute = false;
-                        nusgrabber.StartInfo.CreateNoWindow = Properties.Settings.Default.HideNUS;
-                        try
+                        EnableUI(false);
+                        NUSTabs.SelectedIndex = 0;
+                        ForceRefresh(GUSearchBox, "Downloading...  Please wait.");
+                        if (Properties.Settings.Default.UseEmbedNUS)
                         {
-                            WriteDebugLog("Assumed path to the downloaded files is \"" + filepath + '\"');
-                            WriteDebugLog("Starting \"" + nusgrabber.StartInfo.FileName + "\" with \"" + nusgrabber.StartInfo.Arguments + "\" as arguments.");
-                            nusgrabber.Start();
-                            System.Threading.Thread.Sleep(2000);
-                            while (!nusgrabber.HasExited)
+                            EmbedNUSGrabber.RunWorkerAsync(args);
+                        }
+                        else
+                        {
+                            Process nusgrabber = new Process();
+                            nusgrabber.StartInfo.FileName = "NUSGrabber.exe";
+                            nusgrabber.StartInfo.Arguments = args[0] + (args[1] != "" ? ' ' + args[1] : "");
+                            nusgrabber.StartInfo.RedirectStandardOutput = true;
+                            nusgrabber.StartInfo.UseShellExecute = false;
+                            nusgrabber.StartInfo.CreateNoWindow = Properties.Settings.Default.HideNUS;
+                            try
                             {
-                                try
+                                WriteDebugLog("Assumed path to the downloaded files is \"" + filepath + '\"');
+                                WriteDebugLog("Starting \"" + nusgrabber.StartInfo.FileName + "\" with \"" + nusgrabber.StartInfo.Arguments + "\" as arguments.");
+                                nusgrabber.Start();
+                                System.Threading.Thread.Sleep(2000);
+                                while (!nusgrabber.HasExited)
                                 {
-                                    FileInfo DownloadedFile = GetFiles(filepath, ".app", ".h3").OrderByDescending(f => f.LastWriteTime).First();
-                                    if (!DownloadedFile.Equals(null))
+                                    try
                                     {
-                                        ForceRefresh(GUSearchBox, "Downloading: " + DownloadedFile.Name + "...");
+                                        FileInfo DownloadedFile = GetFiles(filepath, ".app", ".h3").OrderByDescending(f => f.LastWriteTime).First();
+                                        if (!DownloadedFile.Equals(null))
+                                        {
+                                            ForceRefresh(GUSearchBox, "Downloading: " + DownloadedFile.Name + "...");
+                                        }
                                     }
+                                    catch { System.Threading.Thread.Sleep(500); }
                                 }
-                                catch { System.Threading.Thread.Sleep(500); }
-                            }
-                            WriteDebugLog("Detected that NUSGrabber.exe has closed with exit code of " + nusgrabber.ExitCode + ".  Preforming after-processing.");
-                            if (nusgrabber.ExitCode == 1)
-                            {
-                                if (!Directory.Exists(filepath))
+                                WriteDebugLog("Detected that NUSGrabber.exe has closed with exit code of " + nusgrabber.ExitCode + ".  Preforming after-processing.");
+                                if (nusgrabber.ExitCode == 1)
                                 {
-                                    MessageBox.Show("Title not found on Nintendo's servers.");
-                                    WriteDebugLog("Title not found.");
-                                }
-                                else if (File.Exists(filepath + "title.tmd"))
-                                {
-                                    if (Properties.Settings.Default.AutoDecrypt && File.Exists(filepath + "title.tik"))
+                                    if (!Directory.Exists(filepath))
                                     {
-                                        WriteDebugLog("Auto-decrypting title.");
-                                        DecryptButton_Click(sender, e);
+                                        MessageBox.Show("Title not found on Nintendo's servers.");
+                                        WriteDebugLog("Title not found.");
                                     }
-                                    else if (Properties.Settings.Default.AutoDecrypt)
+                                    else if (File.Exists(filepath + "title.tmd"))
                                     {
-                                        MessageBox.Show("Title successfully downloaded, but no decryption key was found.  Can't decrypt automatically.");
-                                        WriteDebugLog("Couldn't find \"title.tik\".  Skipping auto-decryption.\nTitle downloaded successfully.");
+                                        if (Properties.Settings.Default.AutoDecrypt && File.Exists(filepath + "title.tik"))
+                                        {
+                                            WriteDebugLog("Auto-decrypting title.");
+                                            DecryptButton_Click(sender, e);
+                                        }
+                                        else if (Properties.Settings.Default.AutoDecrypt)
+                                        {
+                                            MessageBox.Show("Title successfully downloaded, but no decryption key was found.  Can't decrypt automatically.");
+                                            WriteDebugLog("Couldn't find \"title.tik\".  Skipping auto-decryption.\nTitle downloaded successfully.");
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Title successfully downloaded.");
+                                            WriteDebugLog("Title downloaded successfully.");
+                                        }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Title successfully downloaded.");
-                                        WriteDebugLog("Title downloaded successfully.");
+                                        MessageBox.Show("Incomplete download detected.  Delete \"" + filepath + "\" and try downloading the title again.");
+                                        WriteDebugLog("Possible incomplete download.");
                                     }
-                                }
-                            }
-                            else
-                            {
-                                if (nusgrabber.ExitCode == -1073741510)
-                                {
-                                    MessageBox.Show("NUSGrabber exited without finishing the download.  Please do not exit NUSGrabber while it's downloading!");
-                                    WriteDebugLog("User closed NUSGrabber.  Program exited without finishing download.");
-                                }
-                                else if (nusgrabber.ExitCode == -1073741701)
-                                {
-                                    MessageBox.Show("Detected that NUSGrabber didn't run.  Install Visual Studio C++ (x86) and try again.");
-                                    WriteDebugLog("Detected that NUSGrabber didn't run.  Installation of Visual Studio C++ x86 (32-bit) is required.");
-                                    WriteDebugLog("Status Code: STATUS_INVALID_IMAGE_FORMAT");
-                                }
-                                else if (nusgrabber.ExitCode == -1073741515)
-                                {
-                                    MessageBox.Show("Unable to locate a .dll file.  Perhaps you are running WINE?");
-                                    WriteDebugLog("Detected that NUSGrabber didn't run.  Unable to find a required .dll");
-                                    WriteDebugLog("Status Code: STATUS_DLL_NOT_FOUND");
                                 }
                                 else
                                 {
-                                    MessageBox.Show("There was an unknown problem while downloading.");
-                                    WriteDebugLog("Unknown error occurred while downloading.");
+                                    if (nusgrabber.ExitCode == -1073741510)
+                                    {
+                                        MessageBox.Show("NUSGrabber exited without finishing the download.  Please do not exit NUSGrabber while it's downloading!");
+                                        WriteDebugLog("User closed NUSGrabber.  Program exited without finishing download.");
+                                    }
+                                    else if (nusgrabber.ExitCode == -1073741701)
+                                    {
+                                        MessageBox.Show("Detected that NUSGrabber didn't run.  Install Visual Studio C++ (x86) and try again.");
+                                        WriteDebugLog("Detected that NUSGrabber didn't run.  Installation of Visual Studio C++ x86 (32-bit) is required.");
+                                        WriteDebugLog("Status Code: STATUS_INVALID_IMAGE_FORMAT");
+                                    }
+                                    else if (nusgrabber.ExitCode == -1073741515)
+                                    {
+                                        MessageBox.Show("Unable to locate a .dll file.  Perhaps you are running WINE?");
+                                        WriteDebugLog("Detected that NUSGrabber didn't run.  Unable to find a required .dll");
+                                        WriteDebugLog("Status Code: STATUS_DLL_NOT_FOUND");
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("There was an unknown problem while downloading.");
+                                        WriteDebugLog("Unknown error occurred while downloading.");
+                                    }
                                 }
-                            }
-                            GUSearchBox.Text = "";
-                            filepath = "";
-                            EnableUI(true);
+                                GUSearchBox.Text = "";
+                                filepath = "";
+                                EnableUI(true);
 
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("There was a problem starting NUSgrabber.  Ensure that you have NUSgrabber in the root " +
-                                "directory that this program is stored in.\n" + ex.ToString());
-                            WriteDebugLog("Error starting " + nusgrabber.StartInfo.FileName + ".\n" + ex.ToString());
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("There was a problem starting NUSgrabber.  Ensure that you have NUSgrabber in the root " +
+                                    "directory that this program is stored in.\n" + ex.ToString());
+                                WriteDebugLog("Error starting " + nusgrabber.StartInfo.FileName + ".\n" + ex.ToString());
+                            }
                         }
                     }
                 }
@@ -438,7 +424,16 @@ namespace NUSGrabberGUI
                     List<FileInfo> files = GetFiles(filepath, ".h3", ".app", "", ".tmd", ".tik", ".cert");
                     foreach (FileInfo file in files)
                         DeleteFile(file.FullName);
-                    DownloadButton_Click(sender, e);
+                    try
+                    {
+                        Directory.Delete(filepath);
+                        DownloadButton_Click(sender, e);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Couldn't remove folder after deletion.  Ensure there is no other data in \"" + filepath + "\" and try again.");
+                        WriteDebugLog("Couldn't delete directory " + filepath + ".");
+                    }
                 }
                 else if (MessageBox.Show("You have already downloaded this title.  Are you sure you wish to redownload it?",
                     "Confirm Overwrite", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -446,6 +441,7 @@ namespace NUSGrabberGUI
                     try
                     {
                         File.Create(filepath + "DELETEME");
+                        WriteDebugLog("Deleting previously downloaded files by user request.");
                         DownloadButton_Click(sender, e);
                     }
                     catch { WriteDebugLog("Couldn't access " + filepath + " for deletion."); }
@@ -769,10 +765,17 @@ namespace NUSGrabberGUI
         private void AboutButton_Click(object sender, EventArgs e)
         {
             bool ArchivedDatabase = Properties.Settings.Default.ArchivedDatabase;
+            bool UseOrigNUS = Properties.Settings.Default.UseOrigNUS;
             SettingsForm settings = new SettingsForm(debug);
             settings.ShowDialog();
             if (ArchivedDatabase != Properties.Settings.Default.ArchivedDatabase)
                 GetTitleInfo();
+            if (UseOrigNUS != Properties.Settings.Default.UseOrigNUS)
+            {
+                DeleteFile("NUSgrabber.exe");
+                WriteDebugLog("Replacing NUSgrabber.exe with " + (Properties.Settings.Default.UseOrigNUS ? "original" : "hacked") + " version.");
+                File.WriteAllBytes("NUSgrabber.exe", Properties.Settings.Default.UseOrigNUS ? Properties.Resources.NUSgrabberORIG : Properties.Resources.NUSgrabber);
+            }
         }
 
         #endregion
@@ -1209,7 +1212,7 @@ namespace NUSGrabberGUI
             }
         }
 
-        private void ExtractResources()
+        public void ExtractResources()
         {
             try
             {
@@ -1241,7 +1244,7 @@ namespace NUSGrabberGUI
                 if (!File.Exists("NUSgrabber.exe"))
                 {
                     WriteDebugLog("Couldn't find NUSgrabber.exe.  Extracting resource.");
-                    File.WriteAllBytes("NUSgrabber.exe", Properties.Resources.NUSgrabber);
+                    File.WriteAllBytes("NUSgrabber.exe", Properties.Settings.Default.UseOrigNUS ? Properties.Resources.NUSgrabberORIG : Properties.Resources.NUSgrabber);
                 }
                 if (!File.Exists("vcruntime140.dll"))
                 {
@@ -1266,7 +1269,7 @@ namespace NUSGrabberGUI
             }
         }
 
-        private void WriteDebugLog(string text, bool showdate)
+        public void WriteDebugLog(string text, bool showdate)
         {
             if (canwritedebug && Properties.Settings.Default.Debug)
             {
@@ -1294,12 +1297,12 @@ namespace NUSGrabberGUI
             }
         }
 
-        private void WriteDebugLog(string text)
+        public void WriteDebugLog(string text)
         {
             WriteDebugLog(text, true);
         }
 
-        private void DeleteFile(string file)
+        public void DeleteFile(string file)
         {
             if (File.Exists(file))
             {
@@ -1330,9 +1333,11 @@ namespace NUSGrabberGUI
             }
             DeleteFile("selfdelete.bat");
             DeleteFile("selfdelete.vbs");
+            Properties.Settings.Default.UseEmbedNUS = false;
+            Properties.Settings.Default.Save();
             if (!Properties.Settings.Default.Debug)
                 DeleteFile("debug.log");
-            else WriteDebugLog("");
+            else WriteDebugLog("Preforming shut down process.\n");
         }
 
         public List<FileInfo> GetFiles(string path, params string[] extensions)
