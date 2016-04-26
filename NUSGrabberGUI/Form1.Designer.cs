@@ -35,22 +35,25 @@ namespace NUSGrabberGUI
         {
             NUSTabs = new TabControl();
             GameUpdateTab = new TabPage();
+            GUTitleIDLabel = new Label();
             NUSGrabberProgress = new ProgressBar();
             GUVersionList = new ListBox();
-            GUVersionLabel = new Label();
-            GUTitleLabel = new Label();
+            GUVersionsLabel = new Label();
+            GUTitlesLabel = new Label();
             GUSearchLabel = new Label();
             GUSearchBox = new TextBox();
             GUTitleList = new ListBox();
             SystemTab = new TabPage();
+            STTitleIDLabel = new Label();
             STVersionList = new ListBox();
-            STVersionLabel = new Label();
-            STTitleLabel = new Label();
+            STVersionsLabel = new Label();
+            STTitlesLabel = new Label();
             STSearchLabel = new Label();
             STSearchBox = new TextBox();
             STTitleList = new ListBox();
             FullListTab = new TabPage();
-            FTTitleLabel = new Label();
+            FTTitleIDLabel = new Label();
+            FTTitlesLabel = new Label();
             FTSearchLabel = new Label();
             FTSearchBox = new TextBox();
             FTTitleList = new ListBox();
@@ -75,17 +78,18 @@ namespace NUSGrabberGUI
             NUSTabs.Location = new Point(12, 12);
             NUSTabs.Name = "NUSTabs";
             NUSTabs.SelectedIndex = 0;
-            NUSTabs.Size = new Size(360, 262);
+            NUSTabs.Size = new Size(360, 283);
             NUSTabs.TabIndex = 0;
             NUSTabs.SelectedIndexChanged += new EventHandler(NUSTabs_IndexChanged);
             // 
             // GameUpdateTab
             // 
             GameUpdateTab.BackColor = Color.LightGreen;
+            GameUpdateTab.Controls.Add(GUTitleIDLabel);
             GameUpdateTab.Controls.Add(NUSGrabberProgress);
             GameUpdateTab.Controls.Add(GUVersionList);
-            GameUpdateTab.Controls.Add(GUVersionLabel);
-            GameUpdateTab.Controls.Add(GUTitleLabel);
+            GameUpdateTab.Controls.Add(GUVersionsLabel);
+            GameUpdateTab.Controls.Add(GUTitlesLabel);
             GameUpdateTab.Controls.Add(GUSearchLabel);
             GameUpdateTab.Controls.Add(GUSearchBox);
             GameUpdateTab.Controls.Add(GUTitleList);
@@ -93,9 +97,18 @@ namespace NUSGrabberGUI
             GameUpdateTab.Location = new Point(4, 22);
             GameUpdateTab.Name = "GameUpdateTab";
             GameUpdateTab.Padding = new Padding(3);
-            GameUpdateTab.Size = new Size(352, 236);
+            GameUpdateTab.Size = new Size(352, 257);
             GameUpdateTab.TabIndex = 0;
             GameUpdateTab.Text = "Game Updates";
+            // 
+            // GUTitleIDLabel
+            // 
+            GUTitleIDLabel.AutoSize = true;
+            GUTitleIDLabel.Location = new Point(9, 233);
+            GUTitleIDLabel.Name = "GUTitleIDLabel";
+            GUTitleIDLabel.Size = new Size(44, 13);
+            GUTitleIDLabel.TabIndex = 7;
+            GUTitleIDLabel.Text = "Title ID:";
             // 
             // NUSGrabberProgress
             // 
@@ -113,23 +126,23 @@ namespace NUSGrabberGUI
             GUVersionList.Size = new Size(57, 173);
             GUVersionList.TabIndex = 5;
             // 
-            // GUVersionLabel
+            // GUVersionsLabel
             // 
-            GUVersionLabel.AutoSize = true;
-            GUVersionLabel.Location = new Point(292, 37);
-            GUVersionLabel.Name = "GUVersionLabel";
-            GUVersionLabel.Size = new Size(45, 13);
-            GUVersionLabel.TabIndex = 4;
-            GUVersionLabel.Text = "Version:";
+            GUVersionsLabel.AutoSize = true;
+            GUVersionsLabel.Location = new Point(292, 37);
+            GUVersionsLabel.Name = "GUVersionsLabel";
+            GUVersionsLabel.Size = new Size(50, 13);
+            GUVersionsLabel.TabIndex = 4;
+            GUVersionsLabel.Text = "Versions:";
             // 
-            // GUTitleLabel
+            // GUTitlesLabel
             // 
-            GUTitleLabel.AutoSize = true;
-            GUTitleLabel.Location = new Point(120, 37);
-            GUTitleLabel.Name = "GUTitleLabel";
-            GUTitleLabel.Size = new Size(35, 13);
-            GUTitleLabel.TabIndex = 3;
-            GUTitleLabel.Text = "Titles:";
+            GUTitlesLabel.AutoSize = true;
+            GUTitlesLabel.Location = new Point(120, 37);
+            GUTitlesLabel.Name = "GUTitlesLabel";
+            GUTitlesLabel.Size = new Size(35, 13);
+            GUTitlesLabel.TabIndex = 3;
+            GUTitlesLabel.Text = "Titles:";
             // 
             // GUSearchLabel
             // 
@@ -160,18 +173,28 @@ namespace NUSGrabberGUI
             // SystemTab
             // 
             SystemTab.BackColor = Color.LightCoral;
+            SystemTab.Controls.Add(STTitleIDLabel);
             SystemTab.Controls.Add(STVersionList);
-            SystemTab.Controls.Add(STVersionLabel);
-            SystemTab.Controls.Add(STTitleLabel);
+            SystemTab.Controls.Add(STVersionsLabel);
+            SystemTab.Controls.Add(STTitlesLabel);
             SystemTab.Controls.Add(STSearchLabel);
             SystemTab.Controls.Add(STSearchBox);
             SystemTab.Controls.Add(STTitleList);
             SystemTab.Location = new Point(4, 22);
             SystemTab.Name = "SystemTab";
             SystemTab.Padding = new Padding(3);
-            SystemTab.Size = new Size(352, 236);
+            SystemTab.Size = new Size(352, 257);
             SystemTab.TabIndex = 1;
             SystemTab.Text = "System Titles";
+            // 
+            // STTitleIDLabel
+            // 
+            STTitleIDLabel.AutoSize = true;
+            STTitleIDLabel.Location = new Point(9, 233);
+            STTitleIDLabel.Name = "STTitleIDLabel";
+            STTitleIDLabel.Size = new Size(44, 13);
+            STTitleIDLabel.TabIndex = 12;
+            STTitleIDLabel.Text = "Title ID:";
             // 
             // STVersionList
             // 
@@ -181,23 +204,23 @@ namespace NUSGrabberGUI
             STVersionList.Size = new Size(74, 173);
             STVersionList.TabIndex = 11;
             // 
-            // STVersionLabel
+            // STVersionsLabel
             // 
-            STVersionLabel.AutoSize = true;
-            STVersionLabel.Location = new Point(285, 37);
-            STVersionLabel.Name = "STVersionLabel";
-            STVersionLabel.Size = new Size(45, 13);
-            STVersionLabel.TabIndex = 10;
-            STVersionLabel.Text = "Version:";
+            STVersionsLabel.AutoSize = true;
+            STVersionsLabel.Location = new Point(285, 37);
+            STVersionsLabel.Name = "STVersionsLabel";
+            STVersionsLabel.Size = new Size(50, 13);
+            STVersionsLabel.TabIndex = 10;
+            STVersionsLabel.Text = "Versions:";
             // 
-            // STTitleLabel
+            // STTitlesLabel
             // 
-            STTitleLabel.AutoSize = true;
-            STTitleLabel.Location = new Point(111, 37);
-            STTitleLabel.Name = "STTitleLabel";
-            STTitleLabel.Size = new Size(35, 13);
-            STTitleLabel.TabIndex = 9;
-            STTitleLabel.Text = "Titles:";
+            STTitlesLabel.AutoSize = true;
+            STTitlesLabel.Location = new Point(111, 37);
+            STTitlesLabel.Name = "STTitlesLabel";
+            STTitlesLabel.Size = new Size(35, 13);
+            STTitlesLabel.TabIndex = 9;
+            STTitlesLabel.Text = "Titles:";
             // 
             // STSearchLabel
             // 
@@ -228,25 +251,35 @@ namespace NUSGrabberGUI
             // FullListTab
             // 
             FullListTab.BackColor = Color.Turquoise;
-            FullListTab.Controls.Add(FTTitleLabel);
+            FullListTab.Controls.Add(FTTitleIDLabel);
+            FullListTab.Controls.Add(FTTitlesLabel);
             FullListTab.Controls.Add(FTSearchLabel);
             FullListTab.Controls.Add(FTSearchBox);
             FullListTab.Controls.Add(FTTitleList);
             FullListTab.Location = new Point(4, 22);
             FullListTab.Name = "FullListTab";
             FullListTab.Padding = new Padding(3);
-            FullListTab.Size = new Size(352, 236);
+            FullListTab.Size = new Size(352, 257);
             FullListTab.TabIndex = 2;
             FullListTab.Text = "Full Titles";
             // 
-            // FTTitleLabel
+            // FTTitleIDLabel
             // 
-            FTTitleLabel.AutoSize = true;
-            FTTitleLabel.Location = new Point(152, 37);
-            FTTitleLabel.Name = "FTTitleLabel";
-            FTTitleLabel.Size = new Size(35, 13);
-            FTTitleLabel.TabIndex = 9;
-            FTTitleLabel.Text = "Titles:";
+            FTTitleIDLabel.AutoSize = true;
+            FTTitleIDLabel.Location = new Point(9, 233);
+            FTTitleIDLabel.Name = "FTTitleIDLabel";
+            FTTitleIDLabel.Size = new Size(44, 13);
+            FTTitleIDLabel.TabIndex = 10;
+            FTTitleIDLabel.Text = "Title ID:";
+            // 
+            // FTTitlesLabel
+            // 
+            FTTitlesLabel.AutoSize = true;
+            FTTitlesLabel.Location = new Point(152, 37);
+            FTTitlesLabel.Name = "FTTitlesLabel";
+            FTTitlesLabel.Size = new Size(35, 13);
+            FTTitlesLabel.TabIndex = 9;
+            FTTitlesLabel.Text = "Titles:";
             // 
             // FTSearchLabel
             // 
@@ -272,12 +305,13 @@ namespace NUSGrabberGUI
             FTTitleList.Name = "FTTitleList";
             FTTitleList.Size = new Size(340, 173);
             FTTitleList.TabIndex = 6;
+            FTTitleList.SelectedIndexChanged += new EventHandler(FTTitleList_SelectedIndexChanged);
             // 
             // DownloadButton
             // 
             DownloadButton.DialogResult = DialogResult.Cancel;
             DownloadButton.Enabled = false;
-            DownloadButton.Location = new Point(300, 280);
+            DownloadButton.Location = new Point(300, 301);
             DownloadButton.Name = "DownloadButton";
             DownloadButton.Size = new Size(72, 23);
             DownloadButton.TabIndex = 3;
@@ -288,7 +322,7 @@ namespace NUSGrabberGUI
             // UpdateButton
             // 
             UpdateButton.Enabled = false;
-            UpdateButton.Location = new Point(72, 280);
+            UpdateButton.Location = new Point(72, 301);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(110, 23);
             UpdateButton.TabIndex = 4;
@@ -299,7 +333,7 @@ namespace NUSGrabberGUI
             // AboutButton
             // 
             AboutButton.Enabled = false;
-            AboutButton.Location = new Point(12, 280);
+            AboutButton.Location = new Point(12, 301);
             AboutButton.Name = "AboutButton";
             AboutButton.Size = new Size(54, 23);
             AboutButton.TabIndex = 5;
@@ -322,7 +356,7 @@ namespace NUSGrabberGUI
             // DecryptButton
             // 
             DecryptButton.Enabled = false;
-            DecryptButton.Location = new Point(188, 280);
+            DecryptButton.Location = new Point(188, 301);
             DecryptButton.Name = "DecryptButton";
             DecryptButton.Size = new Size(106, 23);
             DecryptButton.TabIndex = 7;
@@ -343,7 +377,7 @@ namespace NUSGrabberGUI
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(384, 311);
+            ClientSize = new Size(384, 336);
             Controls.Add(DecryptButton);
             Controls.Add(ReloadButton);
             Controls.Add(AboutButton);
@@ -370,8 +404,8 @@ namespace NUSGrabberGUI
         private TabControl NUSTabs;
         private TabPage GameUpdateTab;
         private ListBox GUVersionList;
-        private Label GUVersionLabel;
-        private Label GUTitleLabel;
+        private Label GUVersionsLabel;
+        private Label GUTitlesLabel;
         private Label GUSearchLabel;
         private TextBox GUSearchBox;
         private ListBox GUTitleList;
@@ -379,12 +413,12 @@ namespace NUSGrabberGUI
         private TabPage FullListTab;
         private Button DownloadButton;
         private ListBox STVersionList;
-        private Label STVersionLabel;
-        private Label STTitleLabel;
+        private Label STVersionsLabel;
+        private Label STTitlesLabel;
         private Label STSearchLabel;
         private TextBox STSearchBox;
         private ListBox STTitleList;
-        private Label FTTitleLabel;
+        private Label FTTitlesLabel;
         private Label FTSearchLabel;
         private TextBox FTSearchBox;
         private ListBox FTTitleList;
@@ -395,6 +429,9 @@ namespace NUSGrabberGUI
         private OpenFileDialog OpenFileDialog;
         private BackgroundWorker EmbedNUSGrabber;
         private ProgressBar NUSGrabberProgress;
+        private Label GUTitleIDLabel;
+        private Label STTitleIDLabel;
+        private Label FTTitleIDLabel;
     }
 }
 

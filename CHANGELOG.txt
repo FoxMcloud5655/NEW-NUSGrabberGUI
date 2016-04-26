@@ -1,5 +1,11 @@
 Changelog for NEW-NUSGrabberGUI
 
+0.86 beta
+- Added a Help/FAQ button in the settings.
+- Expanded the main window of the app to include the Title ID of a selected title.
+- Added the ability to search by Title ID.  To search, search only by the last 8 hex values (An example: 10115E00).
+- Fixed some spelling issues.  Why does no one notice/tell me about these things?!
+
 0.85 beta
 - Added project to GitHub!
 - Updated NUSGrabber to a hacked version (by DaBlackDeath) designed to support the new protocol Nintendo has implemented.

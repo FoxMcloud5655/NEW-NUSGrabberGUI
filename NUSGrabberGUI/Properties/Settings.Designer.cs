@@ -49,7 +49,7 @@ namespace NUSGrabberGUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("85")]
+        [global::System.Configuration.DefaultSettingValueAttribute("86")]
         public int Version {
             get {
                 return ((int)(this["Version"]));

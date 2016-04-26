@@ -33,7 +33,6 @@ namespace NUSGrabberGUI
         /// </summary>
         private void InitializeComponent()
         {
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(SettingsForm));
             RegionBox = new ComboBox();
             RegionLabel = new Label();
             AboutButton = new Button();
@@ -46,6 +45,7 @@ namespace NUSGrabberGUI
             ArchivedCheckBox = new CheckBox();
             CleanupCheckBox = new CheckBox();
             OrigCheckBox = new CheckBox();
+            FAQButton = new Button();
             SuspendLayout();
             // 
             // RegionBox
@@ -55,7 +55,7 @@ namespace NUSGrabberGUI
             "USA",
             "EUR",
             "JPN"});
-            RegionBox.Location = new Point(16, 36);
+            RegionBox.Location = new Point(30, 33);
             RegionBox.Name = "RegionBox";
             RegionBox.Size = new Size(121, 21);
             RegionBox.TabIndex = 0;
@@ -71,7 +71,7 @@ namespace NUSGrabberGUI
             // 
             // AboutButton
             // 
-            AboutButton.Location = new Point(12, 243);
+            AboutButton.Location = new Point(12, 226);
             AboutButton.Name = "AboutButton";
             AboutButton.Size = new Size(46, 23);
             AboutButton.TabIndex = 2;
@@ -82,7 +82,7 @@ namespace NUSGrabberGUI
             // SaveCloseButton
             // 
             SaveCloseButton.DialogResult = DialogResult.Cancel;
-            SaveCloseButton.Location = new Point(175, 243);
+            SaveCloseButton.Location = new Point(246, 226);
             SaveCloseButton.Name = "SaveCloseButton";
             SaveCloseButton.Size = new Size(97, 23);
             SaveCloseButton.TabIndex = 3;
@@ -93,7 +93,7 @@ namespace NUSGrabberGUI
             // UpdateButton
             // 
             UpdateButton.DialogResult = DialogResult.Cancel;
-            UpdateButton.Location = new Point(64, 243);
+            UpdateButton.Location = new Point(135, 226);
             UpdateButton.Name = "UpdateButton";
             UpdateButton.Size = new Size(105, 23);
             UpdateButton.TabIndex = 4;
@@ -104,7 +104,7 @@ namespace NUSGrabberGUI
             // DecryptCheckBox
             // 
             DecryptCheckBox.AutoSize = true;
-            DecryptCheckBox.Location = new Point(16, 71);
+            DecryptCheckBox.Location = new Point(16, 61);
             DecryptCheckBox.Name = "DecryptCheckBox";
             DecryptCheckBox.Size = new Size(180, 17);
             DecryptCheckBox.TabIndex = 5;
@@ -114,7 +114,7 @@ namespace NUSGrabberGUI
             // HideCheckBox
             // 
             HideCheckBox.AutoSize = true;
-            HideCheckBox.Location = new Point(16, 117);
+            HideCheckBox.Location = new Point(16, 107);
             HideCheckBox.Name = "HideCheckBox";
             HideCheckBox.Size = new Size(228, 17);
             HideCheckBox.TabIndex = 6;
@@ -124,7 +124,7 @@ namespace NUSGrabberGUI
             // LoadCheckBox
             // 
             LoadCheckBox.AutoSize = true;
-            LoadCheckBox.Location = new Point(16, 94);
+            LoadCheckBox.Location = new Point(16, 84);
             LoadCheckBox.Name = "LoadCheckBox";
             LoadCheckBox.Size = new Size(124, 17);
             LoadCheckBox.TabIndex = 7;
@@ -136,7 +136,7 @@ namespace NUSGrabberGUI
             EmbedCheckBox.AutoSize = true;
             EmbedCheckBox.Checked = true;
             EmbedCheckBox.CheckState = CheckState.Checked;
-            EmbedCheckBox.Location = new Point(16, 209);
+            EmbedCheckBox.Location = new Point(16, 199);
             EmbedCheckBox.Name = "EmbedCheckBox";
             EmbedCheckBox.Size = new Size(167, 17);
             EmbedCheckBox.TabIndex = 8;
@@ -147,7 +147,7 @@ namespace NUSGrabberGUI
             // ArchivedCheckBox
             // 
             ArchivedCheckBox.AutoSize = true;
-            ArchivedCheckBox.Location = new Point(16, 163);
+            ArchivedCheckBox.Location = new Point(16, 153);
             ArchivedCheckBox.Name = "ArchivedCheckBox";
             ArchivedCheckBox.Size = new Size(218, 17);
             ArchivedCheckBox.TabIndex = 9;
@@ -157,7 +157,7 @@ namespace NUSGrabberGUI
             // CleanupCheckBox
             // 
             CleanupCheckBox.AutoSize = true;
-            CleanupCheckBox.Location = new Point(16, 186);
+            CleanupCheckBox.Location = new Point(16, 176);
             CleanupCheckBox.Name = "CleanupCheckBox";
             CleanupCheckBox.Size = new Size(148, 17);
             CleanupCheckBox.TabIndex = 10;
@@ -167,19 +167,30 @@ namespace NUSGrabberGUI
             // OrigCheckBox
             // 
             OrigCheckBox.AutoSize = true;
-            OrigCheckBox.Location = new Point(16, 140);
+            OrigCheckBox.Location = new Point(16, 130);
             OrigCheckBox.Name = "OrigCheckBox";
             OrigCheckBox.Size = new Size(145, 17);
             OrigCheckBox.TabIndex = 11;
             OrigCheckBox.Text = "Use original NUSGrabber";
             OrigCheckBox.UseVisualStyleBackColor = true;
             // 
+            // FAQButton
+            // 
+            FAQButton.Location = new Point(64, 226);
+            FAQButton.Name = "FAQButton";
+            FAQButton.Size = new Size(65, 23);
+            FAQButton.TabIndex = 12;
+            FAQButton.Text = "Help/FAQ";
+            FAQButton.UseVisualStyleBackColor = true;
+            FAQButton.Click += new EventHandler(FAQButton_Click);
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = SaveCloseButton;
-            ClientSize = new Size(284, 278);
+            ClientSize = new Size(355, 261);
+            Controls.Add(FAQButton);
             Controls.Add(OrigCheckBox);
             Controls.Add(CleanupCheckBox);
             Controls.Add(ArchivedCheckBox);
@@ -192,7 +203,6 @@ namespace NUSGrabberGUI
             Controls.Add(AboutButton);
             Controls.Add(RegionLabel);
             Controls.Add(RegionBox);
-            Icon = ((Icon)(resources.GetObject("$Icon")));
             Name = "SettingsForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Settings";
@@ -215,5 +225,6 @@ namespace NUSGrabberGUI
         private CheckBox ArchivedCheckBox;
         private CheckBox CleanupCheckBox;
         private CheckBox OrigCheckBox;
+        private Button FAQButton;
     }
 }

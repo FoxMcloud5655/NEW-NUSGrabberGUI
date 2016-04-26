@@ -115,6 +115,8 @@ namespace NUSGrabberGUI
                 }
             }
             GUVersionList.SelectedIndex = 0;
+            try { GUTitleIDLabel.Text = "Title ID: " + (GUTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
+            catch { }
         }
 
         private void GUSearchBox_TextChanged(object sender, EventArgs e)
@@ -127,7 +129,8 @@ namespace NUSGrabberGUI
                 {
                     foreach (ListItem t in GameUpdates)
                         if (t.Desc != null && t.Versions.ToString() != "v1" && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
-                            if (t.Desc.IndexOf(GUSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                            if (t.Desc.IndexOf(GUSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                t.Title_ID.ToString().IndexOf(GUSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                                 GUTitleList.Items.Add(t);
                     if (GUTitleList.Items.Count != 0)
                     {
@@ -137,6 +140,7 @@ namespace NUSGrabberGUI
                     else
                     {
                         GUVersionList.Items.Clear();
+                        GUTitleIDLabel.Text = "Title ID:";
                         DownloadButton.Enabled = false;
                     }
                 }
@@ -171,6 +175,8 @@ namespace NUSGrabberGUI
                 }
             }
             STVersionList.SelectedIndex = 0;
+            try { STTitleIDLabel.Text = "Title ID: " + (STTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
+            catch { }
         }
 
         private void STSearchBox_TextChanged(object sender, EventArgs e)
@@ -181,7 +187,8 @@ namespace NUSGrabberGUI
             {
                 foreach (ListItem t in SystemTitles)
                     if (t.Desc != null && t.Versions.ToString() != "v1" && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
-                        if (t.Desc.IndexOf(STSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                        if (t.Desc.IndexOf(STSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                t.Title_ID.ToString().IndexOf(GUSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                             STTitleList.Items.Add(t);
                 if (STTitleList.Items.Count != 0)
                 {
@@ -191,6 +198,7 @@ namespace NUSGrabberGUI
                 else
                 {
                     STVersionList.Items.Clear();
+                    STTitleIDLabel.Text = "Title ID:";
                     DownloadButton.Enabled = false;
                 }
             }
@@ -207,6 +215,12 @@ namespace NUSGrabberGUI
             }
         }
 
+        private void FTTitleList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try { FTTitleIDLabel.Text = "Title ID: " + (FTTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
+            catch { }
+        }
+
         private void FTSearchBox_TextChanged(object sender, EventArgs e)
         {
             FTTitleList.Items.Clear();
@@ -215,7 +229,8 @@ namespace NUSGrabberGUI
             {
                 foreach (ListItem t in GameUpdates)
                     if (t.Desc != null && t.Versions.ToString() != "v1" && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
-                        if (t.Desc.IndexOf(FTSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                        if (t.Desc.IndexOf(FTSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                t.Title_ID.ToString().IndexOf(GUSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                             FTTitleList.Items.Add(t);
                 if (FTTitleList.Items.Count != 0)
                 {
@@ -225,6 +240,7 @@ namespace NUSGrabberGUI
                 else
                 {
                     GUVersionList.Items.Clear();
+                    FTTitleIDLabel.Text = "Title ID:";
                     DownloadButton.Enabled = false;
                 }
             }
@@ -1409,6 +1425,7 @@ namespace NUSGrabberGUI
         }
 
         #endregion
+
     }
 
     #region ListItem

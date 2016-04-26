@@ -68,5 +68,52 @@ namespace NUSGrabberGUI
             }
             HideCheckBox.Enabled = !EmbedCheckBox.Checked;
         }
+
+        private void FAQButton_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                "How to download a game update:\n" + 
+                "1.  Update your versionlists by hitting \"Update Versionlists\" on the main screen of the program.  " +
+                "(You can skip updating the versionlists if you know they are up to date.)\n" +
+                "2.  Search for the title that you want to update and click on it.\n" +
+                "3.  Select a version from the list on the right side. (This step is optional if you want the latest version.)\n" +
+                "4.  Hit the download button and wait.\n\n" +
+
+                "How to install a game update that was downloaded:\n" +
+                "You'll need to put ALL the files that you downloaded (stored in the root directory of the program, in a subdirectory " +
+                "with the titleid, and optionally a version if you selected one. Example: \"\\rootdir\\titleid\\version\\\") " +
+                "from this program (WITHOUT decrypting them) onto your SD Card in a folder called \"install\".  So, let's say that " +
+                "your SD Card was mounted as the F: drive.  An example of how the folder structure should look like this: (F:\\install\\)\n\n" +
+
+                "How to decrypt a game update for use with Loadiine:\n" +
+                "1.  Hit the decrypt button.\n" +
+                "2.  Navigate to folder which was just created (if you selected a specific version, then it would be \"\\rootdir\\titleid\\version\\\", " + 
+                "but if you got the latest version, then it would be \"\\rootdir\\titleid\\\").\n" +
+                "3.  Select the \".bin\" of the Wii U Common key (which you have to obtain yourself).\n" +
+                "4.  Wait for the decryption to complete.\n\n" +
+
+                "How to install a decrypted game update:\n" +
+                "1.  Copy all of the folders that were created in the decrypt process (located in the root directory of the program, in a " +
+                "subdirectory with the titleid, and optionally a version if you selected one. [Example: \"\\rootdir\\titleid\\version\\\".  " +
+                "If you got the latest version, then instead it would be \"\\rootdir\\titleid\\\"])\n" +
+                "2.  Optionally, make a backup of the original files for the decrypted game on your SD Card.\n" +
+                "3.  Paste and overwrite the folders inside the game you are updating on your SD Card.\n\n" +
+
+                "How to download a system title: (Instructions are a work in progress.)\n" +
+                "Coming Soon...  This feature isn't ready yet, but if you'd like to speed this part up, let me know on GitHub by opening an issue!\n\n" +
+
+                "How to download a full title:\n" +
+                "1.  Search for the title that you want to download and click on it.\n" +
+                "2.  Hit the download button and wait.\n" +
+                "Decrypting the full title uses the same process as the game updates.\n\n" +
+
+                "How to install a full title: (Instructions are a work in progress.)\n" +
+                "1.  Copy all the folders that were created when you decrypted the title (stored in the root directory of the program, in a " +
+                "subdirectory with the titleid. Example: \"\\rootdir\\titleid\\\").\n" +
+                "2.  Create a new directory on your SD Card where Loadiine loads from.\n" +
+                "3.  Paste the folders in your newly created directory.\n\n" +
+
+                "If a question you have isn't answered here, hit me up on GBATemp!  My username is FoxMcloud5655.");
+        }
     }
 }
