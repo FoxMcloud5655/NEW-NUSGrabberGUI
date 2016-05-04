@@ -35,6 +35,7 @@ namespace NUSGrabberGUI
         {
             NUSTabs = new TabControl();
             GameUpdateTab = new TabPage();
+            GUExportButton = new Button();
             GUTitleIDLabel = new Label();
             NUSGrabberProgress = new ProgressBar();
             GUVersionList = new ListBox();
@@ -44,6 +45,7 @@ namespace NUSGrabberGUI
             GUSearchBox = new TextBox();
             GUTitleList = new ListBox();
             SystemTab = new TabPage();
+            STExportButton = new Button();
             STTitleIDLabel = new Label();
             STVersionList = new ListBox();
             STVersionsLabel = new Label();
@@ -52,6 +54,7 @@ namespace NUSGrabberGUI
             STSearchBox = new TextBox();
             STTitleList = new ListBox();
             FullListTab = new TabPage();
+            FTExportButton = new Button();
             FTTitleIDLabel = new Label();
             FTTitlesLabel = new Label();
             FTSearchLabel = new Label();
@@ -85,6 +88,7 @@ namespace NUSGrabberGUI
             // GameUpdateTab
             // 
             GameUpdateTab.BackColor = Color.LightGreen;
+            GameUpdateTab.Controls.Add(GUExportButton);
             GameUpdateTab.Controls.Add(GUTitleIDLabel);
             GameUpdateTab.Controls.Add(NUSGrabberProgress);
             GameUpdateTab.Controls.Add(GUVersionList);
@@ -100,6 +104,19 @@ namespace NUSGrabberGUI
             GameUpdateTab.Size = new Size(352, 257);
             GameUpdateTab.TabIndex = 0;
             GameUpdateTab.Text = "Game Updates";
+            // 
+            // GUExportButton
+            // 
+            GUExportButton.DialogResult = DialogResult.Cancel;
+            GUExportButton.Enabled = false;
+            GUExportButton.Location = new Point(172, 231);
+            GUExportButton.Name = "GUExportButton";
+            GUExportButton.Size = new Size(174, 23);
+            GUExportButton.TabIndex = 8;
+            GUExportButton.Text = "Export Title to Debug Log";
+            GUExportButton.UseVisualStyleBackColor = true;
+            GUExportButton.Visible = false;
+            GUExportButton.Click += new EventHandler(GUExportButton_Click);
             // 
             // GUTitleIDLabel
             // 
@@ -173,6 +190,7 @@ namespace NUSGrabberGUI
             // SystemTab
             // 
             SystemTab.BackColor = Color.LightCoral;
+            SystemTab.Controls.Add(STExportButton);
             SystemTab.Controls.Add(STTitleIDLabel);
             SystemTab.Controls.Add(STVersionList);
             SystemTab.Controls.Add(STVersionsLabel);
@@ -186,6 +204,19 @@ namespace NUSGrabberGUI
             SystemTab.Size = new Size(352, 257);
             SystemTab.TabIndex = 1;
             SystemTab.Text = "System Titles";
+            // 
+            // STExportButton
+            // 
+            STExportButton.DialogResult = DialogResult.Cancel;
+            STExportButton.Enabled = false;
+            STExportButton.Location = new Point(172, 231);
+            STExportButton.Name = "STExportButton";
+            STExportButton.Size = new Size(174, 23);
+            STExportButton.TabIndex = 13;
+            STExportButton.Text = "Export Title to Debug Log";
+            STExportButton.UseVisualStyleBackColor = true;
+            STExportButton.Visible = false;
+            STExportButton.Click += new EventHandler(STExportButton_Click);
             // 
             // STTitleIDLabel
             // 
@@ -251,6 +282,7 @@ namespace NUSGrabberGUI
             // FullListTab
             // 
             FullListTab.BackColor = Color.Turquoise;
+            FullListTab.Controls.Add(FTExportButton);
             FullListTab.Controls.Add(FTTitleIDLabel);
             FullListTab.Controls.Add(FTTitlesLabel);
             FullListTab.Controls.Add(FTSearchLabel);
@@ -262,6 +294,19 @@ namespace NUSGrabberGUI
             FullListTab.Size = new Size(352, 257);
             FullListTab.TabIndex = 2;
             FullListTab.Text = "Full Titles";
+            // 
+            // FTExportButton
+            // 
+            FTExportButton.DialogResult = DialogResult.Cancel;
+            FTExportButton.Enabled = false;
+            FTExportButton.Location = new Point(172, 231);
+            FTExportButton.Name = "FTExportButton";
+            FTExportButton.Size = new Size(174, 23);
+            FTExportButton.TabIndex = 11;
+            FTExportButton.Text = "Export Title to Debug Log";
+            FTExportButton.UseVisualStyleBackColor = true;
+            FTExportButton.Visible = false;
+            FTExportButton.Click += new EventHandler(FTExportButton_Click);
             // 
             // FTTitleIDLabel
             // 
@@ -432,6 +477,9 @@ namespace NUSGrabberGUI
         private Label GUTitleIDLabel;
         private Label STTitleIDLabel;
         private Label FTTitleIDLabel;
+        private Button GUExportButton;
+        private Button STExportButton;
+        private Button FTExportButton;
     }
 }
 

@@ -1,5 +1,11 @@
 Changelog for NEW-NUSGrabberGUI
 
+0.87 beta
+- Added the ability to export a title and it's full description to the debug log.
+- Fixed a bug reported by kavid - Japanese titles don't populate the list when JPN is selected.
+- Fixed a bug when switching regions - Titles weren't reloading properly.
+- Hopefully fixed a bug that made the UI not disable.
+
 0.86 beta
 - Added a Help/FAQ button in the settings.
 - Expanded the main window of the app to include the Title ID of a selected title.

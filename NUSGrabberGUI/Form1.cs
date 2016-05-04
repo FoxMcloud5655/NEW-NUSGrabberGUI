@@ -52,6 +52,9 @@ namespace NUSGrabberGUI
                             Properties.Settings.Default.VersionType + " started in debug mode on " + 
                             DateTime.Now.ToString() + "\n", false);
                         Text += " DEBUG";
+                        GUExportButton.Visible = true;
+                        STExportButton.Visible = true;
+                        FTExportButton.Visible = true;
                     }
                 }
                 else
@@ -69,6 +72,9 @@ namespace NUSGrabberGUI
                     InitializeComponent();
                     EnableUI(true, true);
                     Text += " PSUDO-DEBUG";
+                    GUExportButton.Visible = true;
+                    STExportButton.Visible = true;
+                    FTExportButton.Visible = true;
                     WriteDebugLog("\nNEW-NUSGrabberGUI v" + (float)Properties.Settings.Default.Version / 100 + " " +
                             Properties.Settings.Default.VersionType + " started in emulated debug mode on " +
                             DateTime.Now.ToString() + "\n", false);
@@ -101,6 +107,7 @@ namespace NUSGrabberGUI
         private void GUTitleList_SelectedIndexChanged(object sender, EventArgs e)
         {
             GUVersionList.Items.Clear();
+            GUExportButton.Enabled = true;
             string versions = (GUTitleList.SelectedItem as ListItem).Versions.ToString();
             GUVersionList.Items.Add("Latest");
             if (versions != "-")
@@ -124,6 +131,7 @@ namespace NUSGrabberGUI
             if (!GUSearchBox.Text.Contains("..."))
             {
                 GUTitleList.Items.Clear();
+                GUExportButton.Enabled = false;
                 string region = Properties.Settings.Default.Region;
                 if (GUSearchBox.Text != "")
                 {
@@ -161,6 +169,7 @@ namespace NUSGrabberGUI
         private void STTitleList_SelectedIndexChanged(object sender, EventArgs e)
         {
             STVersionList.Items.Clear();
+            STExportButton.Enabled = true;
             string versions;
             try { versions = (STTitleList.SelectedItem as ListItem).Versions.ToString(); }
             catch { versions = null; }
@@ -182,6 +191,7 @@ namespace NUSGrabberGUI
         private void STSearchBox_TextChanged(object sender, EventArgs e)
         {
             STTitleList.Items.Clear();
+            STExportButton.Enabled = false;
             string region = Properties.Settings.Default.Region;
             if (STSearchBox.Text != "")
             {
@@ -217,6 +227,7 @@ namespace NUSGrabberGUI
 
         private void FTTitleList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            FTExportButton.Enabled = true;
             try { FTTitleIDLabel.Text = "Title ID: " + (FTTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
             catch { }
         }
@@ -224,6 +235,7 @@ namespace NUSGrabberGUI
         private void FTSearchBox_TextChanged(object sender, EventArgs e)
         {
             FTTitleList.Items.Clear();
+            FTExportButton.Enabled = false;
             string region = Properties.Settings.Default.Region;
             if (FTSearchBox.Text != "")
             {
@@ -780,11 +792,12 @@ namespace NUSGrabberGUI
 
         private void AboutButton_Click(object sender, EventArgs e)
         {
+            string Region = Properties.Settings.Default.Region;
             bool ArchivedDatabase = Properties.Settings.Default.ArchivedDatabase;
             bool UseOrigNUS = Properties.Settings.Default.UseOrigNUS;
             SettingsForm settings = new SettingsForm(debug);
             settings.ShowDialog();
-            if (ArchivedDatabase != Properties.Settings.Default.ArchivedDatabase)
+            if (ArchivedDatabase != Properties.Settings.Default.ArchivedDatabase || Region != Properties.Settings.Default.Region)
                 GetTitleInfo();
             if (UseOrigNUS != Properties.Settings.Default.UseOrigNUS)
             {
@@ -792,6 +805,33 @@ namespace NUSGrabberGUI
                 WriteDebugLog("Replacing NUSgrabber.exe with " + (Properties.Settings.Default.UseOrigNUS ? "original" : "hacked") + " version.");
                 File.WriteAllBytes("NUSgrabber.exe", Properties.Settings.Default.UseOrigNUS ? Properties.Resources.NUSgrabberORIG : Properties.Resources.NUSgrabber);
             }
+        }
+
+        private void GUExportButton_Click(object sender, EventArgs e)
+        {
+            ListItem title = GUTitleList.SelectedItem as ListItem;
+            WriteDebugLog("Title Name: " + title.Desc.ToString());
+            WriteDebugLog("Title Region: " + title.Region.ToString());
+            WriteDebugLog("Title ID: " + title.Title_ID.ToString());
+            WriteDebugLog("Title Versions: " + title.Versions.ToString());
+        }
+
+        private void STExportButton_Click(object sender, EventArgs e)
+        {
+            ListItem title = STTitleList.SelectedItem as ListItem;
+            WriteDebugLog("Title Name: " + title.Desc.ToString());
+            WriteDebugLog("Title Region: " + title.Region.ToString());
+            WriteDebugLog("Title ID: " + title.Title_ID.ToString());
+            WriteDebugLog("Title Versions: " + title.Versions.ToString());
+        }
+
+        private void FTExportButton_Click(object sender, EventArgs e)
+        {
+            ListItem title = FTTitleList.SelectedItem as ListItem;
+            WriteDebugLog("Title Name: " + title.Desc.ToString());
+            WriteDebugLog("Title Region: " + title.Region.ToString());
+            WriteDebugLog("Title ID: " + title.Title_ID.ToString());
+            WriteDebugLog("Title Versions: " + title.Versions.ToString());
         }
 
         #endregion
@@ -828,9 +868,9 @@ namespace NUSGrabberGUI
 
         private void GetTitleInfo()
         {
+            NUSTabs.SelectedIndex = 0;
             ReloadButton.Visible = false;
             EnableUI(false);
-            NUSTabs.SelectedIndex = 0;
             GUSearchBox.Text = "Loading Versionlists...";
             ForceRefresh(GUSearchBox, "Started load of versionlists.");
             bool usingversionlist = true;
@@ -950,7 +990,10 @@ namespace NUSGrabberGUI
                                             string reg = null;
                                             try { reg = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = reg; cbi.Desc = reg; cbi.Versions = reg; }
                                             if (cbi.Desc != null)
+                                            {
+                                                if (reg == "JAP") reg = "JPN";  //Quick-fix for japanese titles
                                                 cbi.Desc = reg + " - " + cbi.Desc;
+                                            }
                                         }
                                         columncount++;
                                     }
@@ -1085,6 +1128,7 @@ namespace NUSGrabberGUI
             UpdateButton.Enabled = enable;
             if (File.Exists("CDecrypt.exe") || debug || !enable)
                 DecryptButton.Enabled = enable;
+            GUExportButton.Enabled = enable;
         }
 
         private void EnableUI(bool enable)
@@ -1425,7 +1469,6 @@ namespace NUSGrabberGUI
         }
 
         #endregion
-
     }
 
     #region ListItem
