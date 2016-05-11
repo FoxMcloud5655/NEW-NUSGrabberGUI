@@ -9,7 +9,7 @@
       <Value Profile="(Default)">USA</Value>
     </Setting>
     <Setting Name="Version" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">87</Value>
+      <Value Profile="(Default)">88</Value>
     </Setting>
     <Setting Name="VersionType" Type="System.String" Scope="Application">
       <Value Profile="(Default)">beta</Value>

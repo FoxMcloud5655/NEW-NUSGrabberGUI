@@ -240,7 +240,7 @@ namespace NUSGrabberGUI
             if (FTSearchBox.Text != "")
             {
                 foreach (ListItem t in GameUpdates)
-                    if (t.Desc != null && t.Versions.ToString() != "v1" && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
+                    if (t.Desc != null && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
                         if (t.Desc.IndexOf(FTSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
                                 t.Title_ID.ToString().IndexOf(GUSearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                             FTTitleList.Items.Add(t);
@@ -259,7 +259,7 @@ namespace NUSGrabberGUI
             else
             {
                 foreach (ListItem t in GameUpdates)
-                    if (t.Desc != null && t.Versions.ToString() != "v1" && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
+                    if (t.Desc != null && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
                         FTTitleList.Items.Add(t);
                 if (FTTitleList.Items.Count != 0)
                 {
@@ -994,6 +994,7 @@ namespace NUSGrabberGUI
                                                 if (reg == "JAP") reg = "JPN";  //Quick-fix for japanese titles
                                                 cbi.Desc = reg + " - " + cbi.Desc;
                                             }
+                                            cbi.Region = reg;
                                         }
                                         columncount++;
                                     }
@@ -1058,6 +1059,7 @@ namespace NUSGrabberGUI
                                             {
                                                 cbisys.Desc = reg + " - " + cbisys.Desc;
                                             }
+                                            cbisys.Region = reg;
                                         }
                                         columncount++;
                                     }

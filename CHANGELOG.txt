@@ -1,5 +1,9 @@
 Changelog for NEW-NUSGrabberGUI
 
+0.88 beta
+- Fixed an issue with the region not being saved internally for each title, preventing exporting to the debug log.
+- Full title support has been increased, but not fully implimented.  Downloading works, but decryption is still in progress.
+
 0.87 beta
 - Added the ability to export a title and it's full description to the debug log.
 - Fixed a bug reported by kavid - Japanese titles don't populate the list when JPN is selected.
