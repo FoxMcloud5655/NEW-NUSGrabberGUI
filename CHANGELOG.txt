@@ -1,5 +1,11 @@
 Changelog for NEW-NUSGrabberGUI
 
+TODO:
++ Fixed a spelling issue - MSVCR120.DLL
+
+0.89 beta
+- Updated NUSGrabber to the latest version, replacing the hacked one with a real one by crediar.
+
 0.88 beta
 - Fixed an issue with the region not being saved internally for each title, preventing exporting to the debug log.
 - Full title support has been increased, but not fully implimented.  Downloading works, but decryption is still in progress.

@@ -49,7 +49,7 @@ namespace NUSGrabberGUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("88")]
+        [global::System.Configuration.DefaultSettingValueAttribute("89")]
         public int Version {
             get {
                 return ((int)(this["Version"]));
@@ -139,7 +139,7 @@ namespace NUSGrabberGUI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool Cleanup {
             get {
                 return ((bool)(this["Cleanup"]));
