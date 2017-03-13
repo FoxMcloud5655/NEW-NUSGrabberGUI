@@ -938,7 +938,7 @@ namespace NUSGrabberGUI
                 {
                     switch (tablecount)
                     {
-                        case 4:
+                        case 7:
                             {
                                 foreach (HtmlAgilityPack.HtmlNode tr in table.Elements("tr"))
                                 {
