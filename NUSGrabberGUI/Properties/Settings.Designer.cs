@@ -49,7 +49,7 @@ namespace NUSGrabberGUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("89")]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
         public int Version {
             get {
                 return ((int)(this["Version"]));
@@ -158,6 +158,18 @@ namespace NUSGrabberGUI.Properties {
             }
             set {
                 this["UseOrigNUS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        public string Language {
+            get {
+                return ((string)(this["Language"]));
+            }
+            set {
+                this["Language"] = value;
             }
         }
     }

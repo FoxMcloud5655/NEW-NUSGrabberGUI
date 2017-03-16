@@ -28,6 +28,7 @@ namespace NUSGrabberGUI
         FileSystemWatcher DownloadWatcher = new FileSystemWatcher();
         bool canwritedebug = true;
         string filepath = "";
+        string language = "";
         #endregion
 
         #region Public Fuctions
@@ -41,6 +42,21 @@ namespace NUSGrabberGUI
             if (File.Exists("NEW-NUSGrabberGUI.exe"))
             {
                 ExtractResources();
+                try
+                {
+                    using (FileStream lang_file = File.Open("lang/" + Properties.Settings.Default.Language + ".resx", FileMode.Open, FileAccess.Read))
+                    {
+                        StreamReader lang_read = new StreamReader(lang_file);
+                        language = lang_read.ReadToEnd();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Can't find specified language file.  Program will now exit and default to english.");
+                    Properties.Settings.Default.Language = "en";
+                    Properties.Settings.Default.Save();
+                    Process.GetCurrentProcess().Kill();
+                }
                 if (File.Exists("HtmlAgilityPack.dll"))
                 {
                     CheckForUpdates(true);
@@ -49,7 +65,7 @@ namespace NUSGrabberGUI
                     if (debug)
                     {
                         WriteDebugLog("\nNEW-NUSGrabberGUI v" + (float)Properties.Settings.Default.Version / 100 + " " + 
-                            Properties.Settings.Default.VersionType + " started in debug mode on " + 
+                            Properties.Settings.Default.VersionType + GetLanguageString("debug_start", true) + 
                             DateTime.Now.ToString() + "\n", false);
                         Text += " DEBUG";
                         GUExportButton.Visible = true;
@@ -59,7 +75,7 @@ namespace NUSGrabberGUI
                 }
                 else
                 {
-                    MessageBox.Show("HtmlAgilityPack.dll not found.");
+                    MessageBox.Show("HtmlAgilityPack.dll " + GetLanguageString("not_found", false));
                     Process.GetCurrentProcess().Kill();
                 }
             }
@@ -76,18 +92,18 @@ namespace NUSGrabberGUI
                     STExportButton.Visible = true;
                     FTExportButton.Visible = true;
                     WriteDebugLog("\nNEW-NUSGrabberGUI v" + (float)Properties.Settings.Default.Version / 100 + " " +
-                            Properties.Settings.Default.VersionType + " started in emulated debug mode on " +
+                            Properties.Settings.Default.VersionType + GetLanguageString("debug_start_emu", true) +
                             DateTime.Now.ToString() + "\n", false);
                 }
                 else
                 {
-                    MessageBox.Show("HtmlAgilityPack.dll not found.");
+                    MessageBox.Show("HtmlAgilityPack.dll " + GetLanguageString("not_found", false));
                     Process.GetCurrentProcess().Kill();
                 }
             }
             else
             {
-                MessageBox.Show("Don't rename the .exe!  Please change it back to NEW-NUSGrabberGUI.exe!");
+                MessageBox.Show(GetLanguageString("dont_rename", false) + " NEW-NUSGrabberGUI.exe!");
                 Process.GetCurrentProcess().Kill();
             }
         }
@@ -423,7 +439,7 @@ namespace NUSGrabberGUI
                                     else if (nusgrabber.ExitCode == -1073741515)
                                     {
                                         MessageBox.Show("Unable to locate a .dll file.  Perhaps you are running WINE?");
-                                        WriteDebugLog("Detected that NUSGrabber didn't run.  Unable to find a required .dll");
+                                        WriteDebugLog("Detected that NUSGrabber didn't run.  Unable to find a required .dll.");
                                         WriteDebugLog("Status Code: STATUS_DLL_NOT_FOUND");
                                     }
                                     else
@@ -653,6 +669,14 @@ namespace NUSGrabberGUI
                         if (File.Exists("title.tik"))
                         {
                             bool ckey_exists = true;
+                            if (File.Exists("ckey.bin"))
+                            {
+                                if (MessageBox.Show("ckey.bin is already in the folder set for decryption.  Would you like to delete it?  " +
+                                      "If not, the file will be used instead.", "Confirm Deletion", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                {
+                                    DeleteFile("ckey.bin");
+                                }
+                            }
                             if (!File.Exists("ckey.bin") && !File.Exists(Properties.Settings.Default.CommonKeyPath))
                             {
                                 ckey_exists = false;
@@ -676,7 +700,7 @@ namespace NUSGrabberGUI
                                 }
                                 else continue_executing = false;
                             }
-                            else if (File.Exists(Properties.Settings.Default.CommonKeyPath))
+                            else if (!File.Exists("ckey.bin") && File.Exists(Properties.Settings.Default.CommonKeyPath))
                             {
                                 try { File.Copy(Properties.Settings.Default.CommonKeyPath, "ckey.bin"); }
                                 catch
@@ -692,17 +716,17 @@ namespace NUSGrabberGUI
                                 try
                                 {
                                     File.Copy(workingdir + "\\CDecrypt.exe", "CDecrypt.exe");
-                                    File.Copy(workingdir + "\\MSVCR120.dll", "MSVCR120.dll");
+                                    //File.Copy(workingdir + "\\MSVCR120.dll", "MSVCR120.dll");
                                 }
                                 catch (Exception ex)
                                 {
                                     MessageBox.Show("Unable to copy files.  Ensure you have access to read and write to the " +
-                                    "directory that you specified and that CDecrypt.exe and MSVCR120.dll is in the root " +
+                                    "directory that you specified and that CDecrypt.exe is in the root " +
                                     "directory of the directory that this program is stored in.\n\n" + ex.ToString());
-                                    WriteDebugLog("Unable to copy CDecrypt.exe or MSVCR120.dll to " + Environment.CurrentDirectory + ".");
+                                    WriteDebugLog("Unable to copy CDecrypt.exe to " + Environment.CurrentDirectory + ".");
                                 }
 
-                                if (File.Exists("MSVCR120.dll"))
+                                if (File.Exists("CDecrypt.exe"))
                                 {
                                     Process cdecrypt = new Process();
                                     cdecrypt.StartInfo.FileName = "CDecrypt.exe";
@@ -762,7 +786,6 @@ namespace NUSGrabberGUI
                                     DeleteFile("ckey.bin");
                                 else WriteDebugLog("Common key was already part of " + Environment.CurrentDirectory + ".  Skipping removal.");
                                 DeleteFile("CDecrypt.exe");
-                                DeleteFile("MSVCR120.dll");
                             }
                             catch { }
                         }
@@ -874,7 +897,7 @@ namespace NUSGrabberGUI
             GUSearchBox.Text = "Loading Versionlists...";
             ForceRefresh(GUSearchBox, "Started load of versionlists.");
             bool usingversionlist = true;
-            if (!titlelist.ContainsKey("10100600"))
+            if (titlelist.Count == 0)
             {
                 try
                 {
@@ -909,7 +932,7 @@ namespace NUSGrabberGUI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unknown Error!/n/n" + ex.ToString());
+                    MessageBox.Show("Unknown error while loading the version list!/n/n" + ex.ToString());
                     usingversionlist = false;
                     WriteDebugLog("Unknown error ocurred while trying to load wiiu_versionlist.txt.  Skipping load.");
                 }
@@ -938,7 +961,7 @@ namespace NUSGrabberGUI
                 {
                     switch (tablecount)
                     {
-                        case 4:
+                        case 7:
                             {
                                 foreach (HtmlAgilityPack.HtmlNode tr in table.Elements("tr"))
                                 {
@@ -957,7 +980,7 @@ namespace NUSGrabberGUI
                                         if (columncount == 2)
                                         {
                                             string desc = null;
-                                            try { desc = td.InnerText.Trim().Replace("amp;",""); } catch (Exception) { cbi.Title_ID = desc; cbi.Desc = desc; cbi.Versions = desc; }
+                                            try { desc = td.InnerText.Trim().Replace("amp;","").Replace("&#160;",""); } catch (Exception) { cbi.Title_ID = desc; cbi.Desc = desc; cbi.Versions = desc; }
                                             cbi.Desc = desc;
                                         }
                                         //VER
@@ -1288,16 +1311,6 @@ namespace NUSGrabberGUI
                     WriteDebugLog("Couldn't find CDecrypt.exe.  Extracting resource.");
                     File.WriteAllBytes("CDecrypt.exe", Properties.Resources.CDecrypt);
                 }
-                if (!File.Exists("msvcr120.dll"))
-                {
-                    WriteDebugLog("Couldn't find msvcr120.dll.  Extracting resource.");
-                    File.WriteAllBytes("msvcr120.dll", Properties.Resources.msvcr120);
-                }
-                if (!File.Exists("msvcp140.dll"))
-                {
-                    WriteDebugLog("Couldn't find msvcp140.dll.  Extracting resource.");
-                    File.WriteAllBytes("msvcp140.dll", Properties.Resources.msvcp140);
-                }
                 if (!File.Exists("libeay32.dll"))
                 {
                     WriteDebugLog("Couldn't find libeay32.dll.  Extracting resource.");
@@ -1322,6 +1335,12 @@ namespace NUSGrabberGUI
                 {
                     WriteDebugLog("Couldn't find wiiu_versionlist.txt.  Extracting default versionlist.");
                     File.WriteAllText("wiiu_versionlist.txt", Properties.Resources.wiiu_versionlist);
+                }
+                if (!File.Exists("lang/en.resx"))
+                {
+                    WriteDebugLog("Couldn't find lang/en.resx.  Extracting english language set.");
+                    Directory.CreateDirectory("lang");
+                    File.WriteAllText("lang/en.resx", Properties.Resources.en);
                 }
             }
             catch
@@ -1383,6 +1402,9 @@ namespace NUSGrabberGUI
 
         private void CleanupOnExit(object sender, EventArgs e)
         {
+            if (!Properties.Settings.Default.Debug)
+                DeleteFile("debug.log");
+            else WriteDebugLog("Preforming shut down process.\n");
             if (Properties.Settings.Default.Cleanup == true && debug == false)
             {
                 DeleteFile("CDecrypt.exe");
@@ -1397,9 +1419,6 @@ namespace NUSGrabberGUI
             DeleteFile("selfdelete.vbs");
             Properties.Settings.Default.UseEmbedNUS = false;
             Properties.Settings.Default.Save();
-            if (!Properties.Settings.Default.Debug)
-                DeleteFile("debug.log");
-            else WriteDebugLog("Preforming shut down process.\n");
         }
 
         public List<FileInfo> GetFiles(string path, params string[] extensions)
@@ -1421,6 +1440,17 @@ namespace NUSGrabberGUI
             else return false;
 
             return true;
+        }
+
+        public string GetLanguageString(string name, bool addwhitespace)
+        {
+            string value = XDocument.Parse(language).Descendants().FirstOrDefault(_ => _.Attributes().Any(a => a.Value == name))?.Value;
+            value.Trim(' ', '\n', '\r'); //TODO: Fix
+            if (addwhitespace)
+                value = value.Insert(0, " ").Insert(value.Length - 1, " ");
+            GUSearchBox.Text = value;
+            return value;
+
         }
 
         #endregion

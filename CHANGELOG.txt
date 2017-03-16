@@ -1,7 +1,16 @@
 Changelog for NEW-NUSGrabberGUI
 
 TODO:
-+ Fixed a spelling issue - MSVCR120.DLL
++ Added more languages (mostly from Google Translate...)
+
+0.90 beta
+- Fixed a potential bug with the internal version lists - it now counts how many there are to determine if it's already been loaded or not.
+- Fixed a bug with HTML parsing - &#160; was not being taken out.
+- Removed MSVCR120.DLL and MSVCP140.DLL, as they are not compatable with all systems.
+- Added preliminary support for languages.
+- Fixed a typo in the region settings text.
+- Fixed a bug when shutting down in the debug log.
+- Merged a hotfix from "Paul-Roesink" for the unexpected reorganization of "wiiubrew.org/wiki/Title_database".
 
 0.89 beta
 - Updated NUSGrabber to the latest version, replacing the hacked one with a real one by crediar.

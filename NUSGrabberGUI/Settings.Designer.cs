@@ -33,181 +33,204 @@ namespace NUSGrabberGUI
         /// </summary>
         private void InitializeComponent()
         {
-            RegionBox = new ComboBox();
-            RegionLabel = new Label();
-            AboutButton = new Button();
-            SaveCloseButton = new Button();
-            UpdateButton = new Button();
-            DecryptCheckBox = new CheckBox();
-            HideCheckBox = new CheckBox();
-            LoadCheckBox = new CheckBox();
-            EmbedCheckBox = new CheckBox();
-            ArchivedCheckBox = new CheckBox();
-            CleanupCheckBox = new CheckBox();
-            OrigCheckBox = new CheckBox();
-            FAQButton = new Button();
-            SuspendLayout();
+            this.RegionBox = new System.Windows.Forms.ComboBox();
+            this.RegionLabel = new System.Windows.Forms.Label();
+            this.AboutButton = new System.Windows.Forms.Button();
+            this.SaveCloseButton = new System.Windows.Forms.Button();
+            this.UpdateButton = new System.Windows.Forms.Button();
+            this.DecryptCheckBox = new System.Windows.Forms.CheckBox();
+            this.HideCheckBox = new System.Windows.Forms.CheckBox();
+            this.LoadCheckBox = new System.Windows.Forms.CheckBox();
+            this.EmbedCheckBox = new System.Windows.Forms.CheckBox();
+            this.ArchivedCheckBox = new System.Windows.Forms.CheckBox();
+            this.CleanupCheckBox = new System.Windows.Forms.CheckBox();
+            this.OrigCheckBox = new System.Windows.Forms.CheckBox();
+            this.FAQButton = new System.Windows.Forms.Button();
+            this.LanguageLabel = new System.Windows.Forms.Label();
+            this.LanguageBox = new System.Windows.Forms.ComboBox();
+            this.SuspendLayout();
             // 
             // RegionBox
             // 
-            RegionBox.FormattingEnabled = true;
-            RegionBox.Items.AddRange(new object[] {
+            this.RegionBox.FormattingEnabled = true;
+            this.RegionBox.Items.AddRange(new object[] {
             "USA",
             "EUR",
             "JPN"});
-            RegionBox.Location = new Point(30, 33);
-            RegionBox.Name = "RegionBox";
-            RegionBox.Size = new Size(121, 21);
-            RegionBox.TabIndex = 0;
+            this.RegionBox.Location = new System.Drawing.Point(30, 33);
+            this.RegionBox.Name = "RegionBox";
+            this.RegionBox.Size = new System.Drawing.Size(121, 21);
+            this.RegionBox.TabIndex = 0;
             // 
             // RegionLabel
             // 
-            RegionLabel.AutoSize = true;
-            RegionLabel.Location = new Point(13, 13);
-            RegionLabel.Name = "RegionLabel";
-            RegionLabel.Size = new Size(262, 13);
-            RegionLabel.TabIndex = 1;
-            RegionLabel.Text = "Region - Select a region to download versionlists from.";
+            this.RegionLabel.AutoSize = true;
+            this.RegionLabel.Location = new System.Drawing.Point(13, 13);
+            this.RegionLabel.Name = "RegionLabel";
+            this.RegionLabel.Size = new System.Drawing.Size(262, 13);
+            this.RegionLabel.TabIndex = 1;
+            this.RegionLabel.Text = "Region - Select a region to download versionlists from:";
             // 
             // AboutButton
             // 
-            AboutButton.Location = new Point(12, 226);
-            AboutButton.Name = "AboutButton";
-            AboutButton.Size = new Size(46, 23);
-            AboutButton.TabIndex = 2;
-            AboutButton.Text = "About";
-            AboutButton.UseVisualStyleBackColor = true;
-            AboutButton.Click += new EventHandler(AboutButton_Click);
+            this.AboutButton.Location = new System.Drawing.Point(12, 274);
+            this.AboutButton.Name = "AboutButton";
+            this.AboutButton.Size = new System.Drawing.Size(46, 23);
+            this.AboutButton.TabIndex = 2;
+            this.AboutButton.Text = "About";
+            this.AboutButton.UseVisualStyleBackColor = true;
+            this.AboutButton.Click += new System.EventHandler(this.AboutButton_Click);
             // 
             // SaveCloseButton
             // 
-            SaveCloseButton.DialogResult = DialogResult.Cancel;
-            SaveCloseButton.Location = new Point(246, 226);
-            SaveCloseButton.Name = "SaveCloseButton";
-            SaveCloseButton.Size = new Size(97, 23);
-            SaveCloseButton.TabIndex = 3;
-            SaveCloseButton.Text = "Save and Close";
-            SaveCloseButton.UseVisualStyleBackColor = true;
-            SaveCloseButton.Click += new EventHandler(SaveCloseButton_Click);
+            this.SaveCloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.SaveCloseButton.Location = new System.Drawing.Point(246, 274);
+            this.SaveCloseButton.Name = "SaveCloseButton";
+            this.SaveCloseButton.Size = new System.Drawing.Size(97, 23);
+            this.SaveCloseButton.TabIndex = 3;
+            this.SaveCloseButton.Text = "Save and Close";
+            this.SaveCloseButton.UseVisualStyleBackColor = true;
+            this.SaveCloseButton.Click += new System.EventHandler(this.SaveCloseButton_Click);
             // 
             // UpdateButton
             // 
-            UpdateButton.DialogResult = DialogResult.Cancel;
-            UpdateButton.Location = new Point(135, 226);
-            UpdateButton.Name = "UpdateButton";
-            UpdateButton.Size = new Size(105, 23);
-            UpdateButton.TabIndex = 4;
-            UpdateButton.Text = "Check for Updates";
-            UpdateButton.UseVisualStyleBackColor = true;
-            UpdateButton.Click += new EventHandler(UpdateButton_Click);
+            this.UpdateButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.UpdateButton.Location = new System.Drawing.Point(135, 274);
+            this.UpdateButton.Name = "UpdateButton";
+            this.UpdateButton.Size = new System.Drawing.Size(105, 23);
+            this.UpdateButton.TabIndex = 4;
+            this.UpdateButton.Text = "Check for Updates";
+            this.UpdateButton.UseVisualStyleBackColor = true;
+            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // DecryptCheckBox
             // 
-            DecryptCheckBox.AutoSize = true;
-            DecryptCheckBox.Location = new Point(16, 61);
-            DecryptCheckBox.Name = "DecryptCheckBox";
-            DecryptCheckBox.Size = new Size(180, 17);
-            DecryptCheckBox.TabIndex = 5;
-            DecryptCheckBox.Text = "Automatically decrypt downloads";
-            DecryptCheckBox.UseVisualStyleBackColor = true;
+            this.DecryptCheckBox.AutoSize = true;
+            this.DecryptCheckBox.Location = new System.Drawing.Point(16, 113);
+            this.DecryptCheckBox.Name = "DecryptCheckBox";
+            this.DecryptCheckBox.Size = new System.Drawing.Size(180, 17);
+            this.DecryptCheckBox.TabIndex = 5;
+            this.DecryptCheckBox.Text = "Automatically decrypt downloads";
+            this.DecryptCheckBox.UseVisualStyleBackColor = true;
             // 
             // HideCheckBox
             // 
-            HideCheckBox.AutoSize = true;
-            HideCheckBox.Location = new Point(16, 107);
-            HideCheckBox.Name = "HideCheckBox";
-            HideCheckBox.Size = new Size(228, 17);
-            HideCheckBox.TabIndex = 6;
-            HideCheckBox.Text = "Hide NUSgrabber/wget while downloading";
-            HideCheckBox.UseVisualStyleBackColor = true;
+            this.HideCheckBox.AutoSize = true;
+            this.HideCheckBox.Location = new System.Drawing.Point(16, 159);
+            this.HideCheckBox.Name = "HideCheckBox";
+            this.HideCheckBox.Size = new System.Drawing.Size(228, 17);
+            this.HideCheckBox.TabIndex = 6;
+            this.HideCheckBox.Text = "Hide NUSgrabber/wget while downloading";
+            this.HideCheckBox.UseVisualStyleBackColor = true;
             // 
             // LoadCheckBox
             // 
-            LoadCheckBox.AutoSize = true;
-            LoadCheckBox.Location = new Point(16, 84);
-            LoadCheckBox.Name = "LoadCheckBox";
-            LoadCheckBox.Size = new Size(124, 17);
-            LoadCheckBox.TabIndex = 7;
-            LoadCheckBox.Text = "Load titles on startup";
-            LoadCheckBox.UseVisualStyleBackColor = true;
+            this.LoadCheckBox.AutoSize = true;
+            this.LoadCheckBox.Location = new System.Drawing.Point(16, 136);
+            this.LoadCheckBox.Name = "LoadCheckBox";
+            this.LoadCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.LoadCheckBox.TabIndex = 7;
+            this.LoadCheckBox.Text = "Load titles on startup";
+            this.LoadCheckBox.UseVisualStyleBackColor = true;
             // 
             // EmbedCheckBox
             // 
-            EmbedCheckBox.AutoSize = true;
-            EmbedCheckBox.Checked = true;
-            EmbedCheckBox.CheckState = CheckState.Checked;
-            EmbedCheckBox.Location = new Point(16, 199);
-            EmbedCheckBox.Name = "EmbedCheckBox";
-            EmbedCheckBox.Size = new Size(167, 17);
-            EmbedCheckBox.TabIndex = 8;
-            EmbedCheckBox.Text = "Use experimental LibWiiSharp";
-            EmbedCheckBox.UseVisualStyleBackColor = true;
-            EmbedCheckBox.CheckedChanged += new EventHandler(EmbedCheckBox_CheckedChanged);
+            this.EmbedCheckBox.AutoSize = true;
+            this.EmbedCheckBox.Checked = true;
+            this.EmbedCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.EmbedCheckBox.Location = new System.Drawing.Point(16, 251);
+            this.EmbedCheckBox.Name = "EmbedCheckBox";
+            this.EmbedCheckBox.Size = new System.Drawing.Size(167, 17);
+            this.EmbedCheckBox.TabIndex = 8;
+            this.EmbedCheckBox.Text = "Use experimental LibWiiSharp";
+            this.EmbedCheckBox.UseVisualStyleBackColor = true;
+            this.EmbedCheckBox.CheckedChanged += new System.EventHandler(this.EmbedCheckBox_CheckedChanged);
             // 
             // ArchivedCheckBox
             // 
-            ArchivedCheckBox.AutoSize = true;
-            ArchivedCheckBox.Location = new Point(16, 153);
-            ArchivedCheckBox.Name = "ArchivedCheckBox";
-            ArchivedCheckBox.Size = new Size(218, 17);
-            ArchivedCheckBox.TabIndex = 9;
-            ArchivedCheckBox.Text = "Load archived database instead of latest";
-            ArchivedCheckBox.UseVisualStyleBackColor = true;
+            this.ArchivedCheckBox.AutoSize = true;
+            this.ArchivedCheckBox.Location = new System.Drawing.Point(16, 205);
+            this.ArchivedCheckBox.Name = "ArchivedCheckBox";
+            this.ArchivedCheckBox.Size = new System.Drawing.Size(218, 17);
+            this.ArchivedCheckBox.TabIndex = 9;
+            this.ArchivedCheckBox.Text = "Load archived database instead of latest";
+            this.ArchivedCheckBox.UseVisualStyleBackColor = true;
             // 
             // CleanupCheckBox
             // 
-            CleanupCheckBox.AutoSize = true;
-            CleanupCheckBox.Location = new Point(16, 176);
-            CleanupCheckBox.Name = "CleanupCheckBox";
-            CleanupCheckBox.Size = new Size(148, 17);
-            CleanupCheckBox.TabIndex = 10;
-            CleanupCheckBox.Text = "Cleanup resources on exit";
-            CleanupCheckBox.UseVisualStyleBackColor = true;
+            this.CleanupCheckBox.AutoSize = true;
+            this.CleanupCheckBox.Location = new System.Drawing.Point(16, 228);
+            this.CleanupCheckBox.Name = "CleanupCheckBox";
+            this.CleanupCheckBox.Size = new System.Drawing.Size(148, 17);
+            this.CleanupCheckBox.TabIndex = 10;
+            this.CleanupCheckBox.Text = "Cleanup resources on exit";
+            this.CleanupCheckBox.UseVisualStyleBackColor = true;
             // 
             // OrigCheckBox
             // 
-            OrigCheckBox.AutoSize = true;
-            OrigCheckBox.Location = new Point(16, 130);
-            OrigCheckBox.Name = "OrigCheckBox";
-            OrigCheckBox.Size = new Size(145, 17);
-            OrigCheckBox.TabIndex = 11;
-            OrigCheckBox.Text = "Use original NUSGrabber";
-            OrigCheckBox.UseVisualStyleBackColor = true;
+            this.OrigCheckBox.AutoSize = true;
+            this.OrigCheckBox.Location = new System.Drawing.Point(16, 182);
+            this.OrigCheckBox.Name = "OrigCheckBox";
+            this.OrigCheckBox.Size = new System.Drawing.Size(145, 17);
+            this.OrigCheckBox.TabIndex = 11;
+            this.OrigCheckBox.Text = "Use original NUSGrabber";
+            this.OrigCheckBox.UseVisualStyleBackColor = true;
             // 
             // FAQButton
             // 
-            FAQButton.Location = new Point(64, 226);
-            FAQButton.Name = "FAQButton";
-            FAQButton.Size = new Size(65, 23);
-            FAQButton.TabIndex = 12;
-            FAQButton.Text = "Help/FAQ";
-            FAQButton.UseVisualStyleBackColor = true;
-            FAQButton.Click += new EventHandler(FAQButton_Click);
+            this.FAQButton.Location = new System.Drawing.Point(64, 274);
+            this.FAQButton.Name = "FAQButton";
+            this.FAQButton.Size = new System.Drawing.Size(65, 23);
+            this.FAQButton.TabIndex = 12;
+            this.FAQButton.Text = "Help/FAQ";
+            this.FAQButton.UseVisualStyleBackColor = true;
+            this.FAQButton.Click += new System.EventHandler(this.FAQButton_Click);
+            // 
+            // LanguageLabel
+            // 
+            this.LanguageLabel.AutoSize = true;
+            this.LanguageLabel.Location = new System.Drawing.Point(13, 64);
+            this.LanguageLabel.Name = "LanguageLabel";
+            this.LanguageLabel.Size = new System.Drawing.Size(220, 13);
+            this.LanguageLabel.TabIndex = 14;
+            this.LanguageLabel.Text = "Language - Select a language to translate to:";
+            // 
+            // LanguageBox
+            // 
+            this.LanguageBox.FormattingEnabled = true;
+            this.LanguageBox.Items.AddRange(new object[] {
+            "en"});
+            this.LanguageBox.Location = new System.Drawing.Point(30, 84);
+            this.LanguageBox.Name = "LanguageBox";
+            this.LanguageBox.Size = new System.Drawing.Size(121, 21);
+            this.LanguageBox.TabIndex = 13;
             // 
             // SettingsForm
             // 
-            AutoScaleDimensions = new SizeF(6F, 13F);
-            AutoScaleMode = AutoScaleMode.Font;
-            CancelButton = SaveCloseButton;
-            ClientSize = new Size(355, 261);
-            Controls.Add(FAQButton);
-            Controls.Add(OrigCheckBox);
-            Controls.Add(CleanupCheckBox);
-            Controls.Add(ArchivedCheckBox);
-            Controls.Add(EmbedCheckBox);
-            Controls.Add(LoadCheckBox);
-            Controls.Add(HideCheckBox);
-            Controls.Add(DecryptCheckBox);
-            Controls.Add(UpdateButton);
-            Controls.Add(SaveCloseButton);
-            Controls.Add(AboutButton);
-            Controls.Add(RegionLabel);
-            Controls.Add(RegionBox);
-            Name = "SettingsForm";
-            StartPosition = FormStartPosition.CenterParent;
-            Text = "Settings";
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.SaveCloseButton;
+            this.ClientSize = new System.Drawing.Size(355, 309);
+            this.Controls.Add(this.LanguageLabel);
+            this.Controls.Add(this.LanguageBox);
+            this.Controls.Add(this.FAQButton);
+            this.Controls.Add(this.OrigCheckBox);
+            this.Controls.Add(this.CleanupCheckBox);
+            this.Controls.Add(this.ArchivedCheckBox);
+            this.Controls.Add(this.EmbedCheckBox);
+            this.Controls.Add(this.LoadCheckBox);
+            this.Controls.Add(this.HideCheckBox);
+            this.Controls.Add(this.DecryptCheckBox);
+            this.Controls.Add(this.UpdateButton);
+            this.Controls.Add(this.SaveCloseButton);
+            this.Controls.Add(this.AboutButton);
+            this.Controls.Add(this.RegionLabel);
+            this.Controls.Add(this.RegionBox);
+            this.Name = "SettingsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Settings";
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -226,5 +249,7 @@ namespace NUSGrabberGUI
         private CheckBox CleanupCheckBox;
         private CheckBox OrigCheckBox;
         private Button FAQButton;
+        private Label LanguageLabel;
+        private ComboBox LanguageBox;
     }
 }

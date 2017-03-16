@@ -136,16 +136,13 @@
   <data name="wiiu_versionlist" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wiiu_versionlist.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
-  <data name="msvcp140" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\msvcp140.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="msvcr120" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\msvcr120.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="NUSgrabber" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NUSgrabber.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="NUSgrabberORIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NUSgrabberORIG.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\en.resx;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

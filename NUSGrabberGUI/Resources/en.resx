@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="access_error" xml:space="preserve">
+    <value>Unable to create a new file or overwrite the current one.  Please don't mess with the program's directories IN THE MIDDLE of an important operation!  You'll have to redownload the versionlists again if you want to save them.</value>
+  </data>
+  <data name="access_error_debug" xml:space="preserve">
+    <value>Write unsuccessful.  Keeping versionlists in memory until next reload.</value>
+  </data>
+  <data name="auto_decrypt_debug" xml:space="preserve">
+    <value>Auto-decrypting title.</value>
+  </data>
+  <data name="bad_vl_debug" xml:space="preserve">
+    <value>Bad versionlist </value>
+  </data>
+  <data name="cant_access2_debug" xml:space="preserve">
+    <value> for deletion.</value>
+  </data>
+  <data name="cant_access_debug" xml:space="preserve">
+    <value>Couldn't access </value>
+  </data>
+  <data name="cant_del_folder" xml:space="preserve">
+    <value>Couldn't remove folder after deletion.  Ensure there is no other data in </value>
+  </data>
+  <data name="cant_del_folder2" xml:space="preserve">
+    <value> and try again.</value>
+  </data>
+  <data name="cant_del_folder_debug" xml:space="preserve">
+    <value>Couldn't delete directory</value>
+  </data>
+  <data name="clean_debug" xml:space="preserve">
+    <value>Cleaning up unneeded resource: </value>
+  </data>
+  <data name="close_code2_debug" xml:space="preserve">
+    <value>.  Preforming after-processing.</value>
+  </data>
+  <data name="close_code_debug" xml:space="preserve">
+    <value>Detected that NUSGrabber.exe has closed with exit code of </value>
+  </data>
+  <data name="confirm_overwrite" xml:space="preserve">
+    <value>Confirm Overwrite</value>
+  </data>
+  <data name="confirm_update" xml:space="preserve">
+    <value>Confirm Update</value>
+  </data>
+  <data name="connecting" xml:space="preserve">
+    <value>Connecting to the Internet...</value>
+  </data>
+  <data name="connecting_debug" xml:space="preserve">
+    <value>Connecting to </value>
+  </data>
+  <data name="connect_error" xml:space="preserve">
+    <value>Could not connect to the internet.  Make sure you have internet access before loading titles!</value>
+  </data>
+  <data name="connect_error_debug" xml:space="preserve">
+    <value>Couldn't connect to the internet.  Not loading titles.</value>
+  </data>
+  <data name="convert_error" xml:space="preserve">
+    <value>There was a problem converting the selected item.  Note your selected item, contact FoxMcloud5655 on GBATemp, and tell him to look into this problem!</value>
+  </data>
+  <data name="convert_error_debug" xml:space="preserve">
+    <value>Error converting title name into a ListItem.</value>
+  </data>
+  <data name="copy_ckey_error" xml:space="preserve">
+    <value>Unable to copy common key.  Ensure you have access to read and write to the directory that you specified and that your common key actually exists.</value>
+  </data>
+  <data name="copy_ckey_error_debug" xml:space="preserve">
+    <value>Couldn't copy common key to </value>
+  </data>
+  <data name="copy_files_error" xml:space="preserve">
+    <value>Unable to copy files.  Ensure you have access to read and write to the directory that you specified and that CDecrypt.exe is in the root directory of the directory that this program is stored in.</value>
+  </data>
+  <data name="copy_files_error_debug" xml:space="preserve">
+    <value>Unable to copy CDecrypt.exe to </value>
+  </data>
+  <data name="copy_saved_ckey_error" xml:space="preserve">
+    <value>Unable to copy saved common key.  Ensure you have access to read and write to the directory that you specified.</value>
+  </data>
+  <data name="copy_saved_ckey_error_debug" xml:space="preserve">
+    <value>Couldn't copy saved common key to </value>
+  </data>
+  <data name="debug" xml:space="preserve">
+    <value> DEBUG</value>
+  </data>
+  <data name="debug_log_error" xml:space="preserve">
+    <value>Unable to write debug log.  Make sure you don't have it open somewhere and that you have write access to the root directory that this program is stored in.</value>
+  </data>
+  <data name="debug_start" xml:space="preserve">
+    <value> started in debug mode on </value>
+  </data>
+  <data name="debug_start_emu" xml:space="preserve">
+    <value> started in emulated debug mode on </value>
+  </data>
+  <data name="decrypting" xml:space="preserve">
+    <value>Decrypting...</value>
+  </data>
+  <data name="decrypting_debug" xml:space="preserve">
+    <value>Starting decryption.</value>
+  </data>
+  <data name="deleting_debug" xml:space="preserve">
+    <value>Deleting previously downloaded files by user request.</value>
+  </data>
+  <data name="dl_update" xml:space="preserve">
+    <value>Your current version is </value>
+  </data>
+  <data name="dl_update2" xml:space="preserve">
+    <value> and the newest version is </value>
+  </data>
+  <data name="dl_update3" xml:space="preserve">
+    <value>You are already up to date.  </value>
+  </data>
+  <data name="dl_update4" xml:space="preserve">
+    <value>Would you like to update</value>
+  </data>
+  <data name="dl_update5" xml:space="preserve">
+    <value> anyways</value>
+  </data>
+  <data name="dont_rename" xml:space="preserve">
+    <value>Don't rename the .exe!  Please change it back to NEW-NUSGrabberGUI.exe!</value>
+  </data>
+  <data name="downloading" xml:space="preserve">
+    <value>Downloading: </value>
+  </data>
+  <data name="downloading_wait" xml:space="preserve">
+    <value>Downloading...  Please wait.</value>
+  </data>
+  <data name="error_cdecrypt" xml:space="preserve">
+    <value>There was an unknown problem while decrypting.</value>
+  </data>
+  <data name="error_cdecrypt_debug" xml:space="preserve">
+    <value>Error: Decryption unsuccessful.</value>
+  </data>
+  <data name="error_check_update" xml:space="preserve">
+    <value>There was an error checking for the newest version.</value>
+  </data>
+  <data name="error_check_update_debug" xml:space="preserve">
+    <value>Couldn't determine the newest version.</value>
+  </data>
+  <data name="error_clean_debug" xml:space="preserve">
+    <value>Couldn't delete resource:</value>
+  </data>
+  <data name="error_dir" xml:space="preserve">
+    <value>Unable to set working directory.  Ensure you have access to read and write to the directory that you specified.</value>
+  </data>
+  <data name="error_dir_debug" xml:space="preserve">
+    <value>Couldn't set working directory to target directory.</value>
+  </data>
+  <data name="error_dll_cdecrypt" xml:space="preserve">
+    <value>Error detected: MSVRC120.dll not found.  Please install Visual C++ x86.</value>
+  </data>
+  <data name="error_dll_cdecrypt_debug" xml:space="preserve">
+    <value>Error detected: MSVRC120.dll not found.</value>
+  </data>
+  <data name="error_dl_update" xml:space="preserve">
+    <value>Failed to download the update.  You can still manually update from here:\nhttps://dl.dropboxusercontent.com/u/41125193/NUSGrabber/NEW-NUSGrabberGUI.exe\nThe program will now exit.</value>
+  </data>
+  <data name="error_dl_update_debug" xml:space="preserve">
+    <value>Failed to download.  Exiting.</value>
+  </data>
+  <data name="error_internet_update" xml:space="preserve">
+    <value>Unable to connect to the internet to check for updates.</value>
+  </data>
+  <data name="error_internet_update_debug" xml:space="preserve">
+    <value>Couldn't connect to the internet to check for updates.</value>
+  </data>
+  <data name="error_no_titles_debug" xml:space="preserve">
+    <value>No titles in titlelist.  Disabling UI and showing reload button.</value>
+  </data>
+  <data name="error_rename_update" xml:space="preserve">
+    <value>Failed to rename the exe back.  Program will now exit, and you'll need to rename it yourself.</value>
+  </data>
+  <data name="error_rename_update_debug" xml:space="preserve">
+    <value>Failed to rename self back to normal.</value>
+  </data>
+  <data name="error_restart_update" xml:space="preserve">
+    <value>Failed to restart program. You'll need to exit and delete the old version, then load the program again.</value>
+  </data>
+  <data name="error_restart_update_debug" xml:space="preserve">
+    <value>Failed to restart.</value>
+  </data>
+  <data name="error_start_cdecrypt" xml:space="preserve">
+    <value>There was a problem starting CDecrypt.  Ensure you have permission to execute files in the directory that you specified.</value>
+  </data>
+  <data name="error_start_cdecrypt_debug" xml:space="preserve">
+    <value>Error attempting to start </value>
+  </data>
+  <data name="error_start_nus" xml:space="preserve">
+    <value>There was a problem starting NUSgrabber.  Ensure that you have NUSgrabber in the root directory that this program is stored in.</value>
+  </data>
+  <data name="error_start_nus_debug" xml:space="preserve">
+    <value>Error starting NUSGrabber.exe.</value>
+  </data>
+  <data name="error_update" xml:space="preserve">
+    <value>Failed to rename old exe.  You'll need to manually update from here:\nhttps://dl.dropboxusercontent.com/u/41125193/NUSGrabber/NEW-NUSGrabberGUI.exe</value>
+  </data>
+  <data name="error_update_debug" xml:space="preserve">
+    <value>Failed to rename self.</value>
+  </data>
+  <data name="extract_debug" xml:space="preserve">
+    <value>.  Extracting resource.</value>
+  </data>
+  <data name="extract_error" xml:space="preserve">
+    <value>Couldn't extract/read base files.  Make sure this program has read/write access to the directory it's stored in.</value>
+  </data>
+  <data name="extract_error_debug" xml:space="preserve">
+    <value>Error extracting resources.</value>
+  </data>
+  <data name="extract_vl_debug" xml:space="preserve">
+    <value>.  Extracting default versionlist.</value>
+  </data>
+  <data name="failed_run" xml:space="preserve">
+    <value>Detected that NUSGrabber didn't run.  Install Visual Studio C++ (x86) and try again.</value>
+  </data>
+  <data name="failed_run_debug" xml:space="preserve">
+    <value>Detected that NUSGrabber didn't run.  Installation of Visual Studio C++ x86 (32-bit) is required.\nStatus Code: STATUS_INVALID_IMAGE_FORMAT</value>
+  </data>
+  <data name="incomplete" xml:space="preserve">
+    <value>Incomplete download detected.  Delete "</value>
+  </data>
+  <data name="incomplete2" xml:space="preserve">
+    <value>" and try downloading the title again.</value>
+  </data>
+  <data name="incomplete_debug" xml:space="preserve">
+    <value>Possible incomplete download.</value>
+  </data>
+  <data name="incomplete_dl_debug" xml:space="preserve">
+    <value>Incomplete download detected.  Deleting previous files.</value>
+  </data>
+  <data name="latest" xml:space="preserve">
+    <value>Latest</value>
+  </data>
+  <data name="load_vl" xml:space="preserve">
+    <value>Loading Versionlists...</value>
+  </data>
+  <data name="load_vl_complete_debug" xml:space="preserve">
+    <value>Completed load successfully.</value>
+  </data>
+  <data name="load_vl_debug" xml:space="preserve">
+    <value>Started load of versionlists.</value>
+  </data>
+  <data name="load_vl_error" xml:space="preserve">
+    <value>Unknown error while loading the version list!</value>
+  </data>
+  <data name="load_vl_error_debug" xml:space="preserve">
+    <value>Unknown error ocurred while trying to load wiiu_versionlist.txt.  Skipping load.</value>
+  </data>
+  <data name="load_vl_loaded" xml:space="preserve">
+    <value>Titlelist already in memory.  Skipping load.</value>
+  </data>
+  <data name="load_vl_modified" xml:space="preserve">
+    <value>The versionlist file was modified externally.  Either fix it or redownload it.</value>
+  </data>
+  <data name="load_vl_modified_debug" xml:space="preserve">
+    <value>wiiu_versionlist.txt was modified externally.  Skipping load.</value>
+  </data>
+  <data name="load_vl_not_found_debug" xml:space="preserve">
+    <value>wiiu_versionlist.txt not found.  Skipping load.</value>
+  </data>
+  <data name="new_version_debug" xml:space="preserve">
+    <value>Starting new version and exiting.</value>
+  </data>
+  <data name="not_found" xml:space="preserve">
+    <value> not found.</value>
+  </data>
+  <data name="not_found_debug" xml:space="preserve">
+    <value>Couldn't find </value>
+  </data>
+  <data name="not_implemented" xml:space="preserve">
+    <value>Feature not implemented yet.  Select a game update or full title instead.</value>
+  </data>
+  <data name="no_del_ckey2_debug" xml:space="preserve">
+    <value>.  Skipping removal.</value>
+  </data>
+  <data name="no_del_ckey_debug" xml:space="preserve">
+    <value>Common key was already part of </value>
+  </data>
+  <data name="no_dll" xml:space="preserve">
+    <value>Unable to locate a .dll file.  Perhaps you are running WINE?</value>
+  </data>
+  <data name="no_dll_debug" xml:space="preserve">
+    <value>Detected that NUSGrabber didn't run.  Unable to find a required .dll.\nStatus Code: STATUS_DLL_NOT_FOUND</value>
+  </data>
+  <data name="no_key" xml:space="preserve">
+    <value>Title successfully downloaded, but no decryption key was found.  Can't decrypt automatically.</value>
+  </data>
+  <data name="no_key_debug" xml:space="preserve">
+    <value>Couldn't find "title.tik".  Skipping auto-decryption.\nTitle downloaded successfully.</value>
+  </data>
+  <data name="no_region" xml:space="preserve">
+    <value>Please set your region in the settings before selecting this option!</value>
+  </data>
+  <data name="no_tik" xml:space="preserve">
+    <value>Unable to find "title.tik".  Did you download a full title?  Ensure you have this file in the directory that you specified.</value>
+  </data>
+  <data name="no_tmd" xml:space="preserve">
+    <value>Unable to find "title.tmd".  Ensure this is truly a WiiU title.</value>
+  </data>
+  <data name="parse_complete_debug" xml:space="preserve">
+    <value>Parse complete.  Writing data to wiiu_versionlist.txt.</value>
+  </data>
+  <data name="parse_error" xml:space="preserve">
+    <value>Unable to parse data.  Either you aren't connected to the internet, or Nintendo has changed their format.</value>
+  </data>
+  <data name="parse_error_debug" xml:space="preserve">
+    <value>Failed to retrieve/parse data from</value>
+  </data>
+  <data name="parsing_data" xml:space="preserve">
+    <value>Parsing Data...</value>
+  </data>
+  <data name="parsing_data_debug" xml:space="preserve">
+    <value>Parsing data gathered from </value>
+  </data>
+  <data name="parsing_list" xml:space="preserve">
+    <value>Parsing list </value>
+  </data>
+  <data name="parsing_list2" xml:space="preserve">
+    <value> of </value>
+  </data>
+  <data name="parsing_list2_debug" xml:space="preserve">
+    <value> of </value>
+  </data>
+  <data name="parsing_list3" xml:space="preserve">
+    <value> for </value>
+  </data>
+  <data name="parsing_list3_debug" xml:space="preserve">
+    <value> from </value>
+  </data>
+  <data name="parsing_list_debug" xml:space="preserve">
+    <value>Retrieving list </value>
+  </data>
+  <data name="path_debug" xml:space="preserve">
+    <value>Assumed path to the downloaded files is </value>
+  </data>
+  <data name="redownload_title" xml:space="preserve">
+    <value>You have already downloaded this title.  Are you sure you wish to redownload it?</value>
+  </data>
+  <data name="rename_debug" xml:space="preserve">
+    <value>Attempting to rename original file - try #</value>
+  </data>
+  <data name="replace_nus2_debug" xml:space="preserve">
+    <value>original</value>
+  </data>
+  <data name="replace_nus3_debug" xml:space="preserve">
+    <value>hacked</value>
+  </data>
+  <data name="replace_nus4_debug" xml:space="preserve">
+    <value> version.</value>
+  </data>
+  <data name="replace_nus_debug" xml:space="preserve">
+    <value>Replacing NUSgrabber.exe with </value>
+  </data>
+  <data name="shut_down_debug" xml:space="preserve">
+    <value>Preforming shut down process.</value>
+  </data>
+  <data name="sorting_titles" xml:space="preserve">
+    <value>Sorting Titles...</value>
+  </data>
+  <data name="sorting_titles_debug" xml:space="preserve">
+    <value>Parse complete.  Sorting internal titlelist.</value>
+  </data>
+  <data name="sort_complete_debug" xml:space="preserve">
+    <value>Sort complete.</value>
+  </data>
+  <data name="starting2_debug" xml:space="preserve">
+    <value> with </value>
+  </data>
+  <data name="starting3_debug" xml:space="preserve">
+    <value> as arguments.</value>
+  </data>
+  <data name="starting_debug" xml:space="preserve">
+    <value>Starting </value>
+  </data>
+  <data name="start_alt_dl2_debug" xml:space="preserve">
+    <value> and </value>
+  </data>
+  <data name="start_alt_dl3_debug" xml:space="preserve">
+    <value> as arguments.</value>
+  </data>
+  <data name="start_alt_dl_debug" xml:space="preserve">
+    <value>Starting background download using libWiiSharp with </value>
+  </data>
+  <data name="start_alt_dl_error" xml:space="preserve">
+    <value>An error has occured while trying to run the embeded NUSGrabber.</value>
+  </data>
+  <data name="start_alt_dl_error_debug" xml:space="preserve">
+    <value>Error while running libWiiSharp:</value>
+  </data>
+  <data name="success_decrypt" xml:space="preserve">
+    <value>Title successfully decrypted.</value>
+  </data>
+  <data name="success_decrypt_debug" xml:space="preserve">
+    <value>Decryption successful.</value>
+  </data>
+  <data name="success_dl" xml:space="preserve">
+    <value>Title successfully downloaded.</value>
+  </data>
+  <data name="success_dl_debug" xml:space="preserve">
+    <value>Title downloaded successfully.</value>
+  </data>
+  <data name="title_id" xml:space="preserve">
+    <value>Title ID:</value>
+  </data>
+  <data name="title_name" xml:space="preserve">
+    <value>Title Name: </value>
+  </data>
+  <data name="title_not_found" xml:space="preserve">
+    <value>Title not found on Nintendo's servers.</value>
+  </data>
+  <data name="title_not_found_debug" xml:space="preserve">
+    <value>Title not found.</value>
+  </data>
+  <data name="title_region" xml:space="preserve">
+    <value>Title Region: </value>
+  </data>
+  <data name="title_versions" xml:space="preserve">
+    <value>Title Versions: </value>
+  </data>
+  <data name="unknown_error" xml:space="preserve">
+    <value>There was an unknown problem while downloading.</value>
+  </data>
+  <data name="unknown_error_debug" xml:space="preserve">
+    <value>Unknown error occurred while downloading.</value>
+  </data>
+  <data name="update_program" xml:space="preserve">
+    <value>Update Program</value>
+  </data>
+  <data name="update_success" xml:space="preserve">
+    <value>Successfully obtained update.  Application will now restart.</value>
+  </data>
+  <data name="update_success_debug" xml:space="preserve">
+    <value>Update successful.</value>
+  </data>
+  <data name="update_vl" xml:space="preserve">
+    <value>Are you sure you want to update the VersionList for all titles in </value>
+  </data>
+  <data name="update_vl2" xml:space="preserve">
+    <value>?  This will take some time.</value>
+  </data>
+  <data name="user_close" xml:space="preserve">
+    <value>NUSGrabber exited without finishing the download.  Please do not exit NUSGrabber while it's downloading!</value>
+  </data>
+  <data name="user_close_debug" xml:space="preserve">
+    <value>User closed NUSGrabber.  Program exited without finishing download.</value>
+  </data>
+  <data name="write_error" xml:space="preserve">
+    <value>Unable to create a new file or overwrite the current one.  Ensure that you have permission to write to the root directory that this GUI is stored in.</value>
+  </data>
+  <data name="write_error_debug" xml:space="preserve">
+    <value>Unable to open/create wiiu_versionlist.txt.  Skipping update.</value>
+  </data>
+</root>

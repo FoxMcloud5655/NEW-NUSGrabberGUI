@@ -10,6 +10,7 @@ namespace NUSGrabberGUI
             InitializeComponent();
             UpdateButton.Enabled = !Properties.Settings.Default.Debug;
             RegionBox.Text = Properties.Settings.Default.Region;
+            LanguageBox.Text = Properties.Settings.Default.Language;
             HideCheckBox.Checked = Properties.Settings.Default.HideNUS;
             LoadCheckBox.Checked = Properties.Settings.Default.LoadTitles;
             DecryptCheckBox.Checked = Properties.Settings.Default.AutoDecrypt;
@@ -29,7 +30,12 @@ namespace NUSGrabberGUI
                 if (MessageBox.Show("You have entered in a manual override to the region.  If not an actual region, this can and will " +
                     "cause errors.  Are you sure you want to do this?", "Confirm Non-Standard Region",
                     MessageBoxButtons.YesNo) == DialogResult.No) { RegionBox.Text = "USA"; return; }
+            if (!LanguageBox.Items.Contains(LanguageBox.Text))
+                if (MessageBox.Show("You have entered in a manual override to the language.  If not an actual language, this can and " +
+                    "will cause errors.  Are you sure you want to do this?", "Confirm Custom Language",
+                    MessageBoxButtons.YesNo) == DialogResult.No) { LanguageBox.Text = "en"; return; }
             Properties.Settings.Default.Region = RegionBox.Text;
+            Properties.Settings.Default.Language = LanguageBox.Text;
             Properties.Settings.Default.HideNUS = HideCheckBox.Checked;
             Properties.Settings.Default.AutoDecrypt = DecryptCheckBox.Checked;
             Properties.Settings.Default.LoadTitles = LoadCheckBox.Checked;
