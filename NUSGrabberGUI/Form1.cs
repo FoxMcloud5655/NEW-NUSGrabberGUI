@@ -1,12 +1,12 @@
-﻿using System;
+﻿using libWiiSharp;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Linq;
-using libWiiSharp;
 
 namespace NUSGrabberGUI
 {
@@ -1176,7 +1176,7 @@ namespace NUSGrabberGUI
         {
             if (!Properties.Settings.Default.Debug)
             {
-                string request = "https://dl.dropboxusercontent.com/u/41125193/NUSGrabber/latestversion.xml";
+                const string request = "https://dl.dropboxusercontent.com/u/41125193/NUSGrabber/latestversion.xml";
                 try
                 {
                     WebRequest req = WebRequest.Create(request);
