@@ -3,7 +3,7 @@ Changelog for NEW-NUSGrabberGUI
 TODO:
 + Added more languages (mostly from Google Translate...)
 
-0.90 beta
+0.99 beta
 - Fixed a potential bug with the internal version lists - it now counts how many there are to determine if it's already been loaded or not.
 - Fixed a bug with HTML parsing - &#160; was not being taken out.
 - Removed MSVCR120.DLL and MSVCP140.DLL, as they are not compatable with all systems.
