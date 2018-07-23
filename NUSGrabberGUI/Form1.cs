@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -13,11 +15,11 @@ namespace NUSGrabberGUI
     public partial class NUSGrabberForm : Form
     {
         #region Global Variables
-        #if DEBUG
-            bool debug = true;
-        #else
+#if DEBUG
+        bool debug = true;
+#else
             bool debug = false;
-        #endif
+#endif
         List<ListItem> GameUpdates = new List<ListItem>();
         List<ListItem> SystemTitles = new List<ListItem>();
         List<int> badversionlists = new List<int> {1, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281,
@@ -811,18 +813,15 @@ namespace NUSGrabberGUI
 
         private void AboutButton_Click(object sender, EventArgs e)
         {
-            string Region = Properties.Settings.Default.Region;
-            bool ArchivedDatabase = Properties.Settings.Default.ArchivedDatabase;
-            bool UseOrigNUS = Properties.Settings.Default.UseOrigNUS;
-            SettingsForm settings = new SettingsForm(debug);
-            settings.ShowDialog();
-            if (ArchivedDatabase != Properties.Settings.Default.ArchivedDatabase || Region != Properties.Settings.Default.Region)
-                GetTitleInfo();
-            if (UseOrigNUS != Properties.Settings.Default.UseOrigNUS)
+            Point screenPoint = AboutButton.PointToScreen(new Point(AboutButton.Left, AboutButton.Bottom));
+
+            if (screenPoint.Y + MenuContext.Size.Height > Screen.PrimaryScreen.WorkingArea.Height)
             {
-                DeleteFile("NUSgrabber.exe");
-                WriteDebugLog("Replacing NUSgrabber.exe with " + (Properties.Settings.Default.UseOrigNUS ? "original" : "hacked") + " version.");
-                File.WriteAllBytes("NUSgrabber.exe", Properties.Settings.Default.UseOrigNUS ? Properties.Resources.NUSgrabberORIG : Properties.Resources.NUSgrabber);
+                MenuContext.Show(AboutButton, new Point(0, -MenuContext.Size.Height));
+            }
+            else
+            {
+                MenuContext.Show(AboutButton, new Point(0, AboutButton.Height));
             }
         }
 
@@ -853,9 +852,119 @@ namespace NUSGrabberGUI
             WriteDebugLog("Title Versions: " + title.Versions.ToString());
         }
 
+        private void MenuSettings_Click(object sender, EventArgs e)
+        {
+            string Region = Properties.Settings.Default.Region;
+            bool ArchivedDatabase = Properties.Settings.Default.ArchivedDatabase;
+            bool UseOrigNUS = Properties.Settings.Default.UseOrigNUS;
+            SettingsForm settings = new SettingsForm(debug);
+            settings.ShowDialog();
+            if (ArchivedDatabase != Properties.Settings.Default.ArchivedDatabase || Region != Properties.Settings.Default.Region)
+                GetTitleInfo();
+            if (UseOrigNUS != Properties.Settings.Default.UseOrigNUS)
+            {
+                DeleteFile("NUSgrabber.exe");
+                WriteDebugLog("Replacing NUSgrabber.exe with " + (Properties.Settings.Default.UseOrigNUS ? "original" : "hacked") + " version.");
+                File.WriteAllBytes("NUSgrabber.exe", Properties.Settings.Default.UseOrigNUS ? Properties.Resources.NUSgrabberORIG : Properties.Resources.NUSgrabber);
+            }
+        }
+
+        private void MenuCreateCommonKey_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string Key = string.Empty;
+                
+                if (InputBox("Common Key", "Please enter your common key to be converted to binary:", ref Key) == DialogResult.OK)
+                {
+                    Key = Key.Trim();
+
+                    if (string.IsNullOrWhiteSpace(Key))
+                    {
+                        return;
+                    }
+                    else if (Key.Length != 32)
+                    {
+                        MessageBox.Show("Your common key length does not look correct.", "Write Binary Key", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    using (SaveFileDialog Diag = new SaveFileDialog())
+                    {
+                        Diag.Title = "Choose where you would like to save the binary key.";
+                        Diag.Filter = "Binary Files|*.bin";
+                        Diag.FileName = "ckey.bin";
+
+                        if (Diag.ShowDialog() == DialogResult.OK)
+                        {
+                            File.WriteAllBytes(Diag.FileName, StringToByteArray(Key));
+                            MessageBox.Show("The binary key file was successfully written to \"" + Diag.FileName + "\"", "Write Binary Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }//using
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error ocurred writing your binary file: " + ex.Message, "Write Binary Key", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         #endregion
 
         #region Extra Functions
+        //This code was taken from this site: "http://www.csharp-examples.net/inputbox/"
+        //I claim no credit, except where modifications are made.
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
+        }
+
+        //This function was taken from this site: "https://stackoverflow.com/questions/6397235/write-bytes-to-file"
+        //I claim no credit, except where modifications are made.
+        public static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
 
         //This class was taken from this site: "http://stackoverflow.com/questions/9988937/sort-string-numbers"
         //I claim no credit, except where modifications are made.
@@ -1452,7 +1561,7 @@ namespace NUSGrabberGUI
         #endregion
 
         #region Background Workers
-        #pragma warning disable CS0162 // Unreachable code detected
+#pragma warning disable CS0162 // Unreachable code detected
 
         private void EmbedNUSGrabber_Work(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
