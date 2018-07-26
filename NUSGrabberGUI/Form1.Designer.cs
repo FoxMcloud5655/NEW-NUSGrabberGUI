@@ -33,6 +33,7 @@ namespace NUSGrabberGUI
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             NUSTabs = new TabControl();
             GameUpdateTab = new TabPage();
             GUExportButton = new Button();
@@ -62,15 +63,20 @@ namespace NUSGrabberGUI
             FTTitleList = new ListBox();
             DownloadButton = new Button();
             UpdateButton = new Button();
-            AboutButton = new Button();
+            OptionsButton = new Button();
             ReloadButton = new Button();
             DecryptButton = new Button();
             OpenFileDialog = new OpenFileDialog();
             EmbedNUSGrabber = new BackgroundWorker();
+            MenuContext = new ContextMenuStrip(this.components);
+            MenuSettings = new System.Windows.Forms.ToolStripMenuItem();
+            MenuTools = new System.Windows.Forms.ToolStripMenuItem();
+            MenuCreateCommonKey = new System.Windows.Forms.ToolStripMenuItem();
             NUSTabs.SuspendLayout();
             GameUpdateTab.SuspendLayout();
             SystemTab.SuspendLayout();
             FullListTab.SuspendLayout();
+            MenuContext.SuspendLayout();
             SuspendLayout();
             // 
             // NUSTabs
@@ -377,14 +383,14 @@ namespace NUSGrabberGUI
             // 
             // AboutButton
             // 
-            AboutButton.Enabled = false;
-            AboutButton.Location = new Point(12, 301);
-            AboutButton.Name = "AboutButton";
-            AboutButton.Size = new Size(54, 23);
-            AboutButton.TabIndex = 5;
-            AboutButton.Text = "Settings";
-            AboutButton.UseVisualStyleBackColor = true;
-            AboutButton.Click += new EventHandler(AboutButton_Click);
+            OptionsButton.Enabled = false;
+            OptionsButton.Location = new Point(12, 301);
+            OptionsButton.Name = "AboutButton";
+            OptionsButton.Size = new Size(54, 23);
+            OptionsButton.TabIndex = 5;
+            OptionsButton.Text = "Options";
+            OptionsButton.UseVisualStyleBackColor = true;
+            OptionsButton.Click += new EventHandler(OptionsButton_Click);
             // 
             // ReloadButton
             // 
@@ -418,6 +424,37 @@ namespace NUSGrabberGUI
             EmbedNUSGrabber.DoWork += new DoWorkEventHandler(EmbedNUSGrabber_Work);
             EmbedNUSGrabber.RunWorkerCompleted += new RunWorkerCompletedEventHandler(EmbedNUSGrabber_Done);
             // 
+            // MenuContext
+            // 
+            MenuContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            MenuSettings,
+            MenuTools});
+            MenuContext.Name = "MenuContext";
+            MenuContext.Size = new System.Drawing.Size(117, 48);
+            MenuContext.Text = "Settings";
+            // 
+            // MenuSettings
+            // 
+            MenuSettings.Name = "MenuSettings";
+            MenuSettings.Size = new System.Drawing.Size(116, 22);
+            MenuSettings.Text = "&Settings";
+            MenuSettings.Click += new System.EventHandler(MenuSettings_Click);
+            // 
+            // MenuTools
+            // 
+            MenuTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            MenuCreateCommonKey});
+            MenuTools.Name = "MenuTools";
+            MenuTools.Size = new System.Drawing.Size(116, 22);
+            MenuTools.Text = "Tools";
+            // 
+            // MenuCreateCommonKey
+            // 
+            MenuCreateCommonKey.Name = "MenuCreateCommonKey";
+            MenuCreateCommonKey.Size = new System.Drawing.Size(184, 22);
+            MenuCreateCommonKey.Text = "Create Common Key";
+            MenuCreateCommonKey.Click += new System.EventHandler(MenuCreateCommonKey_Click);
+            // 
             // NUSGrabberForm
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
@@ -425,7 +462,7 @@ namespace NUSGrabberGUI
             ClientSize = new Size(384, 336);
             Controls.Add(DecryptButton);
             Controls.Add(ReloadButton);
-            Controls.Add(AboutButton);
+            Controls.Add(OptionsButton);
             Controls.Add(UpdateButton);
             Controls.Add(DownloadButton);
             Controls.Add(NUSTabs);
@@ -439,6 +476,7 @@ namespace NUSGrabberGUI
             SystemTab.ResumeLayout(false);
             SystemTab.PerformLayout();
             FullListTab.ResumeLayout(false);
+            MenuContext.ResumeLayout(false);
             FullListTab.PerformLayout();
             ResumeLayout(false);
 
@@ -468,7 +506,7 @@ namespace NUSGrabberGUI
         private TextBox FTSearchBox;
         private ListBox FTTitleList;
         private Button UpdateButton;
-        private Button AboutButton;
+        private Button OptionsButton;
         private Button ReloadButton;
         private Button DecryptButton;
         private OpenFileDialog OpenFileDialog;
@@ -480,6 +518,10 @@ namespace NUSGrabberGUI
         private Button GUExportButton;
         private Button STExportButton;
         private Button FTExportButton;
+        private ContextMenuStrip MenuContext;
+        private ToolStripItem MenuSettings;
+        private ToolStripMenuItem MenuTools;
+        private ToolStripItem MenuCreateCommonKey;
     }
 }
 
