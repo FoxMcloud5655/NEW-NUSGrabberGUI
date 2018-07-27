@@ -75,7 +75,7 @@ namespace NUSGrabberGUI
                     Process.GetCurrentProcess().Kill();
                 }
             }
-            else if (File.Exists("NUSGrabberGUI.exe") || File.Exists("NUtSGrabberGUI.exe") || File.Exists("DeezNUSGrabberGUI.exe"))
+            else if (File.Exists("NUSGrabberGUI.exe"))
             {
                 Properties.Settings.Default.Debug = true;
                 ExtractResources();
@@ -1192,7 +1192,7 @@ namespace NUSGrabberGUI
                                     }
                                     if (times == 0)
                                     {
-                                        MessageBox.Show("Failed to update the exe.  You can still manually update using this link:\nhttps://dl.dropboxusercontent.com/u/41125193/NUSGrabber/NEW-NUSGrabberGUI.exe");
+                                        MessageBox.Show("Failed to update the exe.  You can still manually update using this link:\nhttps://www.dropbox.com/s/wcmwh6hu99dtf3h/NEW-NUSGrabberGUI.exe?dl=1");
                                         WriteDebugLog("Failed to rename self.");
                                     }
                                     else
@@ -1431,10 +1431,9 @@ namespace NUSGrabberGUI
         public string GetLanguageString(string name, bool addwhitespace)
         {
             string value = XDocument.Parse(language).Descendants().FirstOrDefault(_ => _.Attributes().Any(a => a.Value == name))?.Value;
-            value.Trim(' ', '\n', '\r'); //TODO: Fix
+            value = value.Trim(' ', '\n', '\r');
             if (addwhitespace)
                 value = value.Insert(0, " ").Insert(value.Length - 1, " ");
-            GUSearchBox.Text = value;
             return value;
 
         }
