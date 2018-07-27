@@ -120,6 +120,7 @@ namespace NUSGrabberGUI
 
         private void GUTitleList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            GUVersionList.BeginUpdate();
             GUVersionList.Items.Clear();
             GUExportButton.Enabled = true;
             string versions = (GUTitleList.SelectedItem as ListItem).Versions.ToString();
@@ -138,12 +139,14 @@ namespace NUSGrabberGUI
             GUVersionList.SelectedIndex = 0;
             try { GUTitleIDLabel.Text = "Title ID: " + (GUTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
             catch { }
+            GUVersionList.EndUpdate();
         }
 
         private void GUSearchBox_TextChanged(object sender, EventArgs e)
         {
             if (!GUSearchBox.Text.Contains("..."))
             {
+                GUTitleList.BeginUpdate();
                 GUTitleList.Items.Clear();
                 GUExportButton.Enabled = false;
                 string region = Properties.Settings.Default.Region;
@@ -177,11 +180,14 @@ namespace NUSGrabberGUI
                         EnableUI(true);
                     }
                 }
+
+                GUTitleList.EndUpdate();
             }
         }
 
         private void STTitleList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            STVersionList.BeginUpdate();
             STVersionList.Items.Clear();
             STExportButton.Enabled = true;
             string versions;
@@ -193,17 +199,20 @@ namespace NUSGrabberGUI
             {
                 if (v != null && v != "v0" && v != "" && v != " ")
                 {
-                    try { STVersionList.Items.Add(v.TrimStart(' ').Substring(0, v.LastIndexOf('(') - 1)); }
+                    try { STVersionList.Items.Add(v.TrimStart(' ').Substring(0, (v.LastIndexOf('(') > -1 ? v.LastIndexOf('(') : v.Length) - 1)); }
                     catch { STVersionList.Items.Add(v.TrimStart(' ')); }
                 }
             }
             STVersionList.SelectedIndex = 0;
             try { STTitleIDLabel.Text = "Title ID: " + (STTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
             catch { }
+            STVersionList.EndUpdate();
         }
 
         private void STSearchBox_TextChanged(object sender, EventArgs e)
         {
+            EnableUI(false);
+            STTitleList.BeginUpdate();
             STTitleList.Items.Clear();
             STExportButton.Enabled = false;
             string region = Properties.Settings.Default.Region;
@@ -217,7 +226,6 @@ namespace NUSGrabberGUI
                 if (STTitleList.Items.Count != 0)
                 {
                     STTitleList.SelectedIndex = 0;
-                    EnableUI(true);
                 }
                 else
                 {
@@ -234,9 +242,11 @@ namespace NUSGrabberGUI
                 if (STTitleList.Items.Count != 0)
                 {
                     STTitleList.SelectedIndex = 0;
-                    EnableUI(true);
                 }
             }
+
+            EnableUI(true);
+            STTitleList.EndUpdate();
         }
 
         private void FTTitleList_SelectedIndexChanged(object sender, EventArgs e)
@@ -248,6 +258,7 @@ namespace NUSGrabberGUI
 
         private void FTSearchBox_TextChanged(object sender, EventArgs e)
         {
+            FTTitleList.BeginUpdate();
             FTTitleList.Items.Clear();
             FTExportButton.Enabled = false;
             string region = Properties.Settings.Default.Region;
@@ -281,6 +292,7 @@ namespace NUSGrabberGUI
                     EnableUI(true);
                 }
             }
+            FTTitleList.EndUpdate();
         }
 
         private void NUSTabs_IndexChanged(object sender, EventArgs e)
@@ -1261,6 +1273,7 @@ namespace NUSGrabberGUI
 
         private void EnableUI(bool enable, bool first)
         {
+            Cursor = enable ? Cursors.Default : Cursors.WaitCursor;
             NUSTabs.Enabled = enable;
             if ((File.Exists("NUSgrabber.exe") || debug || !enable) && !first)
                 DownloadButton.Enabled = enable;

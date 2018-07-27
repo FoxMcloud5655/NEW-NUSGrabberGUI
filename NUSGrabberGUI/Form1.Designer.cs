@@ -489,6 +489,7 @@ namespace NUSGrabberGUI
             Controls.Add(UpdateButton);
             Controls.Add(DownloadButton);
             Controls.Add(NUSTabs);
+            StartPosition = FormStartPosition.CenterScreen;
             FormBorderStyle = FormBorderStyle.Sizable;
             Name = "NUSGrabberForm";
             ShowIcon = false;
