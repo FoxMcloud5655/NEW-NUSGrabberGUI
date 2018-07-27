@@ -81,6 +81,7 @@ namespace NUSGrabberGUI
             // 
             // NUSTabs
             // 
+            NUSTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             NUSTabs.Controls.Add(GameUpdateTab);
             NUSTabs.Controls.Add(SystemTab);
             NUSTabs.Controls.Add(FullListTab);
@@ -113,6 +114,7 @@ namespace NUSGrabberGUI
             // 
             // GUExportButton
             // 
+            GUExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             GUExportButton.DialogResult = DialogResult.Cancel;
             GUExportButton.Enabled = false;
             GUExportButton.Location = new Point(172, 231);
@@ -126,6 +128,7 @@ namespace NUSGrabberGUI
             // 
             // GUTitleIDLabel
             // 
+            GUTitleIDLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             GUTitleIDLabel.AutoSize = true;
             GUTitleIDLabel.Location = new Point(9, 233);
             GUTitleIDLabel.Name = "GUTitleIDLabel";
@@ -135,6 +138,7 @@ namespace NUSGrabberGUI
             // 
             // NUSGrabberProgress
             // 
+            NUSGrabberProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             NUSGrabberProgress.Location = new Point(56, 6);
             NUSGrabberProgress.Name = "NUSGrabberProgress";
             NUSGrabberProgress.Size = new Size(290, 20);
@@ -143,6 +147,7 @@ namespace NUSGrabberGUI
             // 
             // GUVersionList
             // 
+            GUVersionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right)));
             GUVersionList.FormattingEnabled = true;
             GUVersionList.Location = new Point(289, 53);
             GUVersionList.Name = "GUVersionList";
@@ -151,6 +156,7 @@ namespace NUSGrabberGUI
             // 
             // GUVersionsLabel
             // 
+            GUVersionsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right)));
             GUVersionsLabel.AutoSize = true;
             GUVersionsLabel.Location = new Point(292, 37);
             GUVersionsLabel.Name = "GUVersionsLabel";
@@ -178,6 +184,7 @@ namespace NUSGrabberGUI
             // 
             // GUSearchBox
             // 
+            GUSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             GUSearchBox.Location = new Point(56, 6);
             GUSearchBox.Name = "GUSearchBox";
             GUSearchBox.Size = new Size(290, 20);
@@ -186,6 +193,7 @@ namespace NUSGrabberGUI
             // 
             // GUTitleList
             // 
+            GUTitleList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             GUTitleList.FormattingEnabled = true;
             GUTitleList.Location = new Point(6, 53);
             GUTitleList.Name = "GUTitleList";
@@ -213,6 +221,7 @@ namespace NUSGrabberGUI
             // 
             // STExportButton
             // 
+            STExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             STExportButton.DialogResult = DialogResult.Cancel;
             STExportButton.Enabled = false;
             STExportButton.Location = new Point(172, 231);
@@ -226,6 +235,7 @@ namespace NUSGrabberGUI
             // 
             // STTitleIDLabel
             // 
+            STTitleIDLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             STTitleIDLabel.AutoSize = true;
             STTitleIDLabel.Location = new Point(9, 233);
             STTitleIDLabel.Name = "STTitleIDLabel";
@@ -235,6 +245,7 @@ namespace NUSGrabberGUI
             // 
             // STVersionList
             // 
+            STVersionList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right)));
             STVersionList.FormattingEnabled = true;
             STVersionList.Location = new Point(272, 53);
             STVersionList.Name = "STVersionList";
@@ -243,6 +254,7 @@ namespace NUSGrabberGUI
             // 
             // STVersionsLabel
             // 
+            STVersionsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Right)));
             STVersionsLabel.AutoSize = true;
             STVersionsLabel.Location = new Point(285, 37);
             STVersionsLabel.Name = "STVersionsLabel";
@@ -270,6 +282,7 @@ namespace NUSGrabberGUI
             // 
             // STSearchBox
             // 
+            STSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             STSearchBox.Location = new Point(56, 6);
             STSearchBox.Name = "STSearchBox";
             STSearchBox.Size = new Size(290, 20);
@@ -278,6 +291,7 @@ namespace NUSGrabberGUI
             // 
             // STTitleList
             // 
+            STTitleList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             STTitleList.FormattingEnabled = true;
             STTitleList.Location = new Point(6, 53);
             STTitleList.Name = "STTitleList";
@@ -303,6 +317,7 @@ namespace NUSGrabberGUI
             // 
             // FTExportButton
             // 
+            FTExportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             FTExportButton.DialogResult = DialogResult.Cancel;
             FTExportButton.Enabled = false;
             FTExportButton.Location = new Point(172, 231);
@@ -316,6 +331,7 @@ namespace NUSGrabberGUI
             // 
             // FTTitleIDLabel
             // 
+            FTTitleIDLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             FTTitleIDLabel.AutoSize = true;
             FTTitleIDLabel.Location = new Point(9, 233);
             FTTitleIDLabel.Name = "FTTitleIDLabel";
@@ -343,6 +359,7 @@ namespace NUSGrabberGUI
             // 
             // FTSearchBox
             // 
+            FTSearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             FTSearchBox.Location = new Point(56, 6);
             FTSearchBox.Name = "FTSearchBox";
             FTSearchBox.Size = new Size(290, 20);
@@ -351,6 +368,7 @@ namespace NUSGrabberGUI
             // 
             // FTTitleList
             // 
+            FTTitleList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             FTTitleList.FormattingEnabled = true;
             FTTitleList.Location = new Point(6, 53);
             FTTitleList.Name = "FTTitleList";
@@ -360,6 +378,7 @@ namespace NUSGrabberGUI
             // 
             // DownloadButton
             // 
+            DownloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             DownloadButton.DialogResult = DialogResult.Cancel;
             DownloadButton.Enabled = false;
             DownloadButton.Location = new Point(300, 301);
@@ -372,6 +391,7 @@ namespace NUSGrabberGUI
             // 
             // UpdateButton
             // 
+            UpdateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             UpdateButton.Enabled = false;
             UpdateButton.Location = new Point(72, 301);
             UpdateButton.Name = "UpdateButton";
@@ -383,6 +403,7 @@ namespace NUSGrabberGUI
             // 
             // AboutButton
             // 
+            OptionsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             OptionsButton.Enabled = false;
             OptionsButton.Location = new Point(12, 301);
             OptionsButton.Name = "AboutButton";
@@ -394,6 +415,7 @@ namespace NUSGrabberGUI
             // 
             // ReloadButton
             // 
+            ReloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             ReloadButton.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
             ReloadButton.Location = new Point(288, 10);
             ReloadButton.Name = "ReloadButton";
@@ -406,6 +428,7 @@ namespace NUSGrabberGUI
             // 
             // DecryptButton
             // 
+            DecryptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             DecryptButton.Enabled = false;
             DecryptButton.Location = new Point(188, 301);
             DecryptButton.Name = "DecryptButton";
@@ -466,7 +489,7 @@ namespace NUSGrabberGUI
             Controls.Add(UpdateButton);
             Controls.Add(DownloadButton);
             Controls.Add(NUSTabs);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.Sizable;
             Name = "NUSGrabberForm";
             ShowIcon = false;
             Text = "NEW-NUSGrabberGUI";
