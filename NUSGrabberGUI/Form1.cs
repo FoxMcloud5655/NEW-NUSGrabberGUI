@@ -25,6 +25,7 @@ namespace NUSGrabberGUI
             282, 283, 284, 285, 286, 287, 288, 289, 290, 291, 292, 293, 294, 295, 299, 300, 301, 302, 303, 304, 305, 306,
             307, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324, 325, 326, 327, 328,
             329, 330, 604, 605, 606, 607, 608, 609, 610, 611, 612, 613, 655, 656, 657, 658, 659, 660, 661, 662, 663, 664};
+        List<int> keyHashes = new List<int> { 487391367, -1394384166, 585460703 };
         SortedDictionary<string, List<string>> titlelist = new SortedDictionary<string, List<string>>();
         FileSystemWatcher DownloadWatcher = new FileSystemWatcher();
         bool canwritedebug = true;
@@ -858,8 +859,17 @@ namespace NUSGrabberGUI
                     }
                     else if (Key.Length != 32)
                     {
-                        MessageBox.Show("Your common key length does not look correct.", "Write Binary Key", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Your common key length does not look correct.", 
+                            "Write Binary Key", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
+                    }
+                    else if (!keyHashes.Contains(Key.GetHashCode()))
+                    {
+                        if (MessageBox.Show("Your common key hash doesn't seem to match a valid one, do you still want to continue?", 
+                            "Write Binary Key", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
                     }
 
                     using (SaveFileDialog Diag = new SaveFileDialog())
