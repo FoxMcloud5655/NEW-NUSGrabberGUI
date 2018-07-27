@@ -99,6 +99,12 @@
     <Compile Include="CertificateChain.cs" />
     <Compile Include="CommonKey.cs" />
     <Compile Include="ContentIndices.cs" />
+    <Compile Include="FrmDownloadLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDownloadLog.Designer.cs">
+      <DependentUpon>FrmDownloadLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,10 @@
     <Compile Include="TMD.cs" />
     <Compile Include="U8.cs" />
     <Compile Include="WAD.cs" />
+    <EmbeddedResource Include="FrmDownloadLog.resx">
+      <DependentUpon>FrmDownloadLog.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

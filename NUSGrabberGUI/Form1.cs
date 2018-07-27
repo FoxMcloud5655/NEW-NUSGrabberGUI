@@ -28,6 +28,7 @@ namespace NUSGrabberGUI
         List<int> keyHashes = new List<int> { 487391367, -1394384166, 585460703 };
         SortedDictionary<string, List<string>> titlelist = new SortedDictionary<string, List<string>>();
         FileSystemWatcher DownloadWatcher = new FileSystemWatcher();
+        FrmDownloadLog DownloadLog = new FrmDownloadLog();
         bool canwritedebug = true;
         string filepath = "";
         string language = "";
@@ -381,13 +382,20 @@ namespace NUSGrabberGUI
                             nusgrabber.StartInfo.FileName = "NUSGrabber.exe";
                             nusgrabber.StartInfo.Arguments = args[0] + (args[1] != "" ? ' ' + args[1] : "");
                             nusgrabber.StartInfo.RedirectStandardOutput = true;
+                            nusgrabber.StartInfo.RedirectStandardError = true;
+                            nusgrabber.OutputDataReceived += Nusgrabber_OutputDataReceived;
+                            nusgrabber.ErrorDataReceived += Nusgrabber_OutputDataReceived;
                             nusgrabber.StartInfo.UseShellExecute = false;
                             nusgrabber.StartInfo.CreateNoWindow = Properties.Settings.Default.HideNUS;
                             try
                             {
                                 WriteDebugLog("Assumed path to the downloaded files is \"" + filepath + '\"');
                                 WriteDebugLog("Starting \"" + nusgrabber.StartInfo.FileName + "\" with \"" + nusgrabber.StartInfo.Arguments + "\" as arguments.");
-                                nusgrabber.Start();
+                                DownloadLog.Show(this);
+                                DownloadLog.ClearLog();
+                                nusgrabber.Start();                                
+                                nusgrabber.BeginOutputReadLine();
+                                nusgrabber.BeginErrorReadLine();
                                 System.Threading.Thread.Sleep(2000);
                                 while (!nusgrabber.HasExited)
                                 {
@@ -469,6 +477,10 @@ namespace NUSGrabberGUI
                                     "directory that this program is stored in.\n" + ex.ToString());
                                 WriteDebugLog("Error starting " + nusgrabber.StartInfo.FileName + ".\n" + ex.ToString());
                             }
+                            finally
+                            {
+                                DownloadLog.Hide();
+                            }
                         }
                     }
                 }
@@ -485,7 +497,8 @@ namespace NUSGrabberGUI
                     }
                     catch
                     {
-                        MessageBox.Show("Couldn't remove folder after deletion.  Ensure there is no other data in \"" + filepath + "\" and try again.");
+                        Process.Start("explorer.exe", filepath);
+                        MessageBox.Show("Delete Incomplete Folder", "Couldn't remove folder after deletion.  Ensure there is no other data in \"" + filepath + "\" and try again.", MessageBoxButtons.OK, MessageBoxIcon.Error);                        
                         WriteDebugLog("Couldn't delete directory " + filepath + ".");
                     }
                 }
@@ -507,6 +520,11 @@ namespace NUSGrabberGUI
                     "FoxMcloud5655 on GBATemp, and tell him to look into this problem!");
                 WriteDebugLog("Error converting title name into a ListItem.");
             }
+        }
+
+        private void Nusgrabber_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            DownloadLog.AppendLog(e.Data);
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
@@ -904,6 +922,11 @@ namespace NUSGrabberGUI
             }
         }
 
+        private void MenuShowDownloadLog_Click(object sender, EventArgs e)
+        {
+            DownloadLog.Show();
+        }
+
         private void GUExportButton_Click(object sender, EventArgs e)
         {
             ListItem title = GUTitleList.SelectedItem as ListItem;
@@ -1125,13 +1148,16 @@ namespace NUSGrabberGUI
                                                     }
                                                     cbi.Versions = versions;
                                                 }
-                                                else throw new Exception();
+                                                else
+                                                {
+                                                    string ver = null;
+                                                    try { ver = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = ver; cbi.Desc = ver; cbi.Versions = ver; }
+                                                    cbi.Versions = ver;
+                                                }
                                             }
                                             catch
                                             {
-                                                string ver = null;
-                                                try { ver = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = ver; cbi.Desc = ver; cbi.Versions = ver; }
-                                                cbi.Versions = ver;
+                                                //TODO: Handle
                                             }
                                         }
                                         //REG
@@ -1191,13 +1217,16 @@ namespace NUSGrabberGUI
                                                     }
                                                     cbisys.Versions = versions;
                                                 }
-                                                else throw new Exception();
+                                                else
+                                                {
+                                                    string ver = null;
+                                                    try { ver = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = ver; cbisys.Desc = ver; cbisys.Versions = ver; }
+                                                    cbisys.Versions = ver;
+                                                }
                                             }
                                             catch
                                             {
-                                                string ver = null;
-                                                try { ver = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = ver; cbisys.Desc = ver; cbisys.Versions = ver; }
-                                                cbisys.Versions = ver;
+                                                //TODO: Handle
                                             }
                                         }
                                         //REG
@@ -1530,6 +1559,9 @@ namespace NUSGrabberGUI
 
         private void CleanupOnExit(object sender, EventArgs e)
         {
+            //Dispose            
+            DownloadLog.Dispose();
+
             if (!Properties.Settings.Default.Debug)
                 DeleteFile("debug.log");
             else WriteDebugLog("Preforming shut down process.\n");

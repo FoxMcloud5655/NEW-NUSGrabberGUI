@@ -72,6 +72,7 @@ namespace NUSGrabberGUI
             MenuSettings = new System.Windows.Forms.ToolStripMenuItem();
             MenuTools = new System.Windows.Forms.ToolStripMenuItem();
             MenuCreateCommonKey = new System.Windows.Forms.ToolStripMenuItem();
+            MenuShowDownloadLog = new System.Windows.Forms.ToolStripMenuItem();
             NUSTabs.SuspendLayout();
             GameUpdateTab.SuspendLayout();
             SystemTab.SuspendLayout();
@@ -451,6 +452,7 @@ namespace NUSGrabberGUI
             // 
             MenuContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             MenuSettings,
+            MenuShowDownloadLog,
             MenuTools});
             MenuContext.Name = "MenuContext";
             MenuContext.Size = new System.Drawing.Size(117, 48);
@@ -477,6 +479,13 @@ namespace NUSGrabberGUI
             MenuCreateCommonKey.Size = new System.Drawing.Size(184, 22);
             MenuCreateCommonKey.Text = "Create Common Key";
             MenuCreateCommonKey.Click += new System.EventHandler(MenuCreateCommonKey_Click);
+            // 
+            // MenuShowDownloadLog
+            // 
+            MenuShowDownloadLog.Name = "MenuShowDownloadLog";
+            MenuShowDownloadLog.Size = new System.Drawing.Size(184, 22);
+            MenuShowDownloadLog.Text = "Show Download Log";
+            MenuShowDownloadLog.Click += new System.EventHandler(MenuShowDownloadLog_Click);
             // 
             // NUSGrabberForm
             // 
@@ -546,6 +555,7 @@ namespace NUSGrabberGUI
         private ToolStripItem MenuSettings;
         private ToolStripMenuItem MenuTools;
         private ToolStripItem MenuCreateCommonKey;
+        private ToolStripItem MenuShowDownloadLog;
     }
 }
 
