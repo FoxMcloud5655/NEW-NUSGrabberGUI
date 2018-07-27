@@ -1,12 +1,12 @@
-﻿using System;
+﻿using libWiiSharp;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using System.Linq;
-using libWiiSharp;
 
 namespace NUSGrabberGUI
 {
@@ -44,11 +44,7 @@ namespace NUSGrabberGUI
                 ExtractResources();
                 try
                 {
-                    using (FileStream lang_file = File.Open("lang/" + Properties.Settings.Default.Language + ".resx", FileMode.Open, FileAccess.Read))
-                    {
-                        StreamReader lang_read = new StreamReader(lang_file);
-                        language = lang_read.ReadToEnd();
-                    }
+                    language = File.ReadAllText("lang/" + Properties.Settings.Default.Language + ".resx");
                 }
                 catch
                 {
@@ -64,8 +60,8 @@ namespace NUSGrabberGUI
                     EnableUI(true, true);
                     if (debug)
                     {
-                        WriteDebugLog("\nNEW-NUSGrabberGUI v" + (float)Properties.Settings.Default.Version / 100 + " " + 
-                            Properties.Settings.Default.VersionType + GetLanguageString("debug_start", true) + 
+                        WriteDebugLog("\nNEW-NUSGrabberGUI v" + (float)Properties.Settings.Default.Version / 100 + " " +
+                            Properties.Settings.Default.VersionType + GetLanguageString("debug_start", true) +
                             DateTime.Now.ToString() + "\n", false);
                         Text += " DEBUG";
                         GUExportButton.Visible = true;
@@ -107,7 +103,7 @@ namespace NUSGrabberGUI
                 Process.GetCurrentProcess().Kill();
             }
         }
-        
+
         public NUSGrabberForm(bool temp) { }
 
         private void LoadTitleInfo(object sender, EventArgs e)
@@ -174,7 +170,7 @@ namespace NUSGrabberGUI
                         if (t.Desc != null && t.Versions.ToString() != "v1" && (t.Desc.ToString().StartsWith(region) || t.Desc.ToString().StartsWith("all")))
                             GUTitleList.Items.Add(t);
                     if (GUTitleList.Items.Count != 0)
-                    { 
+                    {
                         GUTitleList.SelectedIndex = 0;
                         EnableUI(true);
                     }
@@ -352,7 +348,7 @@ namespace NUSGrabberGUI
             }
             if (args != null && args[0] != "")
             {
-                
+
                 filepath = Environment.CurrentDirectory + '\\' + args[0] + '\\' + (!args[1].Equals("") ? args[1] + '\\' : "");
                 if (!Directory.Exists(filepath))
                 {
@@ -591,7 +587,7 @@ namespace NUSGrabberGUI
                                             failedversionlists += i + ", ";
                                             WriteDebugLog(GetLanguageString("bad_vl_debug", false) + i + "\".");
                                         }
-                                        
+
                                     }
                                 }
                             }
@@ -752,7 +748,7 @@ namespace NUSGrabberGUI
                                         }
                                         else if (output == "")
                                         {
-                                            MessageBox.Show("Error detected: MSVRC120.dll not found.  Please ensure you don't mess " + 
+                                            MessageBox.Show("Error detected: MSVRC120.dll not found.  Please ensure you don't mess " +
                                                 "with files as they are being used next time!");
                                             WriteDebugLog("Error detected: MSVRC120.dll not found.");
                                         }
@@ -970,7 +966,7 @@ namespace NUSGrabberGUI
                                         if (columncount == 2)
                                         {
                                             string desc = null;
-                                            try { desc = td.InnerText.Trim().Replace("amp;","").Replace("&#160;",""); } catch (Exception) { cbi.Title_ID = desc; cbi.Desc = desc; cbi.Versions = desc; }
+                                            try { desc = td.InnerText.Trim().Replace("amp;", "").Replace("&#160;", ""); } catch (Exception) { cbi.Title_ID = desc; cbi.Desc = desc; cbi.Versions = desc; }
                                             cbi.Desc = desc;
                                         }
                                         //VER
@@ -1166,7 +1162,7 @@ namespace NUSGrabberGUI
         {
             if (!Properties.Settings.Default.Debug)
             {
-                string request = "https://www.dropbox.com/s/w8pw1ed9u1j4swv/latestversion.xml?dl=1";
+                const string request = "https://www.dropbox.com/s/w8pw1ed9u1j4swv/latestversion.xml?dl=1";
                 try
                 {
                     WebRequest req = WebRequest.Create(request);
@@ -1503,7 +1499,7 @@ namespace NUSGrabberGUI
         public object Region { get; set; }
         public override string ToString()
         {
-            Desc = (Desc != null || Desc != "") ? Desc : "null";
+            Desc = !string.IsNullOrEmpty(Desc) ? Desc : "null";
             return Desc;
         }
     }

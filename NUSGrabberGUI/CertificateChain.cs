@@ -509,9 +509,7 @@ namespace libWiiSharp
 
         private void fireDebug(string debugMessage, params object[] args)
         {
-            EventHandler<MessageEventArgs> debug = Debug;
-            if (debug != null)
-                debug(new object(), new MessageEventArgs(string.Format(debugMessage, args)));
+            Debug?.Invoke(new object(), new MessageEventArgs(string.Format(debugMessage, args)));
         }
         #endregion
     }
