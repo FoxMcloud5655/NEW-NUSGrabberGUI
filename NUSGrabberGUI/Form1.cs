@@ -138,7 +138,7 @@ namespace NUSGrabberGUI
                 }
             }
             GUVersionList.SelectedIndex = 0;
-            try { GUTitleIDLabel.Text = "Title ID: " + (GUTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
+            try { GUTitleIDLabel.Text = GetLanguageString("title_id", false) + (GUTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
             catch { }
         }
 
@@ -164,7 +164,7 @@ namespace NUSGrabberGUI
                     else
                     {
                         GUVersionList.Items.Clear();
-                        GUTitleIDLabel.Text = "Title ID:";
+                        GUTitleIDLabel.Text = GetLanguageString("title_id", false);
                         DownloadButton.Enabled = false;
                     }
                 }
@@ -200,7 +200,7 @@ namespace NUSGrabberGUI
                 }
             }
             STVersionList.SelectedIndex = 0;
-            try { STTitleIDLabel.Text = "Title ID: " + (STTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
+            try { STTitleIDLabel.Text = GetLanguageString("title_id", false) + (STTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
             catch { }
         }
 
@@ -224,7 +224,7 @@ namespace NUSGrabberGUI
                 else
                 {
                     STVersionList.Items.Clear();
-                    STTitleIDLabel.Text = "Title ID:";
+                    STTitleIDLabel.Text = GetLanguageString("title_id", false);
                     DownloadButton.Enabled = false;
                 }
             }
@@ -244,7 +244,7 @@ namespace NUSGrabberGUI
         private void FTTitleList_SelectedIndexChanged(object sender, EventArgs e)
         {
             FTExportButton.Enabled = true;
-            try { FTTitleIDLabel.Text = "Title ID: " + (FTTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
+            try { FTTitleIDLabel.Text = GetLanguageString("title_id", false) + (FTTitleList.SelectedItem as ListItem).Title_ID.ToString(); }
             catch { }
         }
 
@@ -268,7 +268,7 @@ namespace NUSGrabberGUI
                 else
                 {
                     GUVersionList.Items.Clear();
-                    FTTitleIDLabel.Text = "Title ID:";
+                    FTTitleIDLabel.Text = GetLanguageString("title_id", false);
                     DownloadButton.Enabled = false;
                 }
             }
@@ -360,7 +360,7 @@ namespace NUSGrabberGUI
                     {
                         EnableUI(false);
                         NUSTabs.SelectedIndex = 0;
-                        ForceRefresh(GUSearchBox, "Downloading...  Please wait.");
+                        ForceRefresh(GUSearchBox, GetLanguageString("downloading_wait", false));
                         if (Properties.Settings.Default.UseEmbedNUS)
                         {
                             EmbedNUSGrabber.RunWorkerAsync(args);
@@ -375,8 +375,8 @@ namespace NUSGrabberGUI
                             nusgrabber.StartInfo.CreateNoWindow = Properties.Settings.Default.HideNUS;
                             try
                             {
-                                WriteDebugLog("Assumed path to the downloaded files is \"" + filepath + '\"');
-                                WriteDebugLog("Starting \"" + nusgrabber.StartInfo.FileName + "\" with \"" + nusgrabber.StartInfo.Arguments + "\" as arguments.");
+                                WriteDebugLog(GetLanguageString("path_debug", false) + filepath + '\"');
+                                WriteDebugLog(GetLanguageString("starting_debug", false) + nusgrabber.StartInfo.FileName + GetLanguageString("starting2_debug", false) + nusgrabber.StartInfo.Arguments + GetLanguageString("starting3_debug", false));
                                 nusgrabber.Start();
                                 System.Threading.Thread.Sleep(2000);
                                 while (!nusgrabber.HasExited)
@@ -386,66 +386,64 @@ namespace NUSGrabberGUI
                                         FileInfo DownloadedFile = GetFiles(filepath, ".app", ".h3").OrderByDescending(f => f.LastWriteTime).First();
                                         if (!DownloadedFile.Equals(null))
                                         {
-                                            ForceRefresh(GUSearchBox, "Downloading: " + DownloadedFile.Name + "...");
+                                            ForceRefresh(GUSearchBox, GetLanguageString("downloading", false) + DownloadedFile.Name + "...");
                                         }
                                     }
                                     catch { System.Threading.Thread.Sleep(500); }
                                 }
-                                WriteDebugLog("Detected that NUSGrabber.exe has closed with exit code of " + nusgrabber.ExitCode + ".  Preforming after-processing.");
+                                WriteDebugLog(GetLanguageString("close_code_debug", false) + nusgrabber.ExitCode + GetLanguageString("close_code2_debug", false));
                                 if (nusgrabber.ExitCode == 1)
                                 {
                                     if (!Directory.Exists(filepath))
                                     {
-                                        MessageBox.Show("Title not found on Nintendo's servers.");
-                                        WriteDebugLog("Title not found.");
+                                        MessageBox.Show(GetLanguageString("title_not_found", false));
+                                        WriteDebugLog(GetLanguageString("title_not_found_debug", false));
                                     }
                                     else if (File.Exists(filepath + "title.tmd"))
                                     {
                                         if (Properties.Settings.Default.AutoDecrypt && File.Exists(filepath + "title.tik"))
                                         {
-                                            WriteDebugLog("Auto-decrypting title.");
+                                            WriteDebugLog(GetLanguageString("auto_decrypt_debug", false));
                                             DecryptButton_Click(sender, e);
                                         }
                                         else if (Properties.Settings.Default.AutoDecrypt)
                                         {
-                                            MessageBox.Show("Title successfully downloaded, but no decryption key was found.  Can't decrypt automatically.");
-                                            WriteDebugLog("Couldn't find \"title.tik\".  Skipping auto-decryption.\nTitle downloaded successfully.");
+                                            MessageBox.Show(GetLanguageString("no_key", false));
+                                            WriteDebugLog(GetLanguageString("no_key_debug", false));
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Title successfully downloaded.");
-                                            WriteDebugLog("Title downloaded successfully.");
+                                            MessageBox.Show(GetLanguageString("success_dl", false));
+                                            WriteDebugLog(GetLanguageString("success_dl_debug", false));
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Incomplete download detected.  Delete \"" + filepath + "\" and try downloading the title again.");
-                                        WriteDebugLog("Possible incomplete download.");
+                                        MessageBox.Show(GetLanguageString("incomplete", false) + filepath + GetLanguageString("incomplete2", false));
+                                        WriteDebugLog(GetLanguageString("incomplete_debug", false));
                                     }
                                 }
                                 else
                                 {
                                     if (nusgrabber.ExitCode == -1073741510)
                                     {
-                                        MessageBox.Show("NUSGrabber exited without finishing the download.  Please do not exit NUSGrabber while it's downloading!");
-                                        WriteDebugLog("User closed NUSGrabber.  Program exited without finishing download.");
+                                        MessageBox.Show(GetLanguageString("user_close", false));
+                                        WriteDebugLog(GetLanguageString("user_close_debug", false));
                                     }
                                     else if (nusgrabber.ExitCode == -1073741701)
                                     {
-                                        MessageBox.Show("Detected that NUSGrabber didn't run.  Install Visual Studio C++ (x86) and try again.");
-                                        WriteDebugLog("Detected that NUSGrabber didn't run.  Installation of Visual Studio C++ x86 (32-bit) is required.");
-                                        WriteDebugLog("Status Code: STATUS_INVALID_IMAGE_FORMAT");
+                                        MessageBox.Show(GetLanguageString("no_vs", false));
+                                        WriteDebugLog(GetLanguageString("no_vs_debug", false));
                                     }
                                     else if (nusgrabber.ExitCode == -1073741515)
                                     {
-                                        MessageBox.Show("Unable to locate a .dll file.  Perhaps you are running WINE?");
-                                        WriteDebugLog("Detected that NUSGrabber didn't run.  Unable to find a required .dll.");
-                                        WriteDebugLog("Status Code: STATUS_DLL_NOT_FOUND");
+                                        MessageBox.Show(GetLanguageString("no_dll", false));
+                                        WriteDebugLog(GetLanguageString("no_dll_debug", false));
                                     }
                                     else
                                     {
-                                        MessageBox.Show("There was an unknown problem while downloading.");
-                                        WriteDebugLog("Unknown error occurred while downloading.");
+                                        MessageBox.Show(GetLanguageString("unknown_error", false));
+                                        WriteDebugLog(GetLanguageString("unknown_error_debug", false));
                                     }
                                 }
                                 GUSearchBox.Text = "";
@@ -455,16 +453,15 @@ namespace NUSGrabberGUI
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show("There was a problem starting NUSgrabber.  Ensure that you have NUSgrabber in the root " +
-                                    "directory that this program is stored in.\n" + ex.ToString());
-                                WriteDebugLog("Error starting " + nusgrabber.StartInfo.FileName + ".\n" + ex.ToString());
+                                MessageBox.Show(GetLanguageString("error_start_nus", false) + "\n" + ex.ToString());
+                                WriteDebugLog(GetLanguageString("error_start_nus_debug", false) + nusgrabber.StartInfo.FileName + ".\n" + ex.ToString());
                             }
                         }
                     }
                 }
                 else if (File.Exists(filepath + "tmd") || File.Exists(filepath + "DELETEME"))
                 {
-                    if (File.Exists(filepath + "tmd")) WriteDebugLog("Incomplete download detected.  Deleting previous files.");
+                    if (File.Exists(filepath + "tmd")) WriteDebugLog(GetLanguageString("incomplete_dl_debug", false));
                     List<FileInfo> files = GetFiles(filepath, ".h3", ".app", "", ".tmd", ".tik", ".cert");
                     foreach (FileInfo file in files)
                         DeleteFile(file.FullName);
@@ -475,27 +472,26 @@ namespace NUSGrabberGUI
                     }
                     catch
                     {
-                        MessageBox.Show("Couldn't remove folder after deletion.  Ensure there is no other data in \"" + filepath + "\" and try again.");
-                        WriteDebugLog("Couldn't delete directory " + filepath + ".");
+                        MessageBox.Show(GetLanguageString("cant_del_folder", false) + filepath + GetLanguageString("cant_del_folder2", false));
+                        WriteDebugLog(GetLanguageString("cant_del_folder_debug", false) + filepath + ".");
                     }
                 }
-                else if (MessageBox.Show("You have already downloaded this title.  Are you sure you wish to redownload it?",
-                    "Confirm Overwrite", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                else if (MessageBox.Show(GetLanguageString("redownload_title", false),
+                    GetLanguageString("confirm_overwrite", false), MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     try
                     {
                         File.Create(filepath + "DELETEME");
-                        WriteDebugLog("Deleting previously downloaded files by user request.");
+                        WriteDebugLog(GetLanguageString("deleting_debug", false));
                         DownloadButton_Click(sender, e);
                     }
-                    catch { WriteDebugLog("Couldn't access " + filepath + " for deletion."); }
+                    catch { WriteDebugLog(GetLanguageString("cant_access_debug", false) + filepath + GetLanguageString("cant_access2_debug", false)); }
                 }
             }
             else
             {
-                MessageBox.Show("There was a problem converting the selected item.  Note your selected item, contact " +
-                    "FoxMcloud5655 on GBATemp, and tell him to look into this problem!");
-                WriteDebugLog("Error converting title name into a ListItem.");
+                MessageBox.Show(GetLanguageString("convert_error", false));
+                WriteDebugLog(GetLanguageString("convert_error_debug", false));
             }
         }
 
@@ -503,14 +499,14 @@ namespace NUSGrabberGUI
         {
             if (Properties.Settings.Default.Region != "")
             {
-                if (MessageBox.Show("Are you sure you want to update the VersionList for all titles in " +
-                    Properties.Settings.Default.Region + "?  This will take some time.",
-                    "Confirm Update", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show(GetLanguageString("update_vl", false) +
+                    Properties.Settings.Default.Region + GetLanguageString("update_vl2", false),
+                    GetLanguageString("confirm_update", false), MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     EnableUI(false);
                     NUSTabs.SelectedIndex = 0;
                     string tmp = GUSearchBox.Text;
-                    ForceRefresh(GUSearchBox, "Connecting to the Internet...");
+                    ForceRefresh(GUSearchBox, GetLanguageString("connecting", false));
                     ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };  //A workaround to get through their secure connection invalidation.
                     titlelist.Clear();
                     bool canwrite = false;
@@ -522,9 +518,8 @@ namespace NUSGrabberGUI
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unable to create a new file or overwrite the current one.  Ensure that you have " +
-                            "permission to write to the root directory that this GUI is stored in.\n\n" + ex.ToString());
-                        WriteDebugLog("Unable to open/create wiiu_versionlist.txt.  Skipping update.");
+                        MessageBox.Show(GetLanguageString("write_error", false) + "\n\n" + ex.ToString());
+                        WriteDebugLog(GetLanguageString("write_error_debug", false));
                     }
 
                     if (canwrite)
@@ -543,9 +538,8 @@ namespace NUSGrabberGUI
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Unable to parse data.  Either you aren't connected to the internet, " +
-                                "or Nintendo has changed their format.\n\n" + ex.ToString());
-                            WriteDebugLog("Failed to retrieve/parse data from " + request + ".");
+                            MessageBox.Show(GetLanguageString("parse_error", false) + "\n\n" + ex.ToString());
+                            WriteDebugLog(GetLanguageString("parse_error_debug", false) + request + ".");
                         }
                         if (latestversion > 0)
                         {
@@ -553,11 +547,13 @@ namespace NUSGrabberGUI
                             {
                                 if (!badversionlists.Contains(i))
                                 {
-                                    ForceRefresh(GUSearchBox, "Parsing list " + i + " of " + latestversion + " for " + region.Substring(1, 3) + "...");
+                                    ForceRefresh(GUSearchBox, GetLanguageString("parsing_list", false) + i + GetLanguageString("parsing_list2", true) + 
+                                        latestversion + GetLanguageString("parsing_list3", true) + region.Substring(1, 3) + "...");
                                     try
                                     {
                                         request = "https://tagaya.wup.shop.nintendo.net/tagaya/versionlist" + region + "list/" + i + ".versionlist";
-                                        WriteDebugLog("Retrieving list " + i + " of " + latestversion + " from " + request + ".");
+                                        WriteDebugLog(GetLanguageString("parsing_list_debug", false) + i + GetLanguageString("parsing_list2_debug", true) + 
+                                            latestversion + GetLanguageString("parsing_list3_debug", true) + request + ".");
                                         req = WebRequest.Create(request);
                                         response = req.GetResponse();
                                         xdoc = XDocument.Load(response.GetResponseStream());
@@ -593,7 +589,7 @@ namespace NUSGrabberGUI
                                         if (Properties.Settings.Default.Debug)
                                         {
                                             failedversionlists += i + ", ";
-                                            WriteDebugLog("Bad versionlist \"" + i + "\".");
+                                            WriteDebugLog(GetLanguageString("bad_vl_debug", false) + i + "\".");
                                         }
                                         
                                     }
@@ -606,7 +602,7 @@ namespace NUSGrabberGUI
                             }
                         }
                         GUSearchBox.Text = tmp;
-                        WriteDebugLog("Parse complete.  Writing data to wiiu_versionlist.txt.");
+                        WriteDebugLog(GetLanguageString("parse_complete_debug", false));
                         try
                         {
                             FileStream versionlist_file = File.Open("wiiu_versionlist.txt", FileMode.Create, FileAccess.Write);
@@ -625,10 +621,8 @@ namespace NUSGrabberGUI
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Unable to create a new file or overwrite the current one.  Please don't mess with " +
-                                "the program's directories IN THE MIDDLE of an important operation!  You'll have to " +
-                                "redownload the versionlists again if you want to save them.\n\n" + ex.ToString());
-                            WriteDebugLog("Write unsuccessful.  Keeping versionlists in memory until next reload.");
+                            MessageBox.Show(GetLanguageString("access_error", false) + "\n\n" + ex.ToString());
+                            WriteDebugLog(GetLanguageString("access_error_debug", false));
                         }
 
                         ReloadButton_Click(sender, e);
@@ -637,7 +631,7 @@ namespace NUSGrabberGUI
             }
             else
             {
-                MessageBox.Show("Please set your region in the settings before selecting this option!");
+                MessageBox.Show(GetLanguageString("no_region", false));
             }
         }
 
@@ -671,8 +665,8 @@ namespace NUSGrabberGUI
                             bool ckey_exists = true;
                             if (File.Exists("ckey.bin"))
                             {
-                                if (MessageBox.Show("ckey.bin is already in the folder set for decryption.  Would you like to delete it?  " +
-                                      "If not, the file will be used instead.", "Confirm Deletion", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                if (MessageBox.Show(GetLanguageString("ckey_del", false), GetLanguageString("confirm_delete", false),
+                                    MessageBoxButtons.YesNo) == DialogResult.Yes)
                                 {
                                     DeleteFile("ckey.bin");
                                 }
@@ -692,9 +686,8 @@ namespace NUSGrabberGUI
                                     }
                                     catch
                                     {
-                                        MessageBox.Show("Unable to copy common key.  Ensure you have access to read and write to the " +
-                                        "directory that you specified and that your common key actually exists.");
-                                        WriteDebugLog("Couldn't copy common key to " + Environment.CurrentDirectory + ".");
+                                        MessageBox.Show(GetLanguageString("copy_ckey_error", false));
+                                        WriteDebugLog(GetLanguageString("copy_ckey_error_debug", false) + Environment.CurrentDirectory + ".");
                                         continue_executing = false;
                                     }
                                 }
@@ -705,9 +698,8 @@ namespace NUSGrabberGUI
                                 try { File.Copy(Properties.Settings.Default.CommonKeyPath, "ckey.bin"); }
                                 catch
                                 {
-                                    MessageBox.Show("Unable to copy saved common key.  Ensure you have access to read and write to the " +
-                                        "directory that you specified.");
-                                    WriteDebugLog("Couldn't copy saved common key to " + Environment.CurrentDirectory + ".");
+                                    MessageBox.Show(GetLanguageString("copy_saved_ckey_error", false));
+                                    WriteDebugLog(GetLanguageString("copy_saved_ckey_error_debug", false) + Environment.CurrentDirectory + ".");
                                     continue_executing = false;
                                 }
                             }
@@ -720,10 +712,8 @@ namespace NUSGrabberGUI
                                 }
                                 catch (Exception ex)
                                 {
-                                    MessageBox.Show("Unable to copy files.  Ensure you have access to read and write to the " +
-                                    "directory that you specified and that CDecrypt.exe is in the root " +
-                                    "directory of the directory that this program is stored in.\n\n" + ex.ToString());
-                                    WriteDebugLog("Unable to copy CDecrypt.exe to " + Environment.CurrentDirectory + ".");
+                                    MessageBox.Show(GetLanguageString("copy_files_error", false) + "\n\n" + ex.ToString());
+                                    WriteDebugLog(GetLanguageString("copy_files_error_debug", false) + Environment.CurrentDirectory + ".");
                                 }
 
                                 if (File.Exists("CDecrypt.exe"))
@@ -739,8 +729,8 @@ namespace NUSGrabberGUI
                                         EnableUI(false);
                                         NUSTabs.SelectedIndex = 0;
                                         string tmp = GUSearchBox.Text;
-                                        ForceRefresh(GUSearchBox, "Decrypting...");
-                                        WriteDebugLog("Starting decryption.");
+                                        ForceRefresh(GUSearchBox, GetLanguageString("decrypting", false) + "...");
+                                        WriteDebugLog(GetLanguageString("decrypting_debug", false));
                                         cdecrypt.Start();
                                         string output = "";
                                         while (!cdecrypt.StandardOutput.EndOfStream)
@@ -1176,7 +1166,7 @@ namespace NUSGrabberGUI
         {
             if (!Properties.Settings.Default.Debug)
             {
-                string request = "https://dl.dropboxusercontent.com/u/41125193/NUSGrabber/latestversion.xml";
+                string request = "https://www.dropbox.com/s/w8pw1ed9u1j4swv/latestversion.xml?dl=1";
                 try
                 {
                     WebRequest req = WebRequest.Create(request);
@@ -1214,13 +1204,13 @@ namespace NUSGrabberGUI
                                         try
                                         {
                                             WebClient webClient = new WebClient();
-                                            webClient.DownloadFile("https://dl.dropboxusercontent.com/u/41125193/NUSGrabber/NEW-NUSGrabberGUI.exe", "NEW-NUSGrabberGUI.exe");
+                                            webClient.DownloadFile("https://www.dropbox.com/s/wcmwh6hu99dtf3h/NEW-NUSGrabberGUI.exe?dl=1", "NEW-NUSGrabberGUI.exe");
                                             MessageBox.Show("Successfully obtained update.  Application will now restart.");
                                             WriteDebugLog("Update successful.");
                                         }
                                         catch
                                         {
-                                            MessageBox.Show("Failed to download the update.  You can still manually update from here:\nhttps://dl.dropboxusercontent.com/u/41125193/NUSGrabber/NEW-NUSGrabberGUI.exe\nThe program will now exit.");
+                                            MessageBox.Show("Failed to download the update.  You can still manually update from here:\nhttps://www.dropbox.com/s/wcmwh6hu99dtf3h/NEW-NUSGrabberGUI.exe?dl=1\nThe program will now exit.");
                                             WriteDebugLog("Failed to download.  Exiting.");
                                             times = 10;
                                             while (File.Exists("NEW-NUSGrabberGUIbackup.exe") && times != 0)
@@ -1240,9 +1230,9 @@ namespace NUSGrabberGUI
                                             try
                                             {
                                                 string batchCommands = "";  //The self deleting batch file idea was taken from this site: http://stackoverflow.com/questions/19689054/is-it-possible-for-a-c-sharp-built-exe-to-self-delete
-                                                batchCommands += "@ECHO OFF\n";                         // Do not show any output
-                                                batchCommands += "ping 127.0.0.1 -n 2> nul\n";              // Wait approximately 4 seconds (so that the process is terminated by the time this executes)
-                                                batchCommands += "echo j | del /F ";                    // Delete the executeable
+                                                batchCommands += "@ECHO OFF\n";                      // Do not show any output
+                                                batchCommands += "ping 127.0.0.1 -n 2> nul\n";       // Wait approximately 4 seconds (so that the process is terminated by the time this executes)
+                                                batchCommands += "echo j | del /F ";                 // Delete the executeable
                                                 batchCommands += Environment.CurrentDirectory + "\\NEW-NUSGrabberGUIbackup.exe\n";
                                                 batchCommands += "echo j | del selfdelete.vbs\n";    // Delete the windows script file that hides the execution of this bat file
                                                 batchCommands += "echo j | del selfdelete.bat\n";    // Delete this bat file
@@ -1277,7 +1267,7 @@ namespace NUSGrabberGUI
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Failed to rename old exe.  You'll need to manually update from here:\nhttps://dl.dropboxusercontent.com/u/41125193/NUSGrabber/NEW-NUSGrabberGUI.exe");
+                                    MessageBox.Show("Failed to rename old exe.  You'll need to manually update from here:\nhttps://www.dropbox.com/s/wcmwh6hu99dtf3h/NEW-NUSGrabberGUI.exe?dl=1");
                                     WriteDebugLog("Failed to rename self.");
                                 }
                             }

@@ -3,6 +3,10 @@ Changelog for NEW-NUSGrabberGUI
 TODO:
 + Added more languages (mostly from Google Translate...)
 
+0.901 beta
+- Added actual language support.
+- Changed dropbox link because the public folder is no longer functional.
+
 0.90 beta
 - Fixed a potential bug with the internal version lists - it now counts how many there are to determine if it's already been loaded or not.
 - Fixed a bug with HTML parsing - &#160; was not being taken out.

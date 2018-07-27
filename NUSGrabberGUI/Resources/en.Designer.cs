@@ -142,6 +142,15 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ckey.bin is already in the folder set for decryption.  Would you like to delete it?  If not, the file will be used instead..
+        /// </summary>
+        internal static string ckey_del {
+            get {
+                return ResourceManager.GetString("ckey_del", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cleaning up unneeded resource: .
         /// </summary>
         internal static string clean_debug {
@@ -165,6 +174,15 @@ namespace NUSGrabberGUI.Resources {
         internal static string close_code2_debug {
             get {
                 return ResourceManager.GetString("close_code2_debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Deletion.
+        /// </summary>
+        internal static string confirm_delete {
+            get {
+                return ResourceManager.GetString("confirm_delete", resourceCulture);
             }
         }
         
@@ -331,7 +349,7 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decrypting....
+        ///   Looks up a localized string similar to Decrypting.
         /// </summary>
         internal static string decrypting {
             get {
@@ -682,24 +700,6 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Detected that NUSGrabber didn&apos;t run.  Install Visual Studio C++ (x86) and try again..
-        /// </summary>
-        internal static string failed_run {
-            get {
-                return ResourceManager.GetString("failed_run", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Detected that NUSGrabber didn&apos;t run.  Installation of Visual Studio C++ x86 (32-bit) is required.\nStatus Code: STATUS_INVALID_IMAGE_FORMAT.
-        /// </summary>
-        internal static string failed_run_debug {
-            get {
-                return ResourceManager.GetString("failed_run_debug", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Incomplete download detected.  Delete &quot;.
         /// </summary>
         internal static string incomplete {
@@ -916,6 +916,24 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Detected that NUSGrabber didn&apos;t run.  Install Visual Studio C++ (x86) and try again..
+        /// </summary>
+        internal static string no_vs {
+            get {
+                return ResourceManager.GetString("no_vs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detected that NUSGrabber didn&apos;t run.  Installation of Visual Studio C++ x86 (32-bit) is required.\nStatus Code: STATUS_INVALID_IMAGE_FORMAT.
+        /// </summary>
+        internal static string no_vs_debug {
+            get {
+                return ResourceManager.GetString("no_vs_debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  not found..
         /// </summary>
         internal static string not_found {
@@ -1006,7 +1024,7 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  of .
+        ///   Looks up a localized string similar to of.
         /// </summary>
         internal static string parsing_list2 {
             get {
@@ -1015,7 +1033,7 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  of .
+        ///   Looks up a localized string similar to of.
         /// </summary>
         internal static string parsing_list2_debug {
             get {
@@ -1024,7 +1042,7 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  for .
+        ///   Looks up a localized string similar to for.
         /// </summary>
         internal static string parsing_list3 {
             get {
@@ -1033,7 +1051,7 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  from .
+        ///   Looks up a localized string similar to from.
         /// </summary>
         internal static string parsing_list3_debug {
             get {
