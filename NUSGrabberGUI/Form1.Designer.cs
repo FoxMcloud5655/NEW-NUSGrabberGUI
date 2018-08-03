@@ -481,10 +481,10 @@ namespace NUSGrabberGUI
             MenuCreateCommonKey.Click += new System.EventHandler(MenuCreateCommonKey_Click);
             // 
             // MenuShowDownloadLog
-            // 
+            //
             MenuShowDownloadLog.Name = "MenuShowDownloadLog";
             MenuShowDownloadLog.Size = new System.Drawing.Size(184, 22);
-            MenuShowDownloadLog.Text = "Show Download Log";
+            MenuShowDownloadLog.Text = "Download Log";
             MenuShowDownloadLog.Click += new System.EventHandler(MenuShowDownloadLog_Click);
             // 
             // NUSGrabberForm

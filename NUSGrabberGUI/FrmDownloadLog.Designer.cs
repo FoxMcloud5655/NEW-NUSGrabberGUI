@@ -63,10 +63,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(336, 374);
-            this.ControlBox = false;
+            this.MinimumSize = new System.Drawing.Size(200, 200);
+            this.ControlBox = true;
             this.Controls.Add(this.chkAutoScroll);
             this.Controls.Add(this.edtLog);
-            this.MaximizeBox = false;
+            this.MaximizeBox = true;
             this.MinimizeBox = false;
             this.Name = "FrmDownloadLog";
             this.ShowIcon = false;

@@ -32,6 +32,21 @@ namespace NUSGrabberGUI
         bool canwritedebug = true;
         string filepath = "";
         string language = "";
+
+        public bool DownloadLogForm_Visible
+        {
+            get
+            {
+                return DownloadLog.Visible;
+            }
+            set
+            {
+                if (DownloadLog.Visible) DownloadLog.Hide();
+                else DownloadLog.Show(this);
+
+                ((ToolStripMenuItem)MenuShowDownloadLog).Checked = DownloadLog.Visible;
+            }
+        }
         #endregion
 
         #region Public Fuctions
@@ -924,7 +939,7 @@ namespace NUSGrabberGUI
 
         private void MenuShowDownloadLog_Click(object sender, EventArgs e)
         {
-            DownloadLog.Show();
+            DownloadLogForm_Visible = !DownloadLogForm_Visible;
         }
 
         private void GUExportButton_Click(object sender, EventArgs e)

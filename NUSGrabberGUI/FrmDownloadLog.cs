@@ -40,6 +40,7 @@ namespace NUSGrabberGUI
         private void FrmDownloadLog_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = (e.CloseReason == CloseReason.UserClosing);
+            ((NUSGrabberForm)Owner).DownloadLogForm_Visible = false;
             Hide();
         }
     }
