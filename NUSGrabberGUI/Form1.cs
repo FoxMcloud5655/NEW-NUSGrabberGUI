@@ -48,7 +48,7 @@ namespace NUSGrabberGUI
                 }
                 catch
                 {
-                    MessageBox.Show("Can't find specified language file.  Program will now exit and default to english.");
+                    MessageBox.Show("Can't find specified language file.  Program will now exit and default to English.");
                     Properties.Settings.Default.Language = "en";
                     Properties.Settings.Default.Save();
                     Process.GetCurrentProcess().Kill();
@@ -100,6 +100,8 @@ namespace NUSGrabberGUI
             else
             {
                 MessageBox.Show(GetLanguageString("dont_rename", false) + " NEW-NUSGrabberGUI.exe!");
+                try { File.Move(Process.GetCurrentProcess().ProcessName, "NEW-NUSGrabberGUI.exe"); }
+                catch { }
                 Process.GetCurrentProcess().Kill();
             }
         }
@@ -334,7 +336,7 @@ namespace NUSGrabberGUI
                 }
                 catch
                 {
-                    args = null; MessageBox.Show("Feature not implemented yet.  Select a game update or full title instead.");
+                    args = null; MessageBox.Show("Feature not implemented.  Select a game update or full title instead.");
                 }
             }
             else if (NUSTabs.SelectedTab.TabIndex == 2)
@@ -543,12 +545,12 @@ namespace NUSGrabberGUI
                             {
                                 if (!badversionlists.Contains(i))
                                 {
-                                    ForceRefresh(GUSearchBox, GetLanguageString("parsing_list", false) + i + GetLanguageString("parsing_list2", true) + 
+                                    ForceRefresh(GUSearchBox, GetLanguageString("parsing_list", false, true) + i + GetLanguageString("parsing_list2", true) + 
                                         latestversion + GetLanguageString("parsing_list3", true) + region.Substring(1, 3) + "...");
                                     try
                                     {
                                         request = "https://tagaya.wup.shop.nintendo.net/tagaya/versionlist" + region + "list/" + i + ".versionlist";
-                                        WriteDebugLog(GetLanguageString("parsing_list_debug", false) + i + GetLanguageString("parsing_list2_debug", true) + 
+                                        WriteDebugLog(GetLanguageString("parsing_list_debug", false, true) + i + GetLanguageString("parsing_list2_debug", true) + 
                                             latestversion + GetLanguageString("parsing_list3_debug", true) + request + ".");
                                         req = WebRequest.Create(request);
                                         response = req.GetResponse();
@@ -670,6 +672,7 @@ namespace NUSGrabberGUI
                             if (!File.Exists("ckey.bin") && !File.Exists(Properties.Settings.Default.CommonKeyPath))
                             {
                                 ckey_exists = false;
+                                OpenFileDialog.Title = GetLanguageString("find_ckey", false);
                                 OpenFileDialog.Filter = "WiiU Common Key|*.bin";
                                 OpenFileDialog.FileName = "ckey.bin";
                                 if (OpenFileDialog.ShowDialog() == DialogResult.OK)
@@ -871,6 +874,13 @@ namespace NUSGrabberGUI
             }
         }
 
+        //This function was taken from this site: "https://stackoverflow.com/questions/6397235/write-bytes-to-file"
+        //I claim no credit, except where modifications are made.
+
+        public static byte[] StringToByteArray(string hex) {
+            return Enumerable.Range(0, hex.Length).Where(x => x % 2 == 0).Select(x => Convert.ToByte(hex.Substring(x, 2), 16)).ToArray();
+        }
+
         //The original code was taken from the old GUI by Arndroid94 on GitHub, and I am
         //not responsible for creating any of the logic behind it, except for where
         //modifications are made.
@@ -943,148 +953,128 @@ namespace NUSGrabberGUI
                 ForceRefresh(GUSearchBox, "Parsing Data...");
                 WriteDebugLog("Parsing data gathered from " + request + ".");
                 int tablecount = 1;
-                foreach (HtmlAgilityPack.HtmlNode table in hdoc.GetElementbyId("mw-content-text").Elements("table"))
-                {
-                    switch (tablecount)
-                    {
-                        case 7:
-                            {
-                                foreach (HtmlAgilityPack.HtmlNode tr in table.Elements("tr"))
-                                {
-                                    int columncount = 1;
-                                    ListItem cbi = new ListItem();
-                                    foreach (HtmlAgilityPack.HtmlNode td in tr.Elements("td"))
-                                    {
-                                        //TITLE
-                                        if (columncount == 1)
-                                        {
-                                            string title = null;
-                                            try { title = td.InnerText.Trim().Substring(9); } catch (Exception) { cbi.Title_ID = title; cbi.Desc = title; cbi.Versions = title; }
-                                            cbi.Title_ID = title;
-                                        }
-                                        //DESC
-                                        if (columncount == 2)
-                                        {
-                                            string desc = null;
-                                            try { desc = td.InnerText.Trim().Replace("amp;", "").Replace("&#160;", ""); } catch (Exception) { cbi.Title_ID = desc; cbi.Desc = desc; cbi.Versions = desc; }
-                                            cbi.Desc = desc;
-                                        }
-                                        //VER
-                                        if (columncount == 6)
-                                        {
-                                            try
-                                            {
-                                                string id = cbi.Title_ID.ToString();
-                                                if (usingversionlist && titlelist.ContainsKey(id))
-                                                {
-                                                    string versions = "";
-                                                    foreach (string v in titlelist[id])
-                                                    {
-                                                        versions += v + ", ";
-                                                    }
-                                                    cbi.Versions = versions;
+                foreach (HtmlAgilityPack.HtmlNode table in hdoc.GetElementbyId("mw-content-text").Descendants("table")) {
+                    switch (tablecount) {
+                        case 6: {
+                            foreach (HtmlAgilityPack.HtmlNode tr in table.Descendants("tr")) {
+                                int columncount = 1;
+                                ListItem cbi = new ListItem();
+                                foreach (HtmlAgilityPack.HtmlNode td in tr.Descendants("td")) {
+                                    //TITLE
+                                    if (columncount == 1) {
+                                        string title = null;
+                                        try { title = td.InnerText.Trim().Substring(9); } catch (Exception) { cbi.Title_ID = title; cbi.Desc = title; cbi.Versions = title; }
+                                        cbi.Title_ID = title;
+                                    }
+                                    //DESC
+                                    if (columncount == 2) {
+                                        string desc = null;
+                                        try { desc = td.InnerText.Trim().Replace("amp;", "").Replace("&#160;", ""); } catch (Exception) { cbi.Title_ID = desc; cbi.Desc = desc; cbi.Versions = desc; }
+                                        cbi.Desc = desc;
+                                    }
+                                    //VER
+                                    if (columncount == 6) {
+                                        try {
+                                            string id = cbi.Title_ID.ToString();
+                                            if (usingversionlist && titlelist.ContainsKey(id)) {
+                                                string versions = "";
+                                                foreach (string v in titlelist[id]) {
+                                                    versions += v + ", ";
                                                 }
-                                                else throw new Exception();
+                                                cbi.Versions = versions;
                                             }
-                                            catch
-                                            {
+                                            else {
                                                 string ver = null;
                                                 try { ver = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = ver; cbi.Desc = ver; cbi.Versions = ver; }
                                                 cbi.Versions = ver;
                                             }
                                         }
-                                        //REG
-                                        if (columncount == 7)
-                                        {
-                                            string reg = null;
-                                            try { reg = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = reg; cbi.Desc = reg; cbi.Versions = reg; }
-                                            if (cbi.Desc != null)
-                                            {
-                                                if (reg == "JAP") reg = "JPN";  //Quick-fix for japanese titles
-                                                cbi.Desc = reg + " - " + cbi.Desc;
-                                            }
-                                            cbi.Region = reg;
+                                        catch {
+                                            string ver = null;
+                                            try { ver = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = ver; cbi.Desc = ver; cbi.Versions = ver; }
+                                            cbi.Versions = ver;
                                         }
-                                        columncount++;
                                     }
-                                    if (cbi.Desc != null && !cbi.Versions.ToString().Contains("v0"))
-                                        GameUpdates.Add(cbi);
+                                    //REG
+                                    if (columncount == 7) {
+                                        string reg = null;
+                                        try { reg = td.InnerText.Trim(); } catch (Exception) { cbi.Title_ID = reg; cbi.Desc = reg; cbi.Versions = reg; }
+                                        if (cbi.Desc != null) {
+                                            if (reg == "JAP") reg = "JPN";  //Quick-fix for japanese titles
+                                            cbi.Desc = reg + " - " + cbi.Desc;
+                                        }
+                                        cbi.Region = reg;
+                                    }
+                                    columncount++;
                                 }
-                                tablecount++;
-                                break;
+                                if (cbi.Desc != null && !cbi.Versions.ToString().Contains("v0"))
+                                    GameUpdates.Add(cbi);
                             }
-                        case 3:
-                            {
-                                foreach (HtmlAgilityPack.HtmlNode tr in table.Elements("tr"))
-                                {
-                                    int columncount = 1;
-                                    ListItem cbisys = new ListItem();
-                                    foreach (HtmlAgilityPack.HtmlNode td in tr.Elements("td"))
-                                    {
-                                        //TITLE
-                                        if (columncount == 1)
-                                        {
-                                            string title = null;
-                                            try { title = td.InnerText.Trim().Substring(9); } catch (Exception) { cbisys.Title_ID = title; cbisys.Desc = title; cbisys.Versions = title; }
-                                            cbisys.Title_ID = title;
-                                        }
-                                        //DESC
-                                        if (columncount == 2)
-                                        {
-                                            string desc = null;
-                                            try { desc = td.InnerText.Trim().Replace("amp;", ""); } catch (Exception) { cbisys.Title_ID = desc; cbisys.Desc = desc; cbisys.Versions = desc; }
-                                            cbisys.Desc = desc;
-                                        }
-                                        //VER
-                                        if (columncount == 4)
-                                        {
-                                            try
-                                            {
-                                                string id = cbisys.Title_ID.ToString();
-                                                if (usingversionlist && titlelist.ContainsKey(id))
-                                                {
-                                                    string versions = "";
-                                                    foreach (string v in titlelist[id])
-                                                    {
-                                                        versions += v + ", ";
-                                                    }
-                                                    cbisys.Versions = versions;
+                            tablecount++;
+                            break;
+                        }
+                        case 3: {
+                            foreach (HtmlAgilityPack.HtmlNode tr in table.Descendants("tr")) {
+                                int columncount = 1;
+                                ListItem cbisys = new ListItem();
+                                foreach (HtmlAgilityPack.HtmlNode td in tr.Descendants("td")) {
+                                    //TITLE
+                                    if (columncount == 1) {
+                                        string title = null;
+                                        try { title = td.InnerText.Trim().Substring(9); } catch (Exception) { cbisys.Title_ID = title; cbisys.Desc = title; cbisys.Versions = title; }
+                                        cbisys.Title_ID = title;
+                                    }
+                                    //DESC
+                                    if (columncount == 2) {
+                                        string desc = null;
+                                        try { desc = td.InnerText.Trim().Replace("amp;", ""); } catch (Exception) { cbisys.Title_ID = desc; cbisys.Desc = desc; cbisys.Versions = desc; }
+                                        cbisys.Desc = desc;
+                                    }
+                                    //VER
+                                    if (columncount == 4) {
+                                        try {
+                                            string id = cbisys.Title_ID.ToString();
+                                            if (usingversionlist && titlelist.ContainsKey(id)) {
+                                                string versions = "";
+                                                foreach (string v in titlelist[id]) {
+                                                    versions += v + ", ";
                                                 }
-                                                else throw new Exception();
+                                                cbisys.Versions = versions;
                                             }
-                                            catch
-                                            {
+                                            else {
                                                 string ver = null;
                                                 try { ver = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = ver; cbisys.Desc = ver; cbisys.Versions = ver; }
                                                 cbisys.Versions = ver;
                                             }
                                         }
-                                        //REG
-                                        if (columncount == 5)
-                                        {
-                                            string reg = null;
-                                            try { reg = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = reg; cbisys.Desc = reg; cbisys.Versions = reg; }
-                                            if (cbisys.Desc != null)
-                                            {
-                                                cbisys.Desc = reg + " - " + cbisys.Desc;
-                                            }
-                                            cbisys.Region = reg;
+                                        catch {
+                                            string ver = null;
+                                            try { ver = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = ver; cbisys.Desc = ver; cbisys.Versions = ver; }
+                                            cbisys.Versions = ver;
                                         }
-                                        columncount++;
                                     }
-                                    if (cbisys.Desc != null)
-                                    {
-                                        SystemTitles.Add(cbisys);
+                                    //REG
+                                    if (columncount == 5) {
+                                        string reg = null;
+                                        try { reg = td.InnerText.Trim(); } catch (Exception) { cbisys.Title_ID = reg; cbisys.Desc = reg; cbisys.Versions = reg; }
+                                        if (cbisys.Desc != null) {
+                                            cbisys.Desc = reg + " - " + cbisys.Desc;
+                                        }
+                                        cbisys.Region = reg;
                                     }
+                                    columncount++;
                                 }
-                                tablecount++;
-                                break;
+                                if (cbisys.Desc != null) {
+                                    SystemTitles.Add(cbisys);
+                                }
                             }
-                        default:
-                            {
-                                tablecount++;
-                                break;
-                            }
+                            tablecount++;
+                            break;
+                        }
+                        default: {
+                            tablecount++;
+                            break;
+                        }
                     }
                 }
                 ForceRefresh(GUSearchBox, "Sorting Titles...");
@@ -1428,20 +1418,23 @@ namespace NUSGrabberGUI
             return true;
         }
 
-        public string GetLanguageString(string name, bool addwhitespace)
+        public string GetLanguageString(string name, bool addWhitespace)
         {
+            return GetLanguageString(name, addWhitespace, addWhitespace);
+        }
+
+        public string GetLanguageString(string name, bool addWhitespaceBefore, bool addWhitespaceAfter) {
             string value = XDocument.Parse(language).Descendants().FirstOrDefault(_ => _.Attributes().Any(a => a.Value == name))?.Value;
             value = value.Trim(' ', '\n', '\r');
-            if (addwhitespace)
-                value = value.Insert(0, " ").Insert(value.Length - 1, " ");
+            if (addWhitespaceAfter) value = value.Insert(value.Length, " ");
+            if (addWhitespaceBefore) value = value.Insert(0, " ");
             return value;
-
         }
 
         #endregion
 
         #region Background Workers
-        #pragma warning disable CS0162 // Unreachable code detected
+#pragma warning disable CS0162 // Unreachable code detected
 
         private void EmbedNUSGrabber_Work(object sender, System.ComponentModel.DoWorkEventArgs e)
         {

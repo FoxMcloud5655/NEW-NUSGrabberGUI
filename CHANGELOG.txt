@@ -3,6 +3,13 @@ Changelog for NEW-NUSGrabberGUI
 TODO:
 + Added more languages (mostly from Google Translate...)
 
+0.91 beta
+- Fixed grammar and added new ways to format it.
+- Added title to prompt to ask the user where ckey.bin is located at.
+- Added contributors in "Settings/About" dialog.
+- Updated wiiu_versionlist.txt.
+- Added the .exe trying to rename itself back to normal after an attempt to rename the .exe to an unsupported name (breaks updates).
+
 0.902 beta
 - Removed the ability to rename the main .exe to "NUtSGrabberGUI.exe" or "DeezNUSGrabberGUI.exe" in order to put the program in debug mode.  Why did I let someone talk me into doing that?
 - Fixed link to dropbox in message box that appears when an update fails.

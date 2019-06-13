@@ -50,8 +50,11 @@ namespace NUSGrabberGUI
         private void AboutButton_Click(object sender, EventArgs e)
         {
             float version_float = (float)Properties.Settings.Default.Version / 100;
-            MessageBox.Show("Created by: FoxMcloud5655\nNUSgrabber/CDecrypt by: crediar\nOriginal GUI by: Adr990\n\nVersion " +
-                version_float + ' ' + Properties.Settings.Default.VersionType + (Properties.Settings.Default.Debug ? " DEBUG" : ""));
+            MessageBox.Show("Created by: FoxMcloud5655\n" +
+                "NUSgrabber/CDecrypt by: crediar\n" +
+                "Original GUI by: Adr990\n " +
+                "Contributors: akorb, Warix3\n\n" +
+                "Version " + version_float + ' ' + Properties.Settings.Default.VersionType + (Properties.Settings.Default.Debug ? " DEBUG" : ""));
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)

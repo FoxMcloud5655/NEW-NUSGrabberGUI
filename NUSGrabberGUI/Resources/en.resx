@@ -202,10 +202,10 @@
     <value>Unable to write debug log.  Make sure you don't have it open somewhere and that you have write access to the root directory that this program is stored in.</value>
   </data>
   <data name="debug_start" xml:space="preserve">
-    <value> started in debug mode on </value>
+    <value>started in debug mode on</value>
   </data>
   <data name="debug_start_emu" xml:space="preserve">
-    <value> started in emulated debug mode on </value>
+    <value>started in emulated debug mode on</value>
   </data>
   <data name="decrypting" xml:space="preserve">
     <value>Decrypting</value>
@@ -569,5 +569,8 @@
   </data>
   <data name="confirm_delete" xml:space="preserve">
     <value>Confirm Deletion</value>
+  </data>
+  <data name="find_ckey" xml:space="preserve">
+    <value>Find WiiU Common Key</value>
   </data>
 </root>

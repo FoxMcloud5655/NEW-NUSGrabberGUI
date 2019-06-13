@@ -19,7 +19,7 @@ namespace NUSGrabberGUI.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class en {
@@ -331,7 +331,7 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  started in debug mode on .
+        ///   Looks up a localized string similar to started in debug mode on.
         /// </summary>
         internal static string debug_start {
             get {
@@ -340,7 +340,7 @@ namespace NUSGrabberGUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  started in emulated debug mode on .
+        ///   Looks up a localized string similar to started in emulated debug mode on.
         /// </summary>
         internal static string debug_start_emu {
             get {
@@ -696,6 +696,15 @@ namespace NUSGrabberGUI.Resources {
         internal static string extract_vl_debug {
             get {
                 return ResourceManager.GetString("extract_vl_debug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find WiiU Common Key.
+        /// </summary>
+        internal static string find_ckey {
+            get {
+                return ResourceManager.GetString("find_ckey", resourceCulture);
             }
         }
         
