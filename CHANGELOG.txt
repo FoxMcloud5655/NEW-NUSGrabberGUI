@@ -3,6 +3,10 @@ Changelog for NEW-NUSGrabberGUI
 TODO:
 + Added more languages (mostly from Google Translate...)
 
+0.92 beta
+- Actually updated the version number this time.
+- Removed unneeded space before the contributors line in the "Settings/About" dialog.
+
 0.91 beta
 - Fixed grammar and added new ways to format it.
 - Added title to prompt to ask the user where ckey.bin is located at.

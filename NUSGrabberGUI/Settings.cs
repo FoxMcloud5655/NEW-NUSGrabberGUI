@@ -52,7 +52,7 @@ namespace NUSGrabberGUI
             float version_float = (float)Properties.Settings.Default.Version / 100;
             MessageBox.Show("Created by: FoxMcloud5655\n" +
                 "NUSgrabber/CDecrypt by: crediar\n" +
-                "Original GUI by: Adr990\n " +
+                "Original GUI by: Adr990\n" +
                 "Contributors: akorb, Warix3\n\n" +
                 "Version " + version_float + ' ' + Properties.Settings.Default.VersionType + (Properties.Settings.Default.Debug ? " DEBUG" : ""));
         }
